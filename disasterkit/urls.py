@@ -7,5 +7,8 @@ import items.views
 
 urlpatterns = patterns(
     '',
-    url(r'^$', items.views.index, name='index'),
+    # default/empty url goes to index
+    url(r'^', include('items.urls')),
+    # admin site URL
+    url(r'^admin/', include(admin.site.urls)),
 )
