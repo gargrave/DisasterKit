@@ -1,32 +1,10 @@
-"""
-Django settings for gettingstarted project, on Heroku. Fore more info, see:
-https://github.com/heroku/heroku-django-template
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.8/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.8/ref/settings/
-"""
-
 import os
 import dj_database_url
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-# TEMPLATE_DEBUG = True
-
 
 # Application definition
 
@@ -71,12 +49,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'disasterkit.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-# DATABASES = {'default': dj_database_url.config(
-#     default='postgres://gabe:NO_PASSWORD@localhost:5432/dkit_local')}
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -85,12 +57,6 @@ TIME_ZONE = 'US/Pacific'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-
-# Parse database configuration from $DATABASE_URL
-# DATABASES['default'] =  dj_database_url.config()
-# Enable Connection Pooling (if desired)
-# DATABASES['default']['ENGINE'] = 'django_postgrespool'
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
