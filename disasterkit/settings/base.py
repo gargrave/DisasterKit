@@ -24,8 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-TEMPLATE_DEBUG = True
+# DEBUG = True
+# TEMPLATE_DEBUG = True
 
 
 # Application definition
@@ -74,8 +74,8 @@ WSGI_APPLICATION = 'disasterkit.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-DATABASES = {'default': dj_database_url.config(
-    default='postgres://gabe:NO_PASSWORD@localhost:5432/dkit_local')}
+# DATABASES = {'default': dj_database_url.config(
+#     default='postgres://gabe:NO_PASSWORD@localhost:5432/dkit_local')}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
