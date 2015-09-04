@@ -1,0 +1,40 @@
+{% extends 'items/layout.html' %}
+
+{% block title %}
+  DisasterKit
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    <div class="twelve columns">
+      <h3>DisasterKit</h3>
+    </div>
+  </div>
+
+  <table class="u-full-width">
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Sub-Category</th>
+      <th>Count</th>
+      <th>Date Added</th>
+      <th>Expiration</th>
+      <th>Notes</th>
+    </tr>
+    {% for item in items %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.fk_category }}</td>
+        <td>{{ item.fk_subcategory }}</td>
+        <td>{{ item.count }}</td>
+        <td>{{ item.date_added }}</td>
+        <td>{{ item.date_of_expiration }}</td>
+        <td>{{ item.notes }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+</div>
+{% endblock %}
