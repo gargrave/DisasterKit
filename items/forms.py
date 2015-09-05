@@ -34,7 +34,6 @@ class ItemForm(ModelFormSub):
 
     def __init__(self, *args, **kwargs):
         super(ItemForm, self).__init__(*args, **kwargs)
-
         self.add_attrs('name', {'class': 'u-full-width'})
         self.add_attrs('count', {'class': 'u-full-width'})
         self.add_attrs('date_of_expiration', {'class': 'u-full-width'})

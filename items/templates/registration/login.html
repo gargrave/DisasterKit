@@ -10,13 +10,15 @@
         <form method='post' action="{% url 'django.contrib.auth.views.login' %}">
           {% csrf_token %}
 
-          <div>
-            <label class="u-full-width" for="login_name">Name:</label>
+          {# name input #}
+          <div id="input-name">
+            <label class="u-full-width" for="id_username">Name:</label>
             <input class="u-full-width" type="text" id="id_username" name=username>
           </div>
 
-          <div>
-            <label for="login_password">Password:</label>
+          {# password input #}
+          <div id="input-password">
+            <label for="id_password">Password:</label>
             <input class="u-full-width" type="password" id="id_password" name="password">
           </div>
 

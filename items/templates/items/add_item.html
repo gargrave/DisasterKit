@@ -10,14 +10,16 @@
 </div>
 
 <div class="dk-form">
-  <form action="#" method="post">
+  <form action="{% url 'items:add_item' %}" method="post">
     {% csrf_token %}
 
+    {{ form.non_field_errors }}
     <div class="row">
       {# item name input #}
       <div class="six columns offset-by-three">
         <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
         {{ form.name }}
+        {{ form.name.errors }}
       </div>
 
     </div>
@@ -27,6 +29,7 @@
       <div class="six columns offset-by-three">
         <label for="{{ form.count.auto_id }}">{{ form.count.label }}</label>
         {{ form.count }}
+        {{ form.count.errors }}
       </div>
     </div>
 
@@ -35,6 +38,7 @@
       <div class="six columns offset-by-three">
         <label for="{{ form.date_of_expiration.auto_id }}">{{ form.date_of_expiration.label }}</label>
         {{ form.date_of_expiration }}
+        {{ form.date_of_expiration.errors }}
       </div>
     </div>
 
@@ -43,12 +47,14 @@
       <div class="three columns offset-by-three">
         <label for="{{ form.fk_category.auto_id }}">{{ form.fk_category.label }}</label>
         {{ form.fk_category }}
+        {{ form.fk_category.errors }}
       </div>
 
       {# sub-category selector #}
       <div class="three columns">
         <label for="{{ form.fk_subcategory.auto_id }}">{{ form.fk_subcategory.label }}</label>
         {{ form.fk_subcategory }}
+        {{ form.fk_subcategory.errors }}
       </div>
     </div>
 
@@ -57,6 +63,7 @@
       <div class="six columns offset-by-three">
         <label for="{{ form.notes.auto_id }}">{{ form.notes.label }}</label>
         {{ form.notes }}
+        {{ form.notes.errors }}
       </div>
     </div>
 

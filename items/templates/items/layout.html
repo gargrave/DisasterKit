@@ -12,8 +12,10 @@
 
 <div class="container">
   {% include 'items/partials/pageheader.html' %}
-  {% block content %}
-  {% endblock %}
+  <div class="main-content">
+    {% block content %}
+    {% endblock %}
+  </div>
 </div>
 
 {% block scripts %}
