@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="six columns">
+    <h4>DisasterKit</h4>
+  </div>
+
+  {# display user name and admin link (if user is admin) #}
+  {% if user.is_authenticated %}
+    <span class="u-pull-right">
+      Logged in as <strong>{{ user.username }}</strong>
+      {% if user.is_staff %}
+        <a href="/admin/"><em>(admin)</em></a>
+      {% endif %}
+      | <a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a>
+    </span>
+  {% endif %}
+</div>

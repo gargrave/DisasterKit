@@ -10,8 +10,11 @@
 </head>
 <body>
 
-{% block content %}
-{% endblock %}
+<div class="container">
+  {% include 'items/partials/pageheader.html' %}
+  {% block content %}
+  {% endblock %}
+</div>
 
 {% block scripts %}
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

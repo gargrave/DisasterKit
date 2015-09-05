@@ -1,0 +1,72 @@
+{% extends 'items/layout.html' %}
+
+{% block title %}
+  Add New Item
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+  <h5>Add a New Item</h5>
+</div>
+
+<div class="dk-form">
+  <form action="#" method="post">
+    {% csrf_token %}
+
+    <div class="row">
+      {# item name input #}
+      <div class="six columns offset-by-three">
+        <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
+        {{ form.name }}
+      </div>
+
+    </div>
+
+    <div class="row">
+      {# item count input #}
+      <div class="six columns offset-by-three">
+        <label for="{{ form.count.auto_id }}">{{ form.count.label }}</label>
+        {{ form.count }}
+      </div>
+    </div>
+
+    <div class="row">
+      {# expiration date #}
+      <div class="six columns offset-by-three">
+        <label for="{{ form.date_of_expiration.auto_id }}">{{ form.date_of_expiration.label }}</label>
+        {{ form.date_of_expiration }}
+      </div>
+    </div>
+
+    <div class="row">
+      {# category selector #}
+      <div class="three columns offset-by-three">
+        <label for="{{ form.fk_category.auto_id }}">{{ form.fk_category.label }}</label>
+        {{ form.fk_category }}
+      </div>
+
+      {# sub-category selector #}
+      <div class="three columns">
+        <label for="{{ form.fk_subcategory.auto_id }}">{{ form.fk_subcategory.label }}</label>
+        {{ form.fk_subcategory }}
+      </div>
+    </div>
+
+    <div class="row">
+      {# additional notes input #}
+      <div class="six columns offset-by-three">
+        <label for="{{ form.notes.auto_id }}">{{ form.notes.label }}</label>
+        {{ form.notes }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="six columns offset-by-three">
+        <input class="button button-primary" type="submit" value="Submit">
+      </div>
+    </div>
+
+  </form>
+</div>
+
+{% endblock content %}

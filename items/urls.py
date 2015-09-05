@@ -4,9 +4,10 @@ from . import views
 
 
 urlpatterns = [
-    # index URL; main page
-    url(r'^$', views.index, name='index'),
+    # /items/
+    # a list of all current items
+    url(r'^$', views.list_items, name='item_list'),
+    # /items/add
     # 'add new item' page
-    # url is form of '.../add'
-    url(r'^add/', views.add_item, name='add'),
+    url(r'^add/', views.add_item, name='add_item'),
 ]
