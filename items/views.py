@@ -8,7 +8,8 @@ from .models import StockItem, Category, SubCategory
 
 
 globalvars = {
-    'is_debug': settings.DEBUG
+    'is_debug': settings.DEBUG,
+    'version': settings.VERSION
 }
 
 
