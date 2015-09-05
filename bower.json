@@ -1,0 +1,20 @@
+{
+  "name": "DisasterKit",
+  "version": "0.1.0",
+  "authors": [
+    "Gabe Hargrave <rinkrinkerfink@gmail.com>"
+  ],
+  "description": "A simple app to help us manage out emergency supplies.",
+  "homepage": "gargrave.me/dk",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.4.5",
+    "bootstrap": "~3.3.5"
+  }
+}

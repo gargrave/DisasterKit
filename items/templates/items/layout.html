@@ -5,8 +5,22 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}{% endblock %}</title>
+
+{% block stylesheets %}
+  {# local import for debug/dev builds #}
+  {% if globalvars.is_debug %}
+  <link rel="stylesheet" href="{% static 'libs/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'libs/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'libs/skeleton.css' %}">
+  {# CDN imports for prod builds #}
+  {% else %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  {% endif %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
 </head>
 <body>
 
@@ -19,8 +33,17 @@
 </div>
 
 {% block scripts %}
-  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+  {# local import for debug/dev builds #}
+  {% if globalvars.is_debug %}
+  <script src="{% static 'libs/jquery.js' %}"></script>
+  <script src="{% static 'libs/bootstrap.js' %}"></script>
+  <script src="{% static 'libs/angular.js' %}"></script>
+  {# CDN imports for prod builds #}
+  {% else %}
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  {% endif %}
 
   <script src="{% static 'scripts/app.js' %}"></script>
   <script src="{% static 'scripts/controllers/main.ctrl.js' %}"></script>

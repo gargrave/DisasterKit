@@ -113,3 +113,6 @@ target/
 # sublime project files
 *.sublime-project
 *.sublime-workspace
+
+/bower_components
+/node_components

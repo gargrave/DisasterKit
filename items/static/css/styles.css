@@ -10,6 +10,17 @@ body {
   color: red;
 }
 
+/*****************************
+form styles
+******************************/
+
+.form-header {
+  color: white;
+  background-color: #999;
+  border: solid 2px #888;
+  text-align: center;
+}
+
 
 #login-form {
   margin-top: 140px;
