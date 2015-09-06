@@ -105,19 +105,6 @@ def add_item(request):
     })
 
 
-@login_required
-def deactivate_item(request, pk):
-    """
-    Deactivates the item with the specified ID. Note that this
-    DOES NOT delete the item from the DB. It is simply a "soft
-    deactivation" to prevent the item from being listed.
-    """
-    item = get_object_or_404(StockItem, pk=pk)
-    item.active = False
-    item.save()
-    return HttpResponseRedirect('/items/')
-
-
 ################################################
 # API Methods
 ################################################
@@ -142,3 +129,16 @@ def get_all_items(request):
             'notes': item.notes
         })
     return JsonResponse(res_dict)
+
+
+@login_required
+def delete_item(request, pk):
+    """
+    Deactivates the item with the specified ID. Note that this
+    DOES NOT delete the item from the DB. It is simply a "soft
+    deactivation" to prevent the item from being listed.
+    """
+    item = get_object_or_404(StockItem, pk=pk)
+    item.active = False
+    item.save()
+    return HttpResponse('ok')

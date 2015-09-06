@@ -16,7 +16,7 @@
     };
 
     // load the list of current items
-    itemListSvc.getItemList(false).then(function(res) {
+    itemListSvc.getItemList(true).then(function(res) {
       vm.items = res;
     });
   }

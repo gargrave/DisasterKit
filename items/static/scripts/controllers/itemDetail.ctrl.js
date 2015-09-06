@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   angular.module('dk').controller('ItemDetailController', ItemDetailController);
-  ItemDetailController.$inject = ['$stateParams', 'itemListSvc'];
+  ItemDetailController.$inject = ['$http', '$state', '$stateParams', 'itemListSvc'];
 
-  function ItemDetailController($stateParams, itemListSvc) {
+  function ItemDetailController($http, $state, $stateParams, itemListSvc) {
     var vm = this;
     // the item whose details we are viewing
     vm.item = {};
@@ -11,6 +11,16 @@
     vm.updateDetailedItem = function() {
       vm.item = itemListSvc.getItemById($stateParams.id);
     };
+
+    vm.deleteItem = function() {
+      if (confirm('Delete this item?')) {
+        $http.delete('items/api/delete_item/' + vm.item.id)
+          .success(function(res) {
+            $state.go('dk.item_list');
+          });
+      }
+    };
+
     vm.updateDetailedItem();
   }
 })();

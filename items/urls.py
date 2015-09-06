@@ -27,4 +27,6 @@ urlpatterns = [
 
     # /items/api/get_all_items
     url(r'^api/get_all_items/?$', views.get_all_items, name='get_all_items'),
+    # /items/api/delete_item/<pk>
+    url(r'^api/delete_item/(?P<pk>\d+)/?$', views.delete_item, name='delete_item'),
 ]
