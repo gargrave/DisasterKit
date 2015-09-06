@@ -1,0 +1,44 @@
+{% extends 'items/layout.html' %}
+
+{% block content %}
+  <div class="row">
+    <div id="item_details_table" class="{{ page_vars.sixcols }} dk-form">
+      <table class="u-full-width">
+        <tr>
+          <td><strong>Name:</strong></td>
+          <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+          <td><strong>Category:</strong></td>
+          <td>{{ object.fk_category }}</td>
+        </tr>
+        <tr>
+          <td><strong>Sub-category:</strong></td>
+          <td>{{ object.fk_subcategory }}</td>
+        </tr>
+        <tr>
+          <td><strong>Count:</strong></td>
+          <td>{{ object.count }}</td>
+        </tr>
+        <tr>
+          <td><strong>Expiration:</strong></td>
+          <td>{{ object.date_of_expiration }}</td>
+        </tr>
+        <tr>
+          <td><strong>Added on:</strong></td>
+          <td>{{ object.date_added }} by {{ object.added_by }}</td>
+        </tr>
+        <tr>
+          <td><strong>Notes:</strong></td>
+          <td>{{ object.notes }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="item_details_table" class="{{ page_vars.sixcols }}">
+      <button class="u-pull-right" ng-click="main.deleteItem({{ object.id }})">Delete</button>
+    </div>
+  </div>
+{% endblock %}

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.views.generic.detail import DetailView
 
 from .forms import ItemForm
 from .models import StockItem, Category, SubCategory
@@ -11,6 +12,18 @@ globalvars = {
     'is_debug': settings.DEBUG,
     'version': settings.VERSION
 }
+
+
+class ItemDetailView(DetailView):
+    model = StockItem
+
+    def get_context_data(self, **kwargs):
+        context = super(ItemDetailView, self).get_context_data(**kwargs)
+        context['globalvars'] = globalvars
+        context['page_vars'] = {
+            'sixcols': 'six columns offset-by-three'
+        }
+        return context
 
 
 @login_required
@@ -60,3 +73,14 @@ def add_item(request):
     return render(request, 'items/add_item.html', {
         'form': form, 'globalvars': globalvars, 'page_vars': page_vars
     })
+
+
+@login_required()
+def deactivate_item(request, pk):
+    """
+    Deactivates the item with the specified ID. Note that this
+    DOES NOT delete the item from the DB. It is simply a "soft
+    deactivation" to prevent the item from being listed.
+    """
+    print('deactivate: ' + pk)
+    return HttpResponseRedirect('/items/')

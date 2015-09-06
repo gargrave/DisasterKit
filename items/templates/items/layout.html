@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="dk">
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}{% endblock %}</title>
@@ -22,7 +22,7 @@
 {% endblock %}
 
 </head>
-<body>
+<body ng-controller="MainController as main">
 
 <div class="container">
   {% include 'items/partials/pageheader.html' %}

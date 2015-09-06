@@ -1,16 +1,25 @@
 <div class="row">
-  <div class="six columns">
-    <h4>DisasterKit <small>v. {{ globalvars.version }}</small></h4>
+  <div class="eight columns">
+    <span class="app_title">disaster_kit</span>
+    {% if user.is_authenticated %}
+    <small>v.{{ globalvars.version }}</small>
+    <span id="app-nav">
+      <a href="{% url 'index' %}">Home</a> |
+      <a href="{% url 'items:item_list' %}">Item List</a>
+    </span>
+    {% endif %}
   </div>
 
-  {# display user name and admin link (if user is admin) #}
-  {% if user.is_authenticated %}
-    <span class="u-pull-right">
-      Logged in as <strong>{{ user.username }}</strong>
-      {% if user.is_staff %}
-        <a href="/admin/"><em>(admin)</em></a>
-      {% endif %}
-      | <a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a>
-    </span>
-  {% endif %}
+  <div class="four columns">
+    {# display user name and admin link (if user is admin) #}
+    {% if user.is_authenticated %}
+      <span class="u-pull-right">
+        Logged in as <strong>{{ user.username }}</strong>
+        {% if user.is_staff %}
+          <a href="/admin/"><em>(admin)</em></a>
+        {% endif %}
+        | <a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a>
+      </span>
+    {% endif %}
+  </div>
 </div>

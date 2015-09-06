@@ -10,6 +10,14 @@ body {
   color: red;
 }
 
+.app_title {
+  font-weight: bold;
+}
+
+.dk-form {
+  margin-top: 40px;
+}
+
 /*****************************
 form styles
 ******************************/
@@ -21,6 +29,10 @@ form styles
   text-align: center;
 }
 
+
+#app-nav {
+  padding-left: 10px;
+}
 
 #login-form {
   margin-top: 140px;

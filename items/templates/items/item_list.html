@@ -8,7 +8,7 @@
   <div id="items-display">
     <div class="row">
       <div class="twelve columns">
-        <a class="button button-primary u-pull-right" href="{% url 'items:add_item' %}">Add</a>
+        <a class="button button-primary" href="{% url 'items:add_item' %}">Add</a>
       </div>
     </div>
 
@@ -21,17 +21,15 @@
           <th>Count</th>
           <th>Date Added</th>
           <th>Expiration</th>
-          <th>Notes</th>
         </tr>
         {% for item in items %}
           <tr>
-            <td>{{ item.name }}</td>
+            <td><a href="{% url 'items:item_detail' pk=item.id %}">{{ item.name }}</a></td>
             <td>{{ item.fk_category }}</td>
             <td>{{ item.fk_subcategory }}</td>
             <td>{{ item.count }}</td>
             <td>{{ item.date_added }}</td>
             <td>{{ item.date_of_expiration }}</td>
-            <td>{{ item.notes }}</td>
           </tr>
         {% endfor %}
       </table>

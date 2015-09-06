@@ -1,11 +1,22 @@
 (function() {
   'use strict';
   angular.module('dk').controller('MainController', MainController);
-  MainController.$inject = ['$scope'];
+  MainController.$inject = ['$scope', '$http'];
 
-  function MainController($scope) {
+  function MainController($scope, $http) {
     var vm = this;
-    console.log('MainController');
+
+    /**
+     * Deletes an item from the databse.
+     * @param itemID {int} - The ID of the item to delete.
+     */
+    vm.deleteItem = function(itemID) {
+      // TODO: Replace this with a modal dialog.
+      // TODO: let's ultimately replace this with an AJAX call
+      if (confirm('Delte this item?')) {
+        window.location = '/items/delete/' + itemID;
+      }
+    }
   }
 })();
 
