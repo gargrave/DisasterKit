@@ -36,6 +36,7 @@
 
             }
           })
+          // a state to show details of an individual item
           .state('dk.item_detail', {
             url: '/items/:id',
             views: {
