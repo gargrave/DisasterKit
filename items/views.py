@@ -41,7 +41,7 @@ def list_items(request):
     """
     Provides a view which lists all current items.
     """
-    items = StockItem.objects.all()
+    items = StockItem.objects.filter(active=True)
     return render(request, 'items/item_list.html', {
         'items': items, 'globalvars': globalvars
     })

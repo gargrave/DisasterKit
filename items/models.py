@@ -24,6 +24,9 @@ class StockItem(models.Model):
     fk_category = models.ForeignKey(Category, blank=False)
     fk_subcategory = models.ForeignKey(SubCategory, blank=True, null=True)
     notes = models.TextField(blank=True, default='')
+    # whether this instance should show up in the list
+    # we will use this to hide it as a form of "soft delete"
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
