@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
 from django.utils.decorators import method_decorator
 
 from .forms import ItemForm
@@ -29,6 +31,29 @@ class ItemDetailView(DetailView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(ItemDetailView, self).dispatch(*args, **kwargs)
+
+
+class ItemUpdateView(UpdateView):
+    model = StockItem
+    fields = ['id', 'name', 'count', 'date_of_expiration',
+              'fk_category', 'fk_subcategory', 'notes']
+    template_name_suffix = '_update_form'
+
+    def get_context_data(self, **kwargs):
+        context = super(ItemUpdateView, self).get_context_data(**kwargs)
+        context['globalvars'] = globalvars
+        context['page_vars'] = {
+            'sixcols': 'six columns offset-by-three'
+        }
+        return context
+
+    # override this method from UpdateView to redirect after success
+    def get_success_url(self):
+        return '/items/'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ItemUpdateView, self).dispatch(*args, **kwargs)
 
 
 @login_required
@@ -78,13 +103,6 @@ def add_item(request):
     return render(request, 'items/add_item.html', {
         'form': form, 'globalvars': globalvars, 'page_vars': page_vars
     })
-
-
-@login_required
-def update_item(request, pk):
-    if request.POST:
-        print(request.POST)
-    return HttpResponse('ok')
 
 
 @login_required

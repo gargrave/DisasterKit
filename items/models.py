@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 
 
@@ -27,6 +28,9 @@ class StockItem(models.Model):
     # whether this instance should show up in the list
     # we will use this to hide it as a form of "soft delete"
     active = models.BooleanField(default=True)
+
+    # def get_absolute_url(self):
+    #     return reverse('items:item_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name

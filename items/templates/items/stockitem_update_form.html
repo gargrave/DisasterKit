@@ -1,0 +1,86 @@
+{% extends 'items/layout.html' %}
+
+{% block title %}
+  Add New Item
+{% endblock title %}
+
+{% block content %}
+
+<div class="dk-form">
+  {# form title display #}
+  <div id="form-title-row" class="row">
+    <div class="{{ page_vars.sixcols }}">
+      <h5 class="form-header">Update an Item</h5>
+    </div>
+  </div>
+
+  <form action="#" method="post">
+    {% csrf_token %}
+
+    <div class="row">
+      {# item name input #}
+      <div class="{{ page_vars.sixcols }}">
+        <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
+        {{ form.name }}
+        {{ form.name.errors }}
+      </div>
+
+    </div>
+
+    <div class="row">
+      {# item count input #}
+      <div class="{{ page_vars.sixcols }}">
+        <label for="{{ form.count.auto_id }}">{{ form.count.label }}</label>
+        {{ form.count }}
+        {{ form.count.errors }}
+      </div>
+    </div>
+
+    <div class="row">
+      {# expiration date #}
+      <div class="{{ page_vars.sixcols }}">
+        <label for="{{ form.date_of_expiration.auto_id }}">{{ form.date_of_expiration.label }}</label>
+        {{ form.date_of_expiration }}
+        {{ form.date_of_expiration.errors }}
+      </div>
+    </div>
+
+    <div class="row">
+      {# category selector #}
+      <div class="three columns offset-by-three">
+        <label for="{{ form.fk_category.auto_id }}">{{ form.fk_category.label }}</label>
+        {{ form.fk_category }}
+        {{ form.fk_category.errors }}
+      </div>
+
+      {# sub-category selector #}
+      <div class="three columns">
+        <label for="{{ form.fk_subcategory.auto_id }}">{{ form.fk_subcategory.label }}</label>
+        {{ form.fk_subcategory }}
+        {{ form.fk_subcategory.errors }}
+      </div>
+    </div>
+
+    <div class="row">
+      {# additional notes input #}
+      <div class="{{ page_vars.sixcols }}">
+        <label for="{{ form.notes.auto_id }}">{{ form.notes.label }}</label>
+        {{ form.notes }}
+        {{ form.notes.errors }}
+      </div>
+    </div>
+
+    {# button row #}
+    <div class="row">
+      {# submit button #}
+      <div class="three columns offset-by-three">
+        <input class="button button-primary" type="submit" value="Submit">
+      </div>
+      {# cancel back -> take us back to item list #}
+      <div class="three columns">
+        <a class="button u-pull-right" href="{% url 'items:item_list' %}">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}
