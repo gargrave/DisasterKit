@@ -1,22 +1,24 @@
 (function() {
   'use strict';
   angular.module('dk').controller('ItemsController', ItemsController);
-  ItemsController.$inject = ['$scope', '$http'];
+  ItemsController.$inject = ['$scope', '$rootScope', '$state', 'itemListSvc'];
 
-  function MainController($scope, $http) {
+  function ItemsController($scope, $rootScope, $state, itemListSvc) {
     var vm = this;
+    vm.items = null;
 
     /**
-     * Deletes an item from the databse.
-     * @param itemID {int} - The ID of the item to delete.
+     * Changes to the item details state for the specified item.
+     * @param {int} itemID - The id of the item to view.
      */
-    vm.deleteItem = function(itemID) {
-      // TODO: Replace this with a modal dialog.
-      // TODO: let's ultimately replace this with an AJAX call
-      if (confirm('Delte this item?')) {
-        window.location = '/items/delete/' + itemID;
-      }
-    }
+    vm.viewItemDetails = function(itemID) {
+      $state.go('dk.item_detail', {'id': itemID});
+    };
+
+    // load the list of current items
+    itemListSvc.getItemList(false).then(function(res) {
+      vm.items = res;
+    });
   }
 })();
 

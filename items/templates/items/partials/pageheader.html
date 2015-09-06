@@ -4,8 +4,8 @@
     {% if user.is_authenticated %}
     <small>v.{{ globalvars.version }}</small>
     <span id="app-nav">
-      <a href="{% url 'index' %}">Home</a> |
-      <a href="{% url 'items:item_list' %}">Item List</a>
+      <a ui-sref="dk.item_list">Home</a> |
+      <a ui-sref="dk.item_list">Item List</a>
     </span>
     {% endif %}
   </div>

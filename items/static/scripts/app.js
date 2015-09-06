@@ -13,12 +13,40 @@
         $interpolateProvider.endSymbol('A}');
 
         $stateProvider
-            .state('disasterkit', {
-              url: '',
-              abstract: true
-            });
-        $urlRouterProvider.otherwise('/');
+          .state('dk', {
+            url: '',
+            abstract: true
+          })
+          // home URL
+          .state('dk.home', {
+            url: '/',
+            views: {
+              controller: '',
+              templateUrl: ''
+            }
+          })
+          // a state showing full item list
+          .state('dk.item_list', {
+            url: '/items/',
+            views: {
+              'item_list@': {
+                controller: 'ItemsController as itemsCtrl',
+                templateUrl: '/static/partials/item-list.html'
+              }
 
+            }
+          })
+          .state('dk.item_detail', {
+            url: '/items/:id',
+            views: {
+              'item_detail@': {
+                controller: 'ItemDetailController as itemDetailCtrl',
+                templateUrl: '/static/partials/item-detail.html'
+              }
+            }
+          }
+        );
+        $urlRouterProvider.otherwise('/');
 
         /*
          * boiler-plate for getting NG to work properly with

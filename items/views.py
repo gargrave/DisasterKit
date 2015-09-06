@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
@@ -116,3 +116,29 @@ def deactivate_item(request, pk):
     item.active = False
     item.save()
     return HttpResponseRedirect('/items/')
+
+
+################################################
+# API Methods
+################################################
+
+@login_required
+def get_all_items(request):
+    """
+    Returns a list of all active items currently in the stock.
+    """
+    items = StockItem.objects.filter(active=True)
+    res_dict = {'items': []}
+    for item in items:
+        res_dict['items'].append({
+            'id': item.id,
+            'name': item.name,
+            'count': item.count,
+            'date_added': item.date_added,
+            'exp': item.date_of_expiration,
+            'added_by': item.added_by,
+            'cat': str(item.fk_category),
+            'subcat': str(item.fk_subcategory),
+            'notes': item.notes
+        })
+    return JsonResponse(res_dict)
