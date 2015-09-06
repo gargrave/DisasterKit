@@ -1,14 +1,29 @@
 (function() {
   'use strict';
 
-  angular.module('dk', [])
+  angular.module('dk', ['ui.router'])
     .config(['$interpolateProvider', '$httpProvider',
-      function($interpolateProvider, $httpProvider) {
+        '$stateProvider', '$urlRouterProvider',
+      function($interpolateProvider, $httpProvider,
+               $stateProvider, $urlRouterProvider) {
 
         /* set up custom interpolation handlebars,
-         * so that NG can work together with Jinja templates */
+         * so that NG can work together with Django templates */
         $interpolateProvider.startSymbol('{A');
         $interpolateProvider.endSymbol('A}');
+
+        $stateProvider
+            .state('disasterkit', {
+              url: '',
+              abstract: true
+            });
+        $urlRouterProvider.otherwise('/');
+
+
+        /*
+         * boiler-plate for getting NG to work properly with
+         * Django's security requirements
+        ***********************************************************/
 
         // get a CSRF token to make Django happy!
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';

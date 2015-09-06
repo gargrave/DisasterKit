@@ -38,11 +38,13 @@
   <script src="{% static 'libs/jquery.js' %}"></script>
   <script src="{% static 'libs/bootstrap.js' %}"></script>
   <script src="{% static 'libs/angular.js' %}"></script>
+  <script src="{% static 'libs/angular-ui-router.js' %}"></script>
   {# CDN imports for prod builds #}
   {% else %}
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
   {% endif %}
 
   <script src="{% static 'scripts/app.js' %}"></script>
