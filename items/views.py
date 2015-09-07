@@ -3,8 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import UpdateView
 from django.utils.decorators import method_decorator
 
 from .forms import ItemForm
@@ -17,45 +15,6 @@ globalvars = {
 }
 
 
-class ItemDetailView(DetailView):
-    model = StockItem
-
-    def get_context_data(self, **kwargs):
-        context = super(ItemDetailView, self).get_context_data(**kwargs)
-        context['globalvars'] = globalvars
-        context['page_vars'] = {
-            'sixcols': 'six columns offset-by-three'
-        }
-        return context
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ItemDetailView, self).dispatch(*args, **kwargs)
-
-
-class ItemUpdateView(UpdateView):
-    model = StockItem
-    fields = ['id', 'name', 'count', 'date_of_expiration',
-              'fk_category', 'fk_subcategory', 'notes']
-    template_name_suffix = '_update_form'
-
-    def get_context_data(self, **kwargs):
-        context = super(ItemUpdateView, self).get_context_data(**kwargs)
-        context['globalvars'] = globalvars
-        context['page_vars'] = {
-            'sixcols': 'six columns offset-by-three'
-        }
-        return context
-
-    # override this method from UpdateView to redirect after success
-    def get_success_url(self):
-        return '/items/'
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(ItemUpdateView, self).dispatch(*args, **kwargs)
-
-
 @login_required
 def index(request):
     """
@@ -63,17 +22,6 @@ def index(request):
     """
     return render(request, 'items/index.html', {
         'globalvars': globalvars
-    })
-
-
-@login_required
-def list_items(request):
-    """
-    Provides a view which lists all current items.
-    """
-    items = StockItem.objects.filter(active=True)
-    return render(request, 'items/item_list.html', {
-        'items': items, 'globalvars': globalvars
     })
 
 
@@ -128,6 +76,26 @@ def get_all_items(request):
             'subcat': str(item.fk_subcategory),
             'notes': item.notes
         })
+    return JsonResponse(res_dict)
+
+
+@login_required
+def get_item_by_id(request, pk):
+    """
+    Returns the item that matches the specified ID.
+    """
+    item = get_object_or_404(StockItem, pk=pk)
+    res_dict = {
+        'id': item.id,
+        'name': item.name,
+        'count': item.count,
+        'date_added': item.date_added,
+        'exp': item.date_of_expiration,
+        'added_by': item.added_by,
+        'cat': str(item.fk_category),
+        'subcat': str(item.fk_subcategory),
+        'notes': item.notes
+    }
     return JsonResponse(res_dict)
 
 

@@ -30,7 +30,7 @@
             url: '/items/',
             views: {
               'item_list@': {
-                controller: 'ItemsController as itemsCtrl',
+                controller: 'ItemListController as itemListCtrl',
                 templateUrl: '/static/partials/item-list.html'
               }
 
@@ -43,6 +43,16 @@
               'item_detail@': {
                 controller: 'ItemDetailController as itemDetailCtrl',
                 templateUrl: '/static/partials/item-detail.html'
+              }
+            }
+          })
+          // a state to show details of an individual item
+          .state('dk.item_update', {
+            url: '/items/update/:id',
+            views: {
+              'item_update@': {
+                controller: 'ItemUpdateController as itemUpdateCtrl',
+                templateUrl: '/static/partials/item-update.html'
               }
             }
           }

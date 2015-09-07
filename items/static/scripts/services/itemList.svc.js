@@ -35,13 +35,18 @@
       return deferred.promise;
     };
 
+    /**
+     * Returns an invidual item instance matching the specified ID.
+     *
+     * @param {int} targetID - The ID of the item to find.
+     */
     vm.getItemById = function(targetID) {
-      for (var i in items) {
-        if (items[i].id == targetID) {
-          return items[i];
-        }
-      }
-      return null;
+      var deferred = $q.defer();
+      $http.get('items/api/get_item_by_id/' + targetID)
+        .then(function(res) {
+          deferred.resolve(res.data);
+        });
+      return deferred.promise;
     };
   }
 })();

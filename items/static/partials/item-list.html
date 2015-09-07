@@ -1,7 +1,8 @@
 <div id="items-display">
   <div class="row">
     <div class="twelve columns">
-      <a class="button button-primary" href="#">Add</a>
+      <a class="button button-primary"
+         ng-click="itemListCtrl.goToItemCreateView()">Add</a>
     </div>
   </div>
 
@@ -15,11 +16,9 @@
         <th>Date Added</th>
         <th>Expiration</th>
       </tr>
-      <tr ng-repeat="item in itemsCtrl.items">
-        <!--
-        <td><a ui-sref="dk.item_detail({id: item.id})" ng-bind="item.name"></a></td>
-        -->
-        <td><a ng-click="itemsCtrl.viewItemDetails(item.id)" ng-bind="item.name"></a></td>
+      <tr ng-repeat="item in itemListCtrl.items">
+        <td><a ng-click="itemListCtrl.viewItemDetails(item.id)"
+               ng-bind="item.name"></a></td>
         <td ng-bind="item.cat"></td>
         <td ng-bind="item.subcat"></td>
         <td ng-bind="item.count"></td>

@@ -1,0 +1,59 @@
+<form action="#" class="dk-form">
+  <div class="row">
+    <div class="six columns offset-by-three">
+      <label for="id_name">Name:</label>
+      <input id="id_name" class="u-full-width"
+             type="text" ng-model="itemUpdateCtrl.item.name">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="six columns offset-by-three">
+      <label for="id_count">Count:</label>
+      <input id="id_count" class="u-full-width"
+             type="text" ng-model="itemUpdateCtrl.item.count">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="six columns offset-by-three">
+      <label for="id_exp">Expiration:</label>
+      <input id="id_exp" class="u-full-width"
+             type="text" ng-model="itemUpdateCtrl.item.exp">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="three columns offset-by-three">
+      <label for="id_cat">Category:</label>
+      <input id="id_cat" class="u-full-width"
+             type="text" ng-model="itemUpdateCtrl.item.cat">
+    </div>
+
+    <div class="three columns">
+      <label for="id_subcat">Sub-category:</label>
+      <input id="id_subcat" class="u-full-width u-pull-right"
+             type="text" ng-model="itemUpdateCtrl.item.subcat">
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="six columns offset-by-three">
+      <label for="id_notes">Notes:</label>
+      <textarea name="notes" id="id_notes" class="u-full-width"
+                cols="40" rows="10"
+                ng-model="itemUpdateCtrl.item.notes"></textarea>
+      </div>
+  </div>
+
+  <div class="row">
+
+    <div class="six columns offset-by-three">
+      <a class="button button-primary"
+         ng-click="itemUpdateCtrl.commitUpdates()">Save</a>
+      <a class="button u-pull-right"
+         ng-click="itemUpdateCtrl.goToItemDetails()">Cancel</a>
+    </div>
+
+  </div>
+</form>

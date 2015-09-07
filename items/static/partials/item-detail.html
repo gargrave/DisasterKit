@@ -39,7 +39,9 @@
 <div class="row">
 
   <div class="three columns offset-by-three">
-    <a class="button button-primary" href="#">Edit</a>
+    <button class="button button-primary"
+            ng-click="itemDetailCtrl.onEditClick()">Edit</button>
+    <button ng-click="itemDetailCtrl.goToItemList()">Back</button>
   </div>
 
   <div class="three columns">

@@ -1,7 +1,6 @@
 from django.conf.urls import url
 
 from . import views
-from .views import ItemDetailView, ItemUpdateView
 
 
 urlpatterns = [
@@ -26,7 +25,9 @@ urlpatterns = [
     # url(r'^update/(?P<pk>\d+)/?$', ItemUpdateView.as_view(), name='item_update'),
 
     # /items/api/get_all_items
-    url(r'^api/get_all_items/?$', views.get_all_items, name='get_all_items'),
+    url(r'^api/get_all_items/?$', views.get_all_items),
+    # /items/api/get_item_by_id/<pk>
+    url(r'^api/get_item_by_id/(?P<pk>\d+)/?$', views.get_item_by_id),
     # /items/api/delete_item/<pk>
-    url(r'^api/delete_item/(?P<pk>\d+)/?$', views.delete_item, name='delete_item'),
+    url(r'^api/delete_item/(?P<pk>\d+)/?$', views.delete_item),
 ]
