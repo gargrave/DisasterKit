@@ -4,24 +4,36 @@
 <html lang="en" ng-app="dk">
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}{% endblock %}</title>
+  <title>{% block title %}disaster_kit{% endblock %}</title>
+
+{% comment %}
+************************************************************
+* STYLESHEETS
+************************************************************
+{% endcomment %}
 
 {% block stylesheets %}
-  {# local import for debug/dev builds #}
-  {% if globalvars.is_debug %}
+{# local import for debug/dev builds #}
+{% if globalvars.is_debug %}
   <link rel="stylesheet" href="{% static 'libs/normalize.css' %}">
   <link rel="stylesheet" href="{% static 'libs/bootstrap.css' %}">
   <link rel="stylesheet" href="{% static 'libs/skeleton.css' %}">
-  {# CDN imports for prod builds #}
-  {% else %}
+{# CDN imports for prod builds #}
+{% else %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
-  {% endif %}
+{% endif %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 {% endblock %}
-
 </head>
+
+{% comment %}
+************************************************************
+* BODY
+************************************************************
+{% endcomment %}
+
 <body ng-controller="MainController as main">
 
 <div class="container">
@@ -32,23 +44,30 @@
   </div>
 </div>
 
+{% comment %}
+************************************************************
+* SCRIPT IMPORTS
+************************************************************
+{% endcomment %}
+
 {% block scripts %}
-  {# local import for debug/dev builds #}
-  {% if globalvars.is_debug %}
+{# local import for debug/dev builds #}
+{% if globalvars.is_debug %}
   <script src="{% static 'libs/jquery.js' %}"></script>
   <script src="{% static 'libs/bootstrap.js' %}"></script>
   <script src="{% static 'libs/angular.js' %}"></script>
   <script src="{% static 'libs/angular-ui-router.js' %}"></script>
-  {# CDN imports for prod builds #}
-  {% else %}
+{# CDN imports for prod builds #}
+{% else %}
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
-  {% endif %}
+{% endif %}
 
   <script src="{% static 'scripts/app.js' %}"></script>
   <script src="{% static 'scripts/controllers/main.ctrl.js' %}"></script>
+  <script src="{% static 'scripts/controllers/home.ctrl.js' %}"></script>
   <script src="{% static 'scripts/controllers/itemDetail.ctrl.js' %}"></script>
   <script src="{% static 'scripts/controllers/itemList.ctrl.js' %}"></script>
   <script src="{% static 'scripts/controllers/itemUpdate.ctrl.js' %}"></script>

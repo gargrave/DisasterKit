@@ -12,6 +12,10 @@
         $interpolateProvider.startSymbol('{A');
         $interpolateProvider.endSymbol('A}');
 
+        /*
+         * routing set up
+         **********************************************/
+
         $stateProvider
           .state('dk', {
             url: '',
@@ -21,8 +25,10 @@
           .state('dk.home', {
             url: '/',
             views: {
-              controller: '',
-              templateUrl: ''
+              'home@': {
+                controller: 'HomeController as homeCtrl',
+                templateUrl: '/static/partials/home.html'
+              }
             }
           })
           // a state showing full item list

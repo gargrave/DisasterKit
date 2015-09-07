@@ -1,38 +1,47 @@
 body {
   padding: 10px;
-  background: white; }
+  background: white;
+}
 
 .main-content {
-  padding-top: 65px; }
+  padding-top: 65px;
+}
 
 /**********************************
  * text styles
  **********************************/
+
 .error_text {
-  color: red; }
+  color: red;
+}
 
 .bold_text {
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 /**********************************
  * form styles
  **********************************/
+
 .dk-form {
-  margin-top: 60px; }
+  margin-top: 60px;
+}
 
 .form-header {
   color: white;
   background-color: #999;
   border: solid 2px #888;
-  text-align: center; }
+  text-align: center;
+}
 
 /**********************************
  * ID styles
  **********************************/
+
 #app-nav {
-  margin-left: 10px; }
+  margin-left: 10px;
+}
 
 #items-display {
-  margin-top: 40px; }
-
-/*# sourceMappingURL=styles.css.map */
+  margin-top: 40px;
+}

@@ -1,12 +1,13 @@
 {% extends 'items/layout.html' %}
 
 {% block title %}
-  Login
+  disaster_kit login
 {% endblock title %}
 
 {% block content %}
   <div class="row dk-form">
     <div class="five columns offset-by-three">
+
       <form method='post' action="{% url 'django.contrib.auth.views.login' %}">
         {% csrf_token %}
 
@@ -24,11 +25,13 @@
 
         <input class="button button-primary" type="submit" value="Submit">
 
+        {# display error messages #}
         {% if form.errors %}
           <br>
-          <p class="error">There were errors logging you in. Please try again.</p>
+          <p class="error_text">There were errors logging you in. Please try again.</p>
         {% endif %}
       </form>
+
     </div>
   </div>
 {% endblock content %}

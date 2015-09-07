@@ -1,11 +1,8 @@
 {% extends 'items/layout.html' %}
 
-{% block title %}
-  DisasterKit
-{% endblock %}
-
 {% block content %}
-<div ui-view="item_list"></div>
-<div ui-view="item_detail"></div>
-<div ui-view="item_update"></div>
+  <div ui-view="home"></div>
+  <div ui-view="item_list"></div>
+  <div ui-view="item_detail"></div>
+  <div ui-view="item_update"></div>
 {% endblock %}
