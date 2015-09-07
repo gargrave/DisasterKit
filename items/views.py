@@ -100,18 +100,26 @@ def get_item_by_id(request, pk):
 
 
 @login_required
+def get_categories(request):
+    res_dict = {}
+    res_dict['cats'] = [
+        'Food', 'Beverage'
+    ]
+    res_dict['subcats'] = [
+        'Salty', 'Sweet'
+    ]
+    return JsonResponse(res_dict)
+
+
+@login_required
 def update_item(request):
-    print('**************************')
-    print('* update_item')
-    print(request.method)
     if request.POST:
-        print(request.POST)
         item = get_object_or_404(StockItem, pk=request.POST['id'])
         item.name = request.POST['name']
         item.count = int(request.POST['count'])
         item.date_of_expiration = request.POST['exp']
-        # item.fk_category = request.POST['cat']
-        # item.fk_subcategory = request.POST['subcat']
+        item.fk_category = Category.objects.get(name=request.POST['cat'])
+        item.fk_subcategory = SubCategory.objects.get(name=request.POST['subcat'])
         item.notes = request.POST['notes']
         item.save()
     return HttpResponse(status=200)

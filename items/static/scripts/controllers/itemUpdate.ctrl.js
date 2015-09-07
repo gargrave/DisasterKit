@@ -2,22 +2,48 @@
   'use strict';
   angular.module('dk').controller('ItemUpdateController', ItemUpdateController);
   ItemUpdateController.$inject = [
-    '$http', '$state', '$stateParams', 'itemListSvc'];
+    '$http', '$state', '$stateParams', 'itemListSvc', 'categoryListSvc'];
 
-  function ItemUpdateController($http, $state, $stateParams, itemListSvc) {
+  function ItemUpdateController($http, $state, $stateParams,
+                                itemListSvc, categoryListSvc) {
     var vm = this;
     vm.loading = true;
     // the item whose details we are viewing
     vm.item = {};
+    // the list of categories from the server
+    vm.cats = [];
+    // the list of sub-categories from the server
+    vm.subcats = [];
+
+    /**
+     * Checks if all necessary values have been loaded, and sets the 'loading'
+     * flag to false once they have.
+     */
+    function updateLoadingStatus() {
+      if (vm.item.id &&
+          vm.cats.length > 0 &&
+          vm.subcats.length > 0) {
+        vm.loading = false;
+      }
+    }
 
     /**
      * Updates the details for the item we are currently previewing.
      */
     vm.getTargetItem = function() {
+      // get the details for the current item
       itemListSvc.getItemById($stateParams.id)
         .then(function(res) {
           vm.item = res;
-          vm.loading = false;
+          updateLoadingStatus();
+        });
+
+      // get the list of categories and sub-categories for the <select>s
+      categoryListSvc.getCateogryList()
+        .then(function(res) {
+          vm.cats = res.cats;
+          vm.subcats = res.subcats;
+          updateLoadingStatus();
         });
     };
 

@@ -27,14 +27,18 @@
     <div class="row">
       <div class="three columns offset-by-three">
         <label for="id_cat">Category:</label>
-        <input id="id_cat" class="u-full-width"
-               type="text" ng-model="itemUpdateCtrl.item.cat">
+        <select name="cat" id="id_cat" class="u-full-width"
+                ng-model="itemUpdateCtrl.item.cat">
+          <option ng-repeat="cat in itemUpdateCtrl.cats">{A cat A}</option>
+        </select>
       </div>
 
       <div class="three columns">
         <label for="id_subcat">Sub-category:</label>
-        <input id="id_subcat" class="u-full-width u-pull-right"
-               type="text" ng-model="itemUpdateCtrl.item.subcat">
+        <select name="subcat" id="id_subcat" class="u-full-width u-pull-right"
+                ng-model="itemUpdateCtrl.item.subcat">
+          <option ng-repeat="subcat in itemUpdateCtrl.subcats">{A subcat A}</option>
+        </select>
       </div>
     </div>
 

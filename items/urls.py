@@ -21,4 +21,8 @@ urlpatterns = [
     #       rather just flags it as inactive, so it will be ignored when listing
     # /items/api/delete_item/<pk>
     url(r'^api/delete_item/(?P<pk>\d+)/?$', views.delete_item),
+
+    # URL to fetch a list of all categories (i.e. for populating <select>s
+    # /items/api/get_categories/
+    url(r'^api/get_categories/?$', views.get_categories),
 ]
