@@ -40,8 +40,8 @@
 
   <div class="three columns offset-by-three">
     <button class="button button-primary"
-            ng-click="itemDetailCtrl.onEditClick()">Edit</button>
-    <button ng-click="itemDetailCtrl.goToItemList()">Back</button>
+            ui-sref="dk.item_update({'id': itemDetailCtrl.item.id})">Edit</button>
+    <button ui-sref="dk.item_list">Back</button>
   </div>
 
   <div class="three columns">
