@@ -17,8 +17,6 @@
         .then(function(res) {
           vm.item = res;
           vm.loading = false;
-        }, function(res) {
-          alert('There was an error when attempting to fetch the item\'s details.');
         });
     };
 

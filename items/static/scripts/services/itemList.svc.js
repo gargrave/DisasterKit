@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   angular.module('dk').service('itemListSvc', itemListSvc);
-  itemListSvc.$inject = ['$http', '$q'];
+  itemListSvc.$inject = ['$http', '$q', '$state'];
 
-  function itemListSvc($http, $q) {
+  function itemListSvc($http, $q, $state) {
     var vm = this;
     var items = [];
 
@@ -30,8 +30,11 @@
               }
             }
             deferred.resolve(items);
+          // in case of error response, display error and return to home state
           }, function(res) {
-            alert('There was an error getting the item list from the server.');
+            alert('There was an error getting the item ' +
+              'list from the server.\nStatus code: ' + res.status);
+            $state.go('dk.home');
           });
       }
       return deferred.promise;
@@ -47,8 +50,11 @@
       $http.get('items/api/get_item_by_id/' + targetID)
         .then(function(res) {
           deferred.resolve(res.data);
+        // in case of error response, display error and return to item-list state
         }, function(res) {
-          alert('There was an error getting the item\'s details from the server.');
+          alert('There was an error getting the item\'s ' +
+            'details from the server.\nStatus code: ' + res.status);
+          $state.go('dk.item_list');
         });
       return deferred.promise;
     };

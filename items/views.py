@@ -100,6 +100,11 @@ def get_item_by_id(request, pk):
 
 
 @login_required
+def update_item(request):
+    return HttpResponse(status=200)
+
+
+@login_required
 def delete_item(request, pk):
     """
     Deactivates the item with the specified ID. Note that this
@@ -109,4 +114,4 @@ def delete_item(request, pk):
     item = get_object_or_404(StockItem, pk=pk)
     item.active = False
     item.save()
-    return HttpResponse('ok')
+    return HttpResponse(status=200)

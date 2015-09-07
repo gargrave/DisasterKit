@@ -18,8 +18,6 @@
         .then(function(res) {
           vm.item = res;
           vm.loading = false;
-        }, function(res) {
-          alert('There was an error when attempting to fetch item details.');
         });
     };
 
@@ -31,8 +29,10 @@
         $http.delete('items/api/delete_item/' + vm.item.id)
           .then(function(res) {
             $state.go('dk.item_list');
+          // in case of error, display error and return to item-list state
           }, function(res) {
-            alert('There was an error when attempting to delete this item.');
+            alert('There was an error when attempting to ' +
+              'delete this item.\nStatus code: ' + res.status);
             $state.go('dk.item_list');
           });
       }
