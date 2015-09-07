@@ -5,6 +5,7 @@
 
   function ItemListController($state, itemListSvc) {
     var vm = this;
+    vm.loading = true;
     vm.items = null;
 
     /**
@@ -17,6 +18,7 @@
     // load the list of current items
     itemListSvc.getItemList(true).then(function(res) {
       vm.items = res;
+      vm.loading = false;
     });
   }
 })();

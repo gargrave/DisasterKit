@@ -5,6 +5,7 @@
 
   function ItemUpdateController($state, $stateParams, itemListSvc) {
     var vm = this;
+    vm.loading = true;
     // the item whose details we are viewing
     vm.item = {};
 
@@ -15,6 +16,7 @@
       itemListSvc.getItemById($stateParams.id)
         .then(function(res) {
           vm.item = res;
+          vm.loading = false;
         });
     };
 
