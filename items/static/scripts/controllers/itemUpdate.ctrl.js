@@ -19,25 +19,11 @@
     };
 
     /**
-     * Returns to the item details view for the current item.
-     */
-    vm.goToItemDetails = function() {
-      $state.go('dk.item_detail', {'id': vm.item.id});
-    };
-
-    /**
-     * Returns to the item kust view.
-     */
-    vm.goToItemList = function() {
-      $state.go('dk.item_list');
-    };
-
-    /**
      * Sends the current changes to the item back to the server.
      */
     vm.commitUpdates = function() {
       alert('TODO: Save this update to the server!');
-      vm.goToItemList();
+      $state.go('dk.item_list');
     };
 
     // init

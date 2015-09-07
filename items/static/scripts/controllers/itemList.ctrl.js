@@ -8,15 +8,6 @@
     vm.items = null;
 
     /**
-     * Changes to the item details state for the specified item.
-     *
-     * @param {int} itemID - The id of the item to view.
-     */
-    vm.viewItemDetails = function(itemID) {
-      $state.go('dk.item_detail', {'id': itemID});
-    };
-
-    /**
      * Changes to the item creation view.
      */
     vm.goToItemCreateView = function() {
