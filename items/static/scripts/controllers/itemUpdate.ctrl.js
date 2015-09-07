@@ -1,9 +1,10 @@
 (function() {
   'use strict';
   angular.module('dk').controller('ItemUpdateController', ItemUpdateController);
-  ItemUpdateController.$inject = ['$state', '$stateParams', 'itemListSvc'];
+  ItemUpdateController.$inject = [
+    '$http', '$state', '$stateParams', 'itemListSvc'];
 
-  function ItemUpdateController($state, $stateParams, itemListSvc) {
+  function ItemUpdateController($http, $state, $stateParams, itemListSvc) {
     var vm = this;
     vm.loading = true;
     // the item whose details we are viewing
@@ -24,9 +25,16 @@
      * Sends the current changes to the item back to the server.
      */
     vm.commitUpdates = function() {
-      alert('TODO: Save this update to the server!');
-      console.log(vm.item);
-      $state.go('dk.item_list');
+      // TODO: let's validate that something has actually changed before sending this off
+      $http.post('items/api/update_item/', vm.item)
+        .then(function(res) {
+          $state.go('dk.item_list');
+        // in case of error, display error and return to item-list state
+        }, function(res) {
+          alert('There was an error when attempting to ' +
+              'update this item.\nStatus code: ' + res.status);
+          $state.go('dk.item_list');
+        });
     };
 
     // init
