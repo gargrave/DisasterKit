@@ -18,6 +18,8 @@
         .then(function(res) {
           vm.item = res;
           vm.loading = false;
+        }, function(res) {
+          alert('There was an error when attempting to fetch item details.');
         });
     };
 
@@ -27,7 +29,10 @@
     vm.deleteItem = function() {
       if (confirm('Delete this item?')) {
         $http.delete('items/api/delete_item/' + vm.item.id)
-          .success(function(res) {
+          .then(function(res) {
+            $state.go('dk.item_list');
+          }, function(res) {
+            alert('There was an error when attempting to delete this item.');
             $state.go('dk.item_list');
           });
       }

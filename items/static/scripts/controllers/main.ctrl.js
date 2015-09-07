@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   angular.module('dk').controller('MainController', MainController);
-  MainController.$inject = ['$state', '$http'];
+  MainController.$inject = [];
 
-  function MainController($state, $http) {
+  function MainController() {
     var vm = this;
     vm.asdf = 'fart';
 

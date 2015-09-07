@@ -30,6 +30,8 @@
               }
             }
             deferred.resolve(items);
+          }, function(res) {
+            alert('There was an error getting the item list from the server.');
           });
       }
       return deferred.promise;
@@ -45,6 +47,8 @@
       $http.get('items/api/get_item_by_id/' + targetID)
         .then(function(res) {
           deferred.resolve(res.data);
+        }, function(res) {
+          alert('There was an error getting the item\'s details from the server.');
         });
       return deferred.promise;
     };

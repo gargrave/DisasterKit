@@ -17,6 +17,8 @@
         .then(function(res) {
           vm.item = res;
           vm.loading = false;
+        }, function(res) {
+          alert('There was an error when attempting to fetch the item\'s details.');
         });
     };
 
@@ -25,6 +27,7 @@
      */
     vm.commitUpdates = function() {
       alert('TODO: Save this update to the server!');
+      console.log(vm.item);
       $state.go('dk.item_list');
     };
 
