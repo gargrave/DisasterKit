@@ -22,6 +22,8 @@
         .then(function(res) {
           vm.cats = res.cats;
           vm.subcats = res.subcats;
+          vm.item.cat = vm.cats[0];
+          vm.item.subcat = 'None';
           vm.loading = false;
         });
     };
@@ -30,7 +32,7 @@
      * Sends the to the server to be saved.
      */
     vm.saveNewItem = function() {
-      // TODO: let's validate that something has actually been entered before sending this off
+      //console.log('saveNewItem()');
       // make sure we do not pass a null 'notes' field
       vm.item.notes = vm.item.notes || '';
       $http.post('items/api/create_item/', vm.item)
