@@ -35,16 +35,22 @@ def create_item(request):
     Adds a new StockItem to the database based on a POST request.
     """
     if request.POST:
-        StockItem(
-            name=request.POST['name'],
-            count=int(request.POST['count']),
-            date_of_expiration=request.POST['exp'],
+        print(request.POST)
+        item = StockItem(
+            name=request.POST.get('name'),
+            count=int(request.POST.get('count')),
+            date_of_expiration=request.POST.get('exp'),
             added_by=str(request.user),
-            fk_category=Category.objects.get(name=request.POST['cat']),
-            fk_subcategory=SubCategory.objects.get(name=request.POST['subcat'] or None),
-            notes=request.POST['notes' or None]
-        ).save()
-    return HttpResponse(status=200)
+            fk_category=Category.objects.get(name=request.POST.get('cat')),
+            # fk_subcategory=SubCategory.objects.get(name=request.POST.get('subcat')),
+            notes=request.POST.get('notes'),
+        )
+        # check for optional subcategory
+        if request.POST.get('subcat'):
+            item.fk_subcategory = SubCategory.objects.get(name=request.POST.get('subcat'))
+        item.save()
+        return HttpResponse(status=200)
+    return HttpResponseRedirect('/')
 
 
 @login_required
