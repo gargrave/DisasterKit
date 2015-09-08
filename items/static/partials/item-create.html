@@ -1,8 +1,9 @@
-<div id="item-update-container" ng-hide="itemUpdateCtrl.loading">
+
+<div id="item-create-container" ng-hide="itemCreateCtrl.loading">
 
   <div class="row">
     <div class="{A main.class.SIXCOLS A}">
-      <h2>Update an Item</h2>
+      <h2>Add a New Item</h2>
     </div>
   </div>
 
@@ -11,7 +12,7 @@
       <div class="{A main.class.SIXCOLS A}">
         <label for="id_name">Name:</label>
         <input id="id_name" class="u-full-width"
-               type="text" ng-model="itemUpdateCtrl.item.name">
+               type="text" ng-model="itemCreateCtrl.item.name">
       </div>
     </div>
 
@@ -19,7 +20,7 @@
       <div class="{A main.class.SIXCOLS A}">
         <label for="id_count">Count:</label>
         <input id="id_count" class="u-full-width"
-               type="text" ng-model="itemUpdateCtrl.item.count">
+               type="text" ng-model="itemCreateCtrl.item.count">
       </div>
     </div>
 
@@ -27,7 +28,7 @@
       <div class="{A main.class.SIXCOLS A}">
         <label for="id_exp">Expiration:</label>
         <input id="id_exp" class="u-full-width"
-               type="text" ng-model="itemUpdateCtrl.item.exp">
+               type="text" ng-model="itemCreateCtrl.item.exp">
       </div>
     </div>
 
@@ -35,16 +36,16 @@
       <div class="three columns offset-by-three">
         <label for="id_cat">Category:</label>
         <select name="cat" id="id_cat" class="u-full-width"
-                ng-model="itemUpdateCtrl.item.cat">
-          <option ng-repeat="cat in itemUpdateCtrl.cats">{A cat A}</option>
+                ng-model="itemCreateCtrl.item.cat">
+          <option ng-repeat="cat in itemCreateCtrl.cats">{A cat A}</option>
         </select>
       </div>
 
       <div class="three columns">
         <label for="id_subcat">Sub-category:</label>
         <select name="subcat" id="id_subcat" class="u-full-width u-pull-right"
-                ng-model="itemUpdateCtrl.item.subcat">
-          <option ng-repeat="subcat in itemUpdateCtrl.subcats">{A subcat A}</option>
+                ng-model="itemCreateCtrl.item.subcat">
+          <option ng-repeat="subcat in itemCreateCtrl.subcats">{A subcat A}</option>
         </select>
       </div>
     </div>
@@ -54,7 +55,7 @@
         <label for="id_notes">Notes:</label>
         <textarea name="notes" id="id_notes" class="u-full-width"
                   cols="40" rows="10"
-                  ng-model="itemUpdateCtrl.item.notes"></textarea>
+                  ng-model="itemCreateCtrl.item.notes"></textarea>
         </div>
     </div>
 
@@ -62,9 +63,9 @@
 
       <div class="{A main.class.SIXCOLS A}">
         <a class="button button-primary"
-           ng-click="itemUpdateCtrl.commitUpdates()">Save</a>
+           ng-click="itemCreateCtrl.saveNewItem()">Save</a>
         <a class="button u-pull-right"
-           ui-sref="dk.item_detail({'id': itemUpdateCtrl.item.id})">Cancel</a>
+           ui-sref="dk.item_list">Cancel</a>
       </div>
 
     </div>

@@ -28,9 +28,9 @@
     }
 
     /**
-     * Updates the details for the item we are currently previewing.
+     * Performs any necessary initializtion for this controller.
      */
-    vm.getTargetItem = function() {
+    vm.load = function() {
       // get the details for the current item
       itemListSvc.getItemById($stateParams.id)
         .then(function(res) {
@@ -39,7 +39,7 @@
         });
 
       // get the list of categories and sub-categories for the <select>s
-      categoryListSvc.getCateogryList()
+      categoryListSvc.getCategoryList()
         .then(function(res) {
           vm.cats = res.cats;
           vm.subcats = res.subcats;
@@ -65,7 +65,7 @@
 
     // init
     (function() {
-      vm.getTargetItem();
+      vm.load();
     })();
   }
 })();

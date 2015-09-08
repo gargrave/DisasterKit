@@ -52,6 +52,16 @@
               }
             }
           })
+          // a state to create a new item
+          .state('dk.item_create', {
+            url: '/items/add/',
+            views: {
+              'item_create@': {
+                controller: 'ItemCreateController as itemCreateCtrl',
+                templateUrl: '/static/partials/item-create.html'
+              }
+            }
+          })
           // a state to show details of an individual item
           .state('dk.item_update', {
             url: '/items/update/:id',

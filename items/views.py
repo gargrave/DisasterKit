@@ -25,42 +25,32 @@ def index(request):
     })
 
 
-@login_required
-def add_item(request):
-    """
-    Provides a view to add a new item to the stock.
-    """
-    form = ItemForm(request.POST or None)
-    if request.POST:
-        # create/save a new StockItem, and redirect back to the list
-        if form.is_valid():
-            StockItem(
-                name=request.POST['name'],
-                count=request.POST['count'],
-                date_of_expiration=request.POST['date_of_expiration'],
-                added_by=str(request.user),
-                fk_category=Category(pk=request.POST['fk_category']),
-                fk_subcategory=SubCategory(pk=request.POST['fk_subcategory' or None]),
-                notes=request.POST['notes' or '']
-            ).save()
-            return HttpResponseRedirect('/items/')
-    # otherwise, render the entry form
-    page_vars = {
-        'sixcols': 'six columns offset-by-three'
-    }
-    return render(request, 'items/add_item.html', {
-        'form': form, 'globalvars': globalvars, 'page_vars': page_vars
-    })
-
-
 ################################################
 # API Methods
 ################################################
 
 @login_required
+def create_item(request):
+    """
+    Adds a new StockItem to the database based on a POST request.
+    """
+    if request.POST:
+        StockItem(
+            name=request.POST['name'],
+            count=int(request.POST['count']),
+            date_of_expiration=request.POST['exp'],
+            added_by=str(request.user),
+            fk_category=Category.objects.get(name=request.POST['cat']),
+            fk_subcategory=SubCategory.objects.get(name=request.POST['subcat'] or None),
+            notes=request.POST['notes' or None]
+        ).save()
+    return HttpResponse(status=200)
+
+
+@login_required
 def get_all_items(request):
     """
-    Returns a list of all active items currently in the stock.
+    Returns a list of all active StockItems currently in the stock.
     """
     items = StockItem.objects.filter(active=True)
     res_dict = {'items': []}
@@ -82,7 +72,7 @@ def get_all_items(request):
 @login_required
 def get_item_by_id(request, pk):
     """
-    Returns the item that matches the specified ID.
+    Returns the StockItem that matches the specified ID.
     """
     item = get_object_or_404(StockItem, pk=pk)
     res_dict = {
@@ -101,18 +91,22 @@ def get_item_by_id(request, pk):
 
 @login_required
 def get_categories(request):
-    res_dict = {}
-    res_dict['cats'] = [
-        'Food', 'Beverage'
-    ]
-    res_dict['subcats'] = [
-        'Salty', 'Sweet'
-    ]
-    return JsonResponse(res_dict)
+    """
+    Returns a JSON object containg two lists:
+        1. a list of all category names
+        2. a list of all sub-category names
+    """
+    return JsonResponse({
+        'cats': [cat.name for cat in Category.objects.all()],
+        'subcats': [cat.name for cat in SubCategory.objects.all()]
+    })
 
 
 @login_required
 def update_item(request):
+    """
+    Updates the specified item with the set of values passed in through POST.
+    """
     if request.POST:
         item = get_object_or_404(StockItem, pk=request.POST['id'])
         item.name = request.POST['name']

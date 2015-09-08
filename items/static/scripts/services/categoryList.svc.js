@@ -6,11 +6,12 @@
   function categoryListSvc($http, $q, $state) {
     var vm = this;
     var combined = {};
+    vm.asdf = 'alsdjflakjsd';
 
     /**
      * Queries the API for a full list of categories and subcategories.
      */
-    vm.getCateogryList = function() {
+    vm.getCategoryList = function() {
       var deferred = $q.defer();
 
       if (combined.cats && combined.subcats) {

@@ -4,6 +4,10 @@ from . import views
 
 
 urlpatterns = [
+    # URL to create a new item
+    # /items/api/create_item
+    url(r'^api/create_item/?$', views.create_item),
+
     # URL to fetch a list of all item details
     # /items/api/get_all_items
     url(r'^api/get_all_items/?$', views.get_all_items),
