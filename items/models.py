@@ -4,6 +4,10 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=64, blank=False, unique=True)
+    order = models.IntegerField(default=1)
+
+    class Meta:
+        ordering = ['order', 'name']
 
     def __str__(self):
         return self.name
@@ -11,6 +15,10 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     name = models.CharField(max_length=64, blank=False, unique=True)
+    order = models.IntegerField(default=1)
+
+    class Meta:
+        ordering = ['order', 'name']
 
     def __str__(self):
         return self.name
