@@ -20,7 +20,4 @@ urlpatterns = patterns(
 
     # admin section
     url(r'^admin/', include(admin.site.urls), name='admin'),
-
-    # catch-all URL to route back to main page
-    url(r'^.*/$', items.views.index),
 )
