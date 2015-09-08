@@ -31,6 +31,8 @@
      */
     vm.saveNewItem = function() {
       // TODO: let's validate that something has actually been entered before sending this off
+      // make sure we do not pass a null 'notes' field
+      vm.item.notes = vm.item.notes || '';
       $http.post('items/api/create_item/', vm.item)
         .then(function(res) {
           $state.go('dk.item_list');
