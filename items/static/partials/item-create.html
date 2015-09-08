@@ -1,4 +1,3 @@
-
 <div id="item-create-container" ng-hide="itemCreateCtrl.loading">
 
   <div class="row">
@@ -32,13 +31,16 @@
     </div>
 
     <!-- expiration date input -->
-    <!-- TODO: validate that this is in 'YYYY-MM-DD' format -->
     <div class="row">
       <div class="{A main.class.SIXCOLS A}">
-        <label for="id_exp">Expiration Date: <span class="error_text">*</span></label>
+        <label for="id_exp">Expiration Date (YYYY-MM-DD): <span class="error_text">*</span></label>
         <input id="id_exp" class="u-full-width"
                type="text" ng-model="itemCreateCtrl.item.exp"
                placeholder="YYYY-MM-DD" required>
+        <!-- error message -->
+        <p ng-hide="itemCreateCtrl.valid.date" class="error_text">
+          Please be sure this is a valid date in 'YYYY-MM-DD' format.
+        </p>
       </div>
     </div>
 
