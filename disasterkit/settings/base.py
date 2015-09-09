@@ -4,10 +4,7 @@ import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
 VERSION = '0.1.2'
-
-# Application definition
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -61,8 +58,6 @@ USE_TZ = True
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Allow all host headers
 ALLOWED_HOSTS = ['*']
 
 # Static files (CSS, JavaScript, Images)

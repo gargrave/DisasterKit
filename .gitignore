@@ -1,4 +1,5 @@
 /node_modules
+/etc
 /package.json
 venv
 *.pyc
