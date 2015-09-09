@@ -1,11 +1,11 @@
 {
   "name": "DisasterKit",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "authors": [
     "Gabe Hargrave <rinkrinkerfink@gmail.com>"
   ],
-  "description": "A simple app to help us manage out emergency supplies.",
-  "homepage": "gargrave.me/dk",
+  "description": "A simple app to help us manage our emergency supplies.",
+  "homepage": "http://disasterkit.gargrave.me",
   "ignore": [
     "**/.*",
     "node_modules",
