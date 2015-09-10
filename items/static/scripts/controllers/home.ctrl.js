@@ -1,10 +1,9 @@
 (function() {
   'use strict';
-  angular.module('dk').controller('HomeController', HomeController);
-  HomeController.$inject = [];
+  angular.module('dk').controller('HomeController', [
 
-  function HomeController() {
-    var vm = this;
-  }
+    function() {
+      var vm = this;
+    }]);
 })();
 

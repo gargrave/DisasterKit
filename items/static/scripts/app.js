@@ -1,9 +1,10 @@
 (function() {
   'use strict';
-
   angular.module('dk', ['ui.router'])
-    .config(['$interpolateProvider', '$httpProvider',
-        '$stateProvider', '$urlRouterProvider',
+    .config([
+      '$interpolateProvider', '$httpProvider',
+      '$stateProvider', '$urlRouterProvider',
+
       function($interpolateProvider, $httpProvider,
                $stateProvider, $urlRouterProvider) {
 
@@ -15,7 +16,6 @@
         /*
          * routing set up
          **********************************************/
-
         $stateProvider
           .state('dk', {
             url: '',
@@ -78,7 +78,7 @@
         /*
          * boiler-plate for getting NG to work properly with
          * Django's security requirements
-        ***********************************************************/
+         ***********************************************************/
 
         // get a CSRF token to make Django happy!
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';

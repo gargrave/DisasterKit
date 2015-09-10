@@ -1,15 +1,16 @@
 (function() {
   'use strict';
-  angular.module('dk').controller('MainController', MainController);
-  MainController.$inject = [];
+  angular.module('dk').controller('MainController', [
 
-  function MainController() {
-    var vm = this;
-    vm.asdf = 'fart';
+      function() {
+        var vm = this;
+        vm.asdf = 'fart';
 
-    vm.class = {
-      SIXCOLS: 'six columns offset-by-three'
-    };
-  }
+        vm.class = {
+          SIXCOLS: 'six columns offset-by-three'
+        };
+      }
+    ]
+  );
 })();
 

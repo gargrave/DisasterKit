@@ -58,19 +58,12 @@
 {% endcomment %}
 
 {% block scripts %}
-{# local import for debug/dev builds #}
+{# local import for local/dev builds #}
 {% if globalvars.build == 'dev' %}
   <script src="{% static 'libs/jquery.js' %}"></script>
   <script src="{% static 'libs/bootstrap.js' %}"></script>
   <script src="{% static 'libs/angular.js' %}"></script>
   <script src="{% static 'libs/angular-ui-router.js' %}"></script>
-{# CDN imports for prod builds #}
-{% else %}
-  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
-{% endif %}
 
   <script src="{% static 'scripts/app.js' %}"></script>
   <script src="{% static 'scripts/controllers/main.ctrl.js' %}"></script>
@@ -81,6 +74,14 @@
   <script src="{% static 'scripts/controllers/itemUpdate.ctrl.js' %}"></script>
   <script src="{% static 'scripts/services/categoryList.svc.js' %}"></script>
   <script src="{% static 'scripts/services/itemList.svc.js' %}"></script>
+{# CDN imports for staging/prod builds #}
+{% else %}
+  <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+  <script src="{% static 'scripts/app.min.js' %}"></script>
+{% endif %}
 {% endblock %}
 
 </body>
