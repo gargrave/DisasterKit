@@ -52,7 +52,7 @@
             vm.item.notes = vm.item.notes || '';
             $http.post('items/api/create_item/', vm.item)
               .then(function(res) {
-                $state.go('dk.item_list');
+                $state.go('dk.item_list', {forceUpdate: true});
                 // in case of error, display error and return to item-list state
               }, function(res) {
                 alert('There was an error when attempting to ' +

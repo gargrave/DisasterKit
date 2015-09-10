@@ -68,7 +68,7 @@
           if (vm.valid.date) {
             $http.post('items/api/update_item/', vm.item)
               .then(function(res) {
-                $state.go('dk.item_list');
+                $state.go('dk.item_list', {forceUpdate: true});
                 // in case of error, display error and return to item-list state
               }, function(res) {
                 alert('There was an error when attempting to ' +

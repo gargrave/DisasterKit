@@ -33,7 +33,7 @@
           })
           // a state showing full item list
           .state('dk.item_list', {
-            url: '/items/',
+            url: '/items/:forceUpdate',
             views: {
               'item_list@': {
                 controller: 'ItemListController as itemListCtrl',
@@ -44,7 +44,7 @@
           })
           // a state to show details of an individual item
           .state('dk.item_detail', {
-            url: '/items/:id',
+            url: '/items/detail/:id',
             views: {
               'item_detail@': {
                 controller: 'ItemDetailController as itemDetailCtrl',

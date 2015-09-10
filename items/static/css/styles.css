@@ -32,6 +32,10 @@ body {
 #app-nav {
   margin-left: 20px; }
 
+#loading-indicator {
+  margin-top: 25%;
+  text-align: center; }
+
 #items-display {
   margin-top: 40px; }
 

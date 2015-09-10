@@ -27,7 +27,7 @@
           if (confirm('Delete this item?')) {
             $http.delete('items/api/delete_item/' + vm.item.id)
               .then(function(res) {
-                $state.go('dk.item_list');
+                $state.go('dk.item_list', {forceUpdate: true});
                 // in case of error, display error and return to
                 // item-list state
               }, function(res) {
