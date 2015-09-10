@@ -1,11 +1,9 @@
 (function() {
   'use strict';
   angular.module('dk').controller('ItemCreateController', [
-      '$http', '$state', 'categoryListSvc',
+      '$scope', '$http', '$state', 'categoryListSvc',
 
-      function($http, $state, categoryListSvc) {
-        // the RE pattern for date validation; checks for 'YYYY-MM-DD' format
-        var DATE_RE = /^20[1-2]\d-[0-1][0-9]-[0-3][0-9]$/i;
+      function($scope, $http, $state, categoryListSvc) {
         var vm = this;
         vm.loading = true;
         // the item being created
@@ -41,24 +39,23 @@
          * Sends the to the server to be saved.
          */
         vm.saveNewItem = function() {
-          // validate all necessary data before proceeding
-          vm.valid = {
-            date: new RegExp(DATE_RE).test(vm.item.exp)
-          };
-
-          // if we are all valid, submit the request to the server
-          if (vm.valid.date) {
+          $scope.submitted = false;
+          // submit as normal if the form is validated
+          if ($scope.createForm.$valid) {
             // make sure we do not pass a null 'notes' field
             vm.item.notes = vm.item.notes || '';
             $http.post('items/api/create_item/', vm.item)
               .then(function(res) {
                 $state.go('dk.item_list', {forceUpdate: true});
-                // in case of error, display error and return to item-list state
+                // in case of server error, display error and return to item-list state
               }, function(res) {
                 alert('There was an error when attempting to ' +
                   'create this item.\nStatus code: ' + res.status);
                 $state.go('dk.item_list');
               });
+            // otherwise, show form errors erorrs
+          } else {
+            $scope.createForm.submitted = true;
           }
         };
 

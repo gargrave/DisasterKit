@@ -15,8 +15,8 @@
       <div class="{A main.class.SIXCOLS A}">
         <label for="id_name">Name: <span class="error_text">*</span></label>
         <input id="id_name" class="u-full-width"
-               type="text" ng-model="itemUpdateCtrl.item.name"
-               placeholder="Enter item name" required>
+               type="text" placeholder="Enter item name"
+               maxlength="128" ng-model="itemUpdateCtrl.item.name" required>
       </div>
     </div>
 
@@ -25,8 +25,8 @@
       <div class="{A main.class.SIXCOLS A}">
         <label for="id_count">Count: <span class="error_text">*</span></label>
         <input id="id_count" class="u-full-width"
-               type="number" ng-model="itemUpdateCtrl.item.count"
-               placeholder="Enter item count" required>
+               type="number" placeholder="Enter item count"
+               min="1" max="1000" ng-model="itemUpdateCtrl.item.count" required>
       </div>
     </div>
 
@@ -34,12 +34,16 @@
     <div class="row">
       <div class="{A main.class.SIXCOLS A}">
         <label for="id_exp">Expiration Date (YYYY-MM-DD): <span class="error_text">*</span></label>
-        <input id="id_exp" class="u-full-width"
-               type="text" ng-model="itemUpdateCtrl.item.exp"
-               placeholder="YYYY-MM-DD" required>
+        <input id="id_exp" name="id_exp" class="u-full-width"
+               type="text" placeholder="YYYY-MM-DD"
+               ng-model="itemUpdateCtrl.item.exp"
+               ng-pattern="/^20[1-2]\d-[0-1]\d-[0-3]\d$/" required>
         <!-- error message -->
-        <p ng-hide="itemUpdateCtrl.valid.date" class="error_text">
-          Please be sure this is a valid date in 'YYYY-MM-DD' format.
+        <p class="error_text" ng-messages="updateForm.id_exp.$error"
+           ng-if="updateForm.$submitted && updateForm.id_exp.$error">
+          <span ng-message="pattern">
+            Please be sure this is a valid date in 'YYYY-MM-DD' format.
+          </span>
         </p>
       </div>
     </div>
@@ -69,8 +73,9 @@
         <div class="{A main.class.SIXCOLS A}">
         <label for="id_notes">Notes:</label>
         <textarea name="notes" id="id_notes" class="u-full-width"
-                  cols="40" rows="10" ng-model="itemUpdateCtrl.item.notes"
-                  placeholder="Enter notes (optional)"></textarea>
+                  cols="40" rows="10" maxlength="500"
+                  placeholder="Enter notes (optional)"
+                  ng-model="itemUpdateCtrl.item.notes"></textarea>
         </div>
     </div>
 

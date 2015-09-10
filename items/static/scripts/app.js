@@ -1,6 +1,8 @@
 (function() {
   'use strict';
-  angular.module('dk', ['ui.router'])
+  angular.module('dk', [
+    'ngMessages',
+    'ui.router'])
     .config([
       '$interpolateProvider', '$httpProvider',
       '$stateProvider', '$urlRouterProvider',

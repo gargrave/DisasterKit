@@ -1,9 +1,11 @@
 (function() {
   'use strict';
   angular.module('dk').controller('ItemUpdateController', [
-      '$http', '$state', '$stateParams', 'itemListSvc', 'categoryListSvc',
+      '$scope', '$http', '$state', '$stateParams',
+      'itemListSvc', 'categoryListSvc',
 
-      function($http, $state, $stateParams, itemListSvc, categoryListSvc) {
+      function($scope, $http, $state, $stateParams,
+               itemListSvc, categoryListSvc) {
         // the RE pattern for date validation; checks for 'YYYY-MM-DD' format
         var DATE_RE = /^20[1-2]\d-[0-1][0-9]-[0-3][0-9]$/i;
         var vm = this;
@@ -58,23 +60,23 @@
          */
         vm.commitUpdates = function() {
           // TODO: check that any values have actually changed before submitting this
-
-          // validate all necessary data before proceeding
-          vm.valid = {
-            date: new RegExp(DATE_RE).test(vm.item.exp)
-          };
-
           // if we are all valid, submit the request to the server
-          if (vm.valid.date) {
+          $scope.submitted = false;
+          // submit as normal if the form is validated
+          if ($scope.updateForm.$valid) {
+            // make sure we do not pass a null 'notes' field
             $http.post('items/api/update_item/', vm.item)
               .then(function(res) {
                 $state.go('dk.item_list', {forceUpdate: true});
-                // in case of error, display error and return to item-list state
+                // in case of server error, display error and return to item-list state
               }, function(res) {
                 alert('There was an error when attempting to ' +
                   'update this item.\nStatus code: ' + res.status);
                 $state.go('dk.item_list');
               });
+            // otherwise, show form errors erorrs
+          } else {
+            $scope.updateForm.submitted = true;
           }
         };
 
