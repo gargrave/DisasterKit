@@ -11,7 +11,8 @@ from .models import StockItem, Category, SubCategory
 
 globalvars = {
     'is_debug': settings.DEBUG,
-    'version': settings.VERSION
+    'version': settings.VERSION,
+    'build': settings.BUILD
 }
 
 

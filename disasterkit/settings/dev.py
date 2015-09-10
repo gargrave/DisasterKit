@@ -10,6 +10,7 @@ with open('etc/secret_key.txt') as f:
 
 DEBUG = True
 TEMPLATE_DEBUG = True
+BUILD = 'dev'
 
 DATABASES = {
     'default': {

@@ -8,5 +8,6 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = True
 TEMPLATE_DEBUG = True
+BUILD = 'staging'
 
 DATABASES = {'default': dj_database_url.config()}
