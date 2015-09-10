@@ -40,7 +40,7 @@
                ng-pattern="/^20[1-2]\d-[0-1]\d-[0-3]\d$/" required>
         <!-- error message -->
         <p class="error_text" ng-messages="updateForm.id_exp.$error"
-           ng-if="updateForm.$submitted && updateForm.id_exp.$error">
+           ng-if="updateForm.id_exp.$error">
           <span ng-message="pattern">
             Please be sure this is a valid date in 'YYYY-MM-DD' format.
           </span>
