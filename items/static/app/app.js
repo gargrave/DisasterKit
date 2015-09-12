@@ -65,7 +65,7 @@
             }
           }
         );
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/items/');
 
         /*
          * boiler-plate for getting NG to work properly with
