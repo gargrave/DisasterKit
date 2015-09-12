@@ -1,5 +1,6 @@
 <div class="row">
-  <div class="eight columns">
+  <div class="col-md-8">
+
     {% if user.is_authenticated %}
       <span id="app_title" class="bold_text">disaster_kit
       </span>
@@ -9,13 +10,15 @@
       {% endif %}
       <span id="app-nav">
         <a ui-sref="dk.home">Home</a> |
-        <a ui-sref="dk.item_list">Item List</a> |
-        <a ui-sref="dk.item_create">Add an Item</a>
+        <a ui-sref="dk.item_list">Items</a> |
+        <a ui-sref="dk.item_create">Add an Item</a> |
+        <a ui-sref="dk.category_list">Categories</a>
       </span>
     {% endif %}
-  </div>
 
-  <div class="four columns">
+  </div>
+  <div class="col-md-4">
+
     {# display user name and admin link (if user is admin) #}
     {% if user.is_authenticated %}
       <span class="u-pull-right">
@@ -26,5 +29,6 @@
         | <a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a>
       </span>
     {% endif %}
+
   </div>
 </div>

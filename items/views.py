@@ -36,7 +36,6 @@ def create_item(request):
     Adds a new StockItem to the database based on a POST request.
     """
     if request.POST:
-        print(request.POST)
         item = StockItem(
             name=request.POST.get('name'),
             count=int(request.POST.get('count')),

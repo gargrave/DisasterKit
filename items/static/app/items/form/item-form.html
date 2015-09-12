@@ -1,68 +1,61 @@
 <!-- item name input -->
-<div class="row">
-  <div class="six columns offset-by-three">
-    <label for="id_name">Name: <span class="error_text">*</span></label>
-    <input id="id_name" class="u-full-width"
-           type="text" placeholder="Enter item name"
-           maxlength="128" ng-model="ctrl.item.name" required>
-  </div>
+<div class="form-group">
+  <label for="id_name">Name: <span class="error_text">*</span></label>
+  <input id="id_name" class="form-control"
+         type="text" placeholder="Enter item name"
+         maxlength="128" ng-model="ctrl.item.name" required>
 </div>
 
 <!-- item count input -->
-<div class="row">
-  <div class="six columns offset-by-three">
-    <label for="id_count">Count: <span class="error_text">*</span></label>
-    <input id="id_count" class="u-full-width"
-           type="number" placeholder="Enter item count"
-           min="1" max="1000" ng-model="ctrl.item.count" required>
-  </div>
+<div class="form-group">
+  <label for="id_count">Count: <span class="error_text">*</span></label>
+  <input id="id_count" class="form-control"
+         type="number" placeholder="Enter item count"
+         min="1" max="1000" ng-model="ctrl.item.count" required>
 </div>
 
 <!-- expiration date input -->
-<div class="row">
-  <div class="six columns offset-by-three">
-    <label for="id_exp">Expiration Date (YYYY-MM-DD): <span class="error_text">*</span></label>
-    <input id="id_exp" name="id_exp" class="u-full-width"
-           type="text" placeholder="YYYY-MM-DD"
-           ng-model="ctrl.item.exp"
-           ng-pattern="/^20[1-2]\d-[0-1]\d-[0-3]\d$/" required>
-    <!-- error message -->
-    <p class="error_text" ng-messages="updateForm.id_exp.$error"
-       ng-if="updateForm.id_exp.$error">
-          <span ng-message="pattern">
-            Please be sure this is a valid date in 'YYYY-MM-DD' format.
-          </span>
-    </p>
-  </div>
+<div class="form-group">
+  <label for="id_exp">Expiration Date (YYYY-MM-DD): <span class="error_text">*</span></label>
+  <input id="id_exp" name="id_exp" class="form-control"
+         type="text" placeholder="YYYY-MM-DD"
+         ng-model="ctrl.item.exp"
+         ng-pattern="/^20[1-2]\d-[0-1]\d-[0-3]\d$/" required>
+  <!-- error message -->
+  <p class="error_text" ng-messages="form.id_exp.$error"
+     ng-if="form.id_exp.$error">
+    <span ng-message="pattern">
+      Please be sure this is a valid date in 'YYYY-MM-DD' format.
+    </span>
+  </p>
 </div>
 
 <!-- category selector -->
-<div class="row">
-  <div class="three columns offset-by-three">
-    <label for="id_cat">Category:</label>
-    <select name="cat" id="id_cat" class="u-full-width"
-            ng-model="ctrl.item.cat">
-      <option ng-repeat="cat in ctrl.cats">{A cat A}</option>
-    </select>
-  </div>
+<div class="form-group">
+  <label for="id_cat">Category: <span class="error_text">*</span></label>
+  <select name="cat" id="id_cat"
+          class="form-control"
+          ng-model="ctrl.item.cat">
+    <option ng-repeat="cat in ctrl.cats">{A cat A}</option>
+  </select>
+</div>
 
-  <!-- subcategory selector -->
-  <div class="three columns">
-    <label for="id_subcat">Sub-category:</label>
-    <select name="subcat" id="id_subcat" class="u-full-width u-pull-right"
-            ng-model="ctrl.item.subcat">
-      <option ng-repeat="subcat in ctrl.subcats">{A subcat A}</option>
-    </select>
-  </div>
+<!-- subcategory selector -->
+<div class="form-group">
+  <label for="id_subcat">Sub-category:</label>
+  <select name="subcat" id="id_subcat"
+          class="form-control u-pull-right"
+          ng-model="ctrl.item.subcat">
+    <option ng-repeat="subcat in ctrl.subcats">{A subcat A}</option>
+  </select>
 </div>
 
 <!-- notes input -->
-<div class="row">
-  <div class="six columns offset-by-three">
-    <label for="id_notes">Notes:</label>
-        <textarea name="notes" id="id_notes" class="u-full-width"
-                  cols="40" rows="10" maxlength="500"
-                  placeholder="Enter notes (optional)"
-                  ng-model="ctrl.item.notelayous"></textarea>
-  </div>
+<div class="form-group">
+  <label for="id_notes">Notes:</label>
+    <textarea name="notes" id="id_notes" class="form-control"
+              cols="40" rows="6" maxlength="500"
+              placeholder="Enter notes (optional)"
+              ng-model="ctrl.item.notelayous">
+    </textarea>
 </div>

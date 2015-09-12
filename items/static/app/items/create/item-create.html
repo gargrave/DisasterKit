@@ -1,91 +1,25 @@
-<div id="item-create-container" ng-hide="itemCreateCtrl.loading">
+<div id="item-create-container"
+     class="col-xs-12 col-md-6 col-md-offset-3"
+     ng-hide="itemCreateCtrl.loading">
 
-  <div class="row">
-    <div class="{A main.class.SIXCOLS A}">
-      <h2>Add a New Item</h2>
-      <p>Fields marked with <span class="error_text">*</span> are required.</p>
-    </div>
+  <div>
+    <h2>Add an Item</h2>
+    <p>Fields marked with <span class="error_text">*</span> are required.</p>
   </div>
+  <br>
 
+  <!-- add new item form -->
   <form class="dk-form" name="createForm"
         ng-submit="itemCreateCtrl.saveNewItem()" required>
 
-    <!-- item name input -->
-    <div class="row">
-      <div class="{A main.class.SIXCOLS A}">
-        <label for="id_name">Name: <span class="error_text">*</span></label>
-        <input id="id_name" class="u-full-width"
-               type="text" placeholder="Enter item name"
-               maxlength="128" ng-model="itemCreateCtrl.item.name" required>
-      </div>
-    </div>
-
-    <!-- item count input -->
-    <div class="row">
-      <div class="{A main.class.SIXCOLS A}">
-        <label for="id_count">Count: <span class="error_text">*</span></label>
-        <input id="id_count" class="u-full-width"
-               type="number" placeholder="Enter item count"
-               min="1" max="1000" ng-model="itemCreateCtrl.item.count" required>
-      </div>
-    </div>
-
-    <!-- expiration date input -->
-    <div class="row">
-      <div class="{A main.class.SIXCOLS A}">
-        <label for="id_exp">Expiration Date (YYYY-MM-DD): <span class="error_text">*</span></label>
-        <input id="id_exp" name="id_exp" class="u-full-width"
-               type="text" placeholder="YYYY-MM-DD"
-               ng-model="itemCreateCtrl.item.exp"
-               ng-pattern="/^20[1-2]\d-[0-1]\d-[0-3]\d$/" required>
-        <!-- error message -->
-        <p class="error_text" ng-messages="createForm.id_exp.$error"
-           ng-if="createForm.id_exp.$error">
-          <span ng-message="pattern">
-            Please be sure this is a valid date in 'YYYY-MM-DD' format.
-          </span>
-        </p>
-      </div>
-    </div>
-
-    <!-- category selector -->
-    <div class="row">
-      <div class="three columns offset-by-three">
-        <label for="id_cat">Category: <span class="error_text">*</span></label>
-        <select name="cat" id="id_cat" class="u-full-width"
-                ng-model="itemCreateCtrl.item.cat" >
-          <option ng-repeat="cat in itemCreateCtrl.cats">{A cat A}</option>
-        </select>
-      </div>
-
-      <!-- subcategory selector -->
-      <div class="three columns">
-        <label for="id_subcat">Sub-category:</label>
-        <select name="subcat" id="id_subcat" class="u-full-width u-pull-right"
-                ng-model="itemCreateCtrl.item.subcat">
-          <option ng-repeat="subcat in itemCreateCtrl.subcats">{A subcat A}</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- notes input -->
-    <div class="row">
-        <div class="{A main.class.SIXCOLS A}">
-        <label for="id_notes">Notes:</label>
-        <textarea name="notes" id="id_notes" class="u-full-width"
-                  cols="40" rows="10" maxlength="500"
-                  placeholder="Enter notes (optional)"
-                  ng-model="itemCreateCtrl.item.notes"></textarea>
-        </div>
-    </div>
+    <div item-entry-form ctrl="itemCreateCtrl" form="createForm"></div>
 
     <!-- submit/cancel buttons -->
-    <div class="row">
-      <div class="{A main.class.SIXCOLS A}">
-        <input class="button button-primary" type="submit" value="Save">
-        <a class="button u-pull-right"
-           ui-sref="dk.item_list">Cancel</a>
-      </div>
+    <div>
+      <input class="btn btn-primary" type="submit" value="Submit">
+      <button class="btn btn-default pull-right"
+              ui-sref="dk.item_list">Cancel
+      </button>
     </div>
 
   </form>

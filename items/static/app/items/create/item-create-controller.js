@@ -33,6 +33,7 @@
        * Sends the to the server to be saved.
        */
       vm.saveNewItem = function() {
+        console.log('savenewItem()');
         $scope.submitted = false;
         // submit as normal if the form is validated
         if ($scope.createForm.$valid) {

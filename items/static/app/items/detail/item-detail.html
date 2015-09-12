@@ -1,53 +1,59 @@
-<div id="item-detail-container" ng-hide="itemDetailCtrl.loading">
-  <div class="row">
-    <div id="item_details_table" class="{A main.class.SIXCOLS A} dk-form">
-      <table class="u-full-width">
-        <tr>
-          <td><strong>Name:</strong></td>
-          <td ng-bind="itemDetailCtrl.item.name"></td>
-        </tr>
-        <tr>
-          <td><strong>Category:</strong></td>
-          <td ng-bind="itemDetailCtrl.item.cat"></td>
-        </tr>
-        <tr>
-          <td><strong>Sub-category:</strong></td>
-          <td ng-bind="itemDetailCtrl.item.subcat"></td>
-        </tr>
-        <tr>
-          <td><strong>Count:</strong></td>
-          <td ng-bind="itemDetailCtrl.item.count"></td>
-        </tr>
-        <tr>
-          <td><strong>Expiration:</strong></td>
-          <td ng-bind="itemDetailCtrl.item.exp"></td>
-        </tr>
-        <tr>
-          <td><strong>Added on:</strong></td>
-          <td>
-            <span ng-bind="itemDetailCtrl.item.date_added"></span> by
-            <span ng-bind="itemDetailCtrl.item.added_by"></span>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Notes:</strong></td>
-          <td ng-bind="itemDetailCtrl.item.notes"></td>
-        </tr>
-      </table>
-    </div>
+<div id="item-detail-container"
+     class="col-md-8 col-md-offset-2"
+     ng-hide="itemDetailCtrl.loading">
+
+  <div>
+    <h2>Details for:
+      <em><span ng-bind="itemDetailCtrl.item.name"></span></em>
+    </h2>
+  </div>
+  <br>
+
+  <!-- item details table -->
+  <table class="table" id="item_details_table">
+    <tr>
+      <td><strong>Name:</strong></td>
+      <td ng-bind="itemDetailCtrl.item.name"></td>
+    </tr>
+    <tr>
+      <td><strong>Category:</strong></td>
+      <td ng-bind="itemDetailCtrl.item.cat"></td>
+    </tr>
+    <tr>
+      <td><strong>Sub-category:</strong></td>
+      <td ng-bind="itemDetailCtrl.item.subcat"></td>
+    </tr>
+    <tr>
+      <td><strong>Count:</strong></td>
+      <td ng-bind="itemDetailCtrl.item.count"></td>
+    </tr>
+    <tr>
+      <td><strong>Expiration:</strong></td>
+      <td ng-bind="itemDetailCtrl.item.exp"></td>
+    </tr>
+    <tr>
+      <td><strong>Added on:</strong></td>
+      <td>
+        <span ng-bind="itemDetailCtrl.item.date_added"></span> by
+        <span ng-bind="itemDetailCtrl.item.added_by"></span>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Notes:</strong></td>
+      <td ng-bind="itemDetailCtrl.item.notes"></td>
+    </tr>
+  </table>
+
+  <!-- edit/back/submit buttons -->
+  <div>
+    <button class="btn btn-primary"
+            ui-sref="dk.item_update({'id': itemDetailCtrl.item.id})">Edit
+    </button>
+    <button class="btn btn-default" ui-sref="dk.item_list">Back</button>
+
+    <button class="btn btn-danger pull-right"
+            ng-click="itemDetailCtrl.deleteItem()">Delete
+    </button>
   </div>
 
-  <div class="row">
-
-    <div class="three columns offset-by-three">
-      <button class="button button-primary"
-              ui-sref="dk.item_update({'id': itemDetailCtrl.item.id})">Edit</button>
-      <button ui-sref="dk.item_list">Back</button>
-    </div>
-
-    <div class="three columns">
-      <button class="u-pull-right"
-              ng-click="itemDetailCtrl.deleteItem()">Delete</button>
-    </div>
-  </div>
 </div>

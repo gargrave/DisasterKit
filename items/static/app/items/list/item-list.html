@@ -1,25 +1,33 @@
 <div id="item-detail-container" ng-hide="itemListCtrl.loading">
   <div id="items-display">
+    <!--
     <div class="row">
-      <div class="twelve columns">
-        <a class="button button-primary" ui-sref="dk.item_create">Add</a>
+      <div class="col-md-12">
+
+        <button class="btn btn-primary" ui-sref="dk.item_create">Add</button>
+
       </div>
     </div>
+    -->
 
     <div class="row">
-      <table class="u-full-width">
-        <tr>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Sub-Category</th>
-          <th>Count</th>
-          <th>Date Added</th>
-          <th>Expiration</th>
-        </tr>
-        <tr item-widget item-data="item"
-            ng-repeat="item in itemListCtrl.items">
-        </tr>
-      </table>
+      <div class="col-md-12">
+
+        <table class="table">
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Sub-Category</th>
+            <th>Count</th>
+            <th>Date Added</th>
+            <th>Expiration</th>
+          </tr>
+          <tr item-widget item-data="item"
+              ng-repeat="item in itemListCtrl.items">
+          </tr>
+        </table>
+
+      </div>
     </div>
   </div>
 </div>

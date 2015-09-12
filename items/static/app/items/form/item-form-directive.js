@@ -5,7 +5,8 @@
       return {
         restrict: 'A',
         scope: {
-          ctrl: '='
+          ctrl: '=',
+          form: '='
         },
         templateUrl: '/static/app/items/form/item-form.html'
       };

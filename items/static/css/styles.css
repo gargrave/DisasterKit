@@ -2,8 +2,8 @@ body {
   padding: 10px;
   background: white; }
 
-.main-content {
-  padding-top: 65px; }
+.container {
+  max-width: 1000px; }
 
 /**********************************
  * text styles
@@ -15,11 +15,15 @@ body {
   font-weight: bold; }
 
 /**********************************
+ * GUI styles
+ **********************************/
+.btn-dk-control {
+  border: 1px solid #ccc;
+  background-color: #fff; }
+
+/**********************************
  * form styles
  **********************************/
-.dk-form {
-  margin-top: 10px; }
-
 .form-header {
   color: white;
   background-color: #999;
@@ -29,6 +33,9 @@ body {
 /**********************************
  * ID styles
  **********************************/
+#main-content {
+  padding-top: 45px; }
+
 #app-nav {
   margin-left: 20px; }
 

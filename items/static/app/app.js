@@ -23,16 +23,6 @@
             url: '',
             abstract: true
           })
-          // home URL
-          .state('dk.home', {
-            url: '/',
-            views: {
-              'home@': {
-                controller: 'HomeCtrl as homeCtrl',
-                templateUrl: '/static/app/main/home.html'
-              }
-            }
-          })
           // a state showing full items list
           .state('dk.item_list', {
             url: '/items/:forceUpdate',
