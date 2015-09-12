@@ -16,14 +16,8 @@
           <th>Date Added</th>
           <th>Expiration</th>
         </tr>
-        <tr ng-repeat="item in itemListCtrl.items">
-          <td><a ui-sref="dk.item_detail({'id': item.id})"
-                 ng-bind="item.name"></a></td>
-          <td ng-bind="item.cat"></td>
-          <td ng-bind="item.subcat"></td>
-          <td ng-bind="item.count"></td>
-          <td ng-bind="item.date_added"></td>
-          <td ng-bind="item.exp"></td>
+        <tr item-widget item-data="item"
+            ng-repeat="item in itemListCtrl.items">
         </tr>
       </table>
     </div>
