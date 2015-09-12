@@ -12,7 +12,7 @@ module.exports = function(grunt) {
           'items/static/scripts/app.min.js': [
             'items/static/scripts/app.js',
             'items/static/scripts/controllers/*.js',
-            'items/static/scripts/services/*.js'
+            'items/static/scripts/categories/*.js'
           ]
         }]
       }

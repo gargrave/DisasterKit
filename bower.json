@@ -16,6 +16,7 @@
   "devDependencies": {
     "angular": "~1.4.5",
     "angular-messages": "~1.4.5",
+    "angular-mocks": "~1.4.5",
     "angular-ui-router": "~0.2.15",
     "bootstrap": "~3.3.5"
   }

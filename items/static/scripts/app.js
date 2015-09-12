@@ -28,7 +28,7 @@
             url: '/',
             views: {
               'home@': {
-                controller: 'HomeController as homeCtrl',
+                controller: 'HomeCtrl as homeCtrl',
                 templateUrl: '/static/partials/home.html'
               }
             }
@@ -38,7 +38,7 @@
             url: '/items/:forceUpdate',
             views: {
               'item_list@': {
-                controller: 'ItemListController as itemListCtrl',
+                controller: 'ItemListCtrl as itemListCtrl',
                 templateUrl: '/static/partials/item-list.html'
               }
 
@@ -49,7 +49,7 @@
             url: '/items/detail/:id',
             views: {
               'item_detail@': {
-                controller: 'ItemDetailController as itemDetailCtrl',
+                controller: 'ItemDetailCtrl as itemDetailCtrl',
                 templateUrl: '/static/partials/item-detail.html'
               }
             }
@@ -59,7 +59,7 @@
             url: '/items/add/',
             views: {
               'item_create@': {
-                controller: 'ItemCreateController as itemCreateCtrl',
+                controller: 'ItemCreateCtrl as itemCreateCtrl',
                 templateUrl: '/static/partials/item-create.html'
               }
             }
@@ -69,7 +69,7 @@
             url: '/items/update/:id',
             views: {
               'item_update@': {
-                controller: 'ItemUpdateController as itemUpdateCtrl',
+                controller: 'ItemUpdateCtrl as itemUpdateCtrl',
                 templateUrl: '/static/partials/item-update.html'
               }
             }

@@ -41,7 +41,7 @@
 ************************************************************
 {% endcomment %}
 
-<body ng-controller="MainController as main">
+<body ng-controller="MainCtrl as main">
 
 <div class="container">
   {% include 'items/partials/pageheader.html' %}
@@ -67,14 +67,14 @@
   <script src="{% static 'libs/angular-ui-router.js' %}"></script>
 
   <script src="{% static 'scripts/app.js' %}"></script>
-  <script src="{% static 'scripts/controllers/main.ctrl.js' %}"></script>
-  <script src="{% static 'scripts/controllers/home.ctrl.js' %}"></script>
-  <script src="{% static 'scripts/controllers/itemCreate.ctrl.js' %}"></script>
-  <script src="{% static 'scripts/controllers/itemDetail.ctrl.js' %}"></script>
-  <script src="{% static 'scripts/controllers/itemList.ctrl.js' %}"></script>
-  <script src="{% static 'scripts/controllers/itemUpdate.ctrl.js' %}"></script>
-  <script src="{% static 'scripts/services/categoryList.svc.js' %}"></script>
-  <script src="{% static 'scripts/services/itemList.svc.js' %}"></script>
+  <script src="{% static 'scripts/home-controller.js' %}"></script>
+  <script src="{% static 'scripts/main-controller.js' %}"></script>
+  <script src="{% static 'scripts/categories/categoryList-service.js' %}"></script>
+  <script src="{% static 'scripts/items/itemCreate-controller.js' %}"></script>
+  <script src="{% static 'scripts/items/itemDetail-controller.js' %}"></script>
+  <script src="{% static 'scripts/items/itemList-controller.js' %}"></script>
+  <script src="{% static 'scripts/items/itemList-service.js' %}"></script>
+  <script src="{% static 'scripts/items/itemUpdate-controller.js' %}"></script>
 {# CDN imports for staging/prod builds #}
 {% else %}
   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
