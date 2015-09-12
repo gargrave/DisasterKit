@@ -63,6 +63,16 @@
                 templateUrl: '/static/app/items/update/item-update.html'
               }
             }
+          })
+          // a list display all current categories
+          .state('dk.category_list', {
+            url: '/categories/',
+            views: {
+              'category_list@': {
+                controller: 'CategoryListCtrl as catCtrl',
+                templateUrl: '/static/app/categories/list/category-list.html'
+              }
+            }
           }
         );
         $urlRouterProvider.otherwise('/items/');
