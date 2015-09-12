@@ -20,7 +20,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      'items/static/scripts/app.min.js'
+      'items/static/app/app.min.js'
     ],
 
     // preprocess matching files before serving them to the browser
