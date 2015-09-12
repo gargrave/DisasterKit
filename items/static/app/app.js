@@ -29,48 +29,48 @@
             views: {
               'home@': {
                 controller: 'HomeCtrl as homeCtrl',
-                templateUrl: '/static/partials/home.html'
+                templateUrl: '/static/app/main/home.html'
               }
             }
           })
-          // a state showing full item list
+          // a state showing full items list
           .state('dk.item_list', {
             url: '/items/:forceUpdate',
             views: {
               'item_list@': {
                 controller: 'ItemListCtrl as itemListCtrl',
-                templateUrl: '/static/partials/item-list.html'
+                templateUrl: '/static/app/items/list/item-list.html'
               }
 
             }
           })
-          // a state to show details of an individual item
+          // a state to show details of an individual items
           .state('dk.item_detail', {
             url: '/items/detail/:id',
             views: {
               'item_detail@': {
                 controller: 'ItemDetailCtrl as itemDetailCtrl',
-                templateUrl: '/static/partials/item-detail.html'
+                templateUrl: '/static/app/items/detail/item-detail.html'
               }
             }
           })
-          // a state to create a new item
+          // a state to create a new items
           .state('dk.item_create', {
             url: '/items/add/',
             views: {
               'item_create@': {
                 controller: 'ItemCreateCtrl as itemCreateCtrl',
-                templateUrl: '/static/partials/item-create.html'
+                templateUrl: '/static/app/items/create/item-create.html'
               }
             }
           })
-          // a state to show details of an individual item
+          // a state to show details of an individual items
           .state('dk.item_update', {
             url: '/items/update/:id',
             views: {
               'item_update@': {
                 controller: 'ItemUpdateCtrl as itemUpdateCtrl',
-                templateUrl: '/static/partials/item-update.html'
+                templateUrl: '/static/app/items/update/item-update.html'
               }
             }
           }

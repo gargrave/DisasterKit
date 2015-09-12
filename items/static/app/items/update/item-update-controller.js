@@ -8,7 +8,7 @@
              itemListSvc, categoryListSvc) {
       var vm = this;
       vm.loading = true;
-      // the item whose details we are viewing
+      // the items whose details we are viewing
       vm.item = {};
       // the list of categories from the server
       vm.cats = [];
@@ -31,7 +31,7 @@
        * Performs any necessary initializtion for this controller.
        */
       vm.load = function() {
-        // get the details for the current item
+        // get the details for the current items
         itemListSvc.getItemById($stateParams.id)
           .then(function(res) {
             vm.item = res;
@@ -48,7 +48,7 @@
       };
 
       /**
-       * Sends the current changes to the item back to the server.
+       * Sends the current changes to the items back to the server.
        */
       vm.commitUpdates = function() {
         // TODO: check that any values have actually changed before submitting this
@@ -60,10 +60,10 @@
           $http.post('items/api/update_item/', vm.item)
             .then(function(res) {
               $state.go('dk.item_list', {forceUpdate: true});
-              // in case of server error, display error and return to item-list state
+              // in case of server error, display error and return to list state
             }, function(res) {
               alert('There was an error when attempting to ' +
-                'update this item.\nStatus code: ' + res.status);
+                'update this items.\nStatus code: ' + res.status);
               $state.go('dk.item_list');
             });
           // otherwise, show form errors erorrs

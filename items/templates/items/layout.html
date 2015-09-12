@@ -66,16 +66,17 @@
   <script src="{% static 'libs/angular-messages.js' %}"></script>
   <script src="{% static 'libs/angular-ui-router.js' %}"></script>
 
-  <script src="{% static 'scripts/app.js' %}"></script>
-  <script src="{% static 'scripts/home-controller.js' %}"></script>
-  <script src="{% static 'scripts/main-controller.js' %}"></script>
-  <script src="{% static 'scripts/categories/categoryList-service.js' %}"></script>
-  <script src="{% static 'scripts/items/itemCreate-controller.js' %}"></script>
-  <script src="{% static 'scripts/items/itemDetail-controller.js' %}"></script>
-  <script src="{% static 'scripts/items/itemList-controller.js' %}"></script>
-  <script src="{% static 'scripts/items/itemList-service.js' %}"></script>
-  <script src="{% static 'scripts/items/itemUpdate-controller.js' %}"></script>
-  <script src="{% static 'scripts/items/itemWidget-directive.js' %}"></script>
+  <script src="{% static 'app/app.js' %}"></script>
+  <script src="{% static 'app/categories/list/category-list-service.js' %}"></script>
+  <script src="{% static 'app/items/create/item-create-controller.js' %}"></script>
+  <script src="{% static 'app/items/detail/item-detail-controller.js' %}"></script>
+  <script src="{% static 'app/items/form/item-form-directive.js' %}"></script>
+  <script src="{% static 'app/items/list/item-list-controller.js' %}"></script>
+  <script src="{% static 'app/items/list/item-list-service.js' %}"></script>
+  <script src="{% static 'app/items/row/item-row-directive.js' %}"></script>
+  <script src="{% static 'app/items/update/item-update-controller.js' %}"></script>
+  <script src="{% static 'app/main/home-controller.js' %}"></script>
+  <script src="{% static 'app/main/main-controller.js' %}"></script>
 {# CDN imports for staging/prod builds #}
 {% else %}
   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -83,7 +84,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-messages.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
-  <script src="{% static 'scripts/app.min.js' %}"></script>
+  <script src="{% static 'app/app.min.js' %}"></script>
 {% endif %}
 {% endblock %}
 

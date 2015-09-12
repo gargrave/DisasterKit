@@ -1,0 +1,25 @@
+<div id="item-update-container" ng-hide="itemUpdateCtrl.loading">
+
+  <div class="row">
+    <div class="{A main.class.SIXCOLS A}">
+      <h2>Update an Item</h2>
+      <p>Fields marked with <span class="error_text">*</span> are required.</p>
+    </div>
+  </div>
+
+  <form class="dk-form" name="updateForm"
+        ng-submit="itemUpdateCtrl.commitUpdates()">
+
+    <div item-entry-form ctrl="itemUpdateCtrl"></div>
+
+    <!-- submit/cancel buttons -->
+    <div class="row">
+      <div class="{A main.class.SIXCOLS A}">
+        <input class="button button-primary" type="submit" value="Save">
+        <a class="button u-pull-right"
+           ui-sref="dk.item_detail({'id': itemUpdateCtrl.item.id})">Cancel</a>
+      </div>
+    </div>
+
+  </form>
+</div>

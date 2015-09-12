@@ -112,7 +112,7 @@ def get_categories(request):
 @login_required
 def update_item(request):
     """
-    Updates the specified item with the set of values passed in through POST.
+    Updates the specified items with the set of values passed in through POST.
     """
     if request.POST:
         item = get_object_or_404(StockItem, pk=request.POST['id'])
@@ -129,9 +129,9 @@ def update_item(request):
 @login_required
 def delete_item(request, pk):
     """
-    Deactivates the item with the specified ID. Note that this
-    DOES NOT delete the item from the DB. It is simply a "soft
-    deactivation" to prevent the item from being listed.
+    Deactivates the items with the specified ID. Note that this
+    DOES NOT delete the items from the DB. It is simply a "soft
+    deactivation" to prevent the items from being listed.
     """
     item = get_object_or_404(StockItem, pk=pk)
     item.active = False

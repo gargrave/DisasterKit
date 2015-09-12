@@ -9,10 +9,11 @@ module.exports = function(grunt) {
           mangle: false
         },
         files: [{
-          'items/static/scripts/app.min.js': [
-            'items/static/scripts/app.js',
-            'items/static/scripts/controllers/*.js',
-            'items/static/scripts/categories/*.js'
+          'items/static/app/app.min.js': [
+            'items/static/app/app.js',
+            'items/static/app/main/**/*.js',
+            'items/static/app/categories/**/*.js',
+            'items/static/app/items/**/*.js'
           ]
         }]
       }

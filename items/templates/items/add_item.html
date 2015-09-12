@@ -18,7 +18,7 @@
     {% csrf_token %}
 
     <div class="row">
-      {# item name input #}
+      {# items name input #}
       <div class="{{ page_vars.sixcols }}">
         <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
         {{ form.name }}
@@ -28,7 +28,7 @@
     </div>
 
     <div class="row">
-      {# item count input #}
+      {# items count input #}
       <div class="{{ page_vars.sixcols }}">
         <label for="{{ form.count.auto_id }}">{{ form.count.label }}</label>
         {{ form.count }}
@@ -76,7 +76,7 @@
       <div class="three columns offset-by-three">
         <input class="button button-primary" type="submit" value="Submit">
       </div>
-      {# cancel back -> take us back to item list #}
+      {# cancel back -> take us back to items list #}
       <div class="three columns">
         <a class="button u-pull-right" href="{% url 'items:item_list' %}">Cancel</a>
       </div>

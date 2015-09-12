@@ -6,7 +6,7 @@
     function($scope, $http, $state, categoryListSvc) {
       var vm = this;
       vm.loading = true;
-      // the item being created
+      // the items being created
       vm.item = {};
       // the list of categories from the server
       vm.cats = [];
@@ -41,10 +41,10 @@
           $http.post('items/api/create_item/', vm.item)
             .then(function(res) {
               $state.go('dk.item_list', {forceUpdate: true});
-              // in case of server error, display error and return to item-list state
+              // in case of server error, display error and return to list state
             }, function(res) {
               alert('There was an error when attempting to ' +
-                'create this item.\nStatus code: ' + res.status);
+                'create this items.\nStatus code: ' + res.status);
               $state.go('dk.item_list');
             });
           // otherwise, show form errors erorrs

@@ -6,7 +6,7 @@
     function($stateParams, itemListSvc) {
       var vm = this;
       // check the state params if we need to force a list update
-      // (i.e. has an item been updated/added/deleted/etc.?)
+      // (i.e. has an items been updated/added/deleted/etc.?)
       var forceListUpdate = $stateParams.forceUpdate || false;
       vm.loading = true;
       vm.items = null;
