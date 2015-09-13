@@ -6,7 +6,7 @@
     function($http, $state, $stateParams, itemListSvc) {
       var vm = this;
       vm.loading = true;
-      // the items whose details we are viewing
+      // the item whose details we are viewing
       vm.item = {};
 
       /**
