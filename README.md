@@ -15,3 +15,8 @@ $venvw && workon dkenv
 ```
 export run="python manage.py runserver --settings=disasterkit.settings.dev"
 ```
+
+#### Running a test with dev settings
+```
+export test="python manage.py test items --settings=disasterkit.settings.dev"
+```

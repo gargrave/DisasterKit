@@ -9,6 +9,10 @@
       vm.cats = [];
       vm.subcats = [];
 
+      vm.addNewCategory = function() {
+        alert('TODO: Add a new category!');
+      };
+
       (function() {
         // get the list of categories and sub-categories for the <select>s
         categoryListSvc.getCategoryList()

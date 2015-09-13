@@ -22,7 +22,8 @@ def index(request):
     Provides the main site page.
     """
     return render(request, 'items/index.html', {
-        'globalvars': globalvars
+        'globalvars': globalvars,
+        'fart': 'fart'
     })
 
 

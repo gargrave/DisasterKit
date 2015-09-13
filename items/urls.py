@@ -6,11 +6,11 @@ from . import views
 urlpatterns = [
     # URL to create a new items
     # /items/api/create_item
-    url(r'^api/create_item/?$', views.create_item),
+    url(r'^api/create_item/?$', views.create_item, name='create_item'),
 
     # URL to fetch a list of all items details
     # /items/api/get_all_items
-    url(r'^api/get_all_items/?$', views.get_all_items),
+    url(r'^api/get_all_items/?$', views.get_all_items, name='get_all_items'),
 
     # URL to fetch details for a single items, as specified by ID
     # /items/api/get_item_by_id/<pk>
