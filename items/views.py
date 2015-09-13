@@ -36,6 +36,7 @@ def create_item(request):
     """
     Adds a new StockItem to the database based on a POST request.
     """
+    # TODO add form validation
     if request.POST:
         item = StockItem(
             name=request.POST.get('name'),
