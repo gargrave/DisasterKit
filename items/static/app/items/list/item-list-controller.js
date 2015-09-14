@@ -6,6 +6,16 @@
     function($stateParams, itemListSvc) {
       // pre-calcuate the number of milliseconds in a dsy
       var MS_IN_DAY = 1000 * 60 * 60 * 24;
+      // the possibilities for sorting the entry list
+      var ORDER_OPTIONS = [
+        'name',
+        'cat',
+        'subcat',
+        'count',
+        'date_added',
+        'exp'
+      ];
+
       var vm = this;
       // check the state params if we need to force a list update
       // (i.e. has an items been updated/added/deleted/etc.?)
@@ -14,6 +24,9 @@
       var nowRounded;
       vm.loading = true;
       vm.items = null;
+      // the current sorting option we are using
+      // default is 'expiration date DESC'
+      vm.ordering = '-exp';
 
       /**
        * Parses the item's expiration date against today's date and
@@ -33,6 +46,24 @@
         }
         return Math.floor((Date.parse(item.exp) - nowRounded) / MS_IN_DAY) + 1;
       }
+
+      /**
+       * Sets the value to use for sorting the item list. If the value
+       * supplied is the same as the current sort value, the order will
+       * be reversed.
+       *
+       * @param {String} value - The new value to use for sorting.
+       */
+      vm.setOrderBy = function(value) {
+        if ($.inArray(value, ORDER_OPTIONS) !== -1) {
+          // if the value is the same as our current value, reverse it
+          if (vm.ordering === value) {
+            vm.ordering = '-' + value;
+          } else {
+            vm.ordering = value;
+          }
+        }
+      };
 
       /*
        Initializes the controller.

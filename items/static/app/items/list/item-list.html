@@ -15,15 +15,15 @@
 
         <table class="table">
           <tr class="info">
-            <th>Name</th>
-            <th>Category</th>
-            <th>Sub-Category</th>
-            <th>Count</th>
-            <th>Date Added</th>
-            <th>Expiration</th>
+            <th><a href ng-click="itemListCtrl.setOrderBy('name')">Name</a></th>
+            <th><a href ng-click="itemListCtrl.setOrderBy('cat')">Category</a></th>
+            <th><a href ng-click="itemListCtrl.setOrderBy('subcat')">Sub-Category</a></th>
+            <th><a href ng-click="itemListCtrl.setOrderBy('count')">Count</a></th>
+            <th><a href ng-click="itemListCtrl.setOrderBy('date_added')">Date Added</a></th>
+            <th><a href ng-click="itemListCtrl.setOrderBy('exp')">Expiration</a></th>
           </tr>
           <tr item-widget item-data="item" class="{A item.trClass A}"
-              ng-repeat="item in itemListCtrl.items | orderBy:'-exp' track by item.id">
+              ng-repeat="item in itemListCtrl.items | orderBy:itemListCtrl.ordering track by item.id">
           </tr>
         </table>
 
