@@ -128,10 +128,31 @@ class ItemsViewsTests(TestCase):
         self.assertEqual(res.status_code, 200)
 
         # make sure the item we create is in the database
+        cat = None
         try:
-            self.assertTrue(Category.objects.get(name=cat_name))
+            cat = Category.objects.get(name=cat_name)
         except Category.DoesNotExist:
-            self.assertTrue(False, 'Expected Category instance not found.')
+            pass
+        self.assertNotEqual(cat, None, 'Category was not created correctly.')
+
+    def test_delete_category(self):
+        """
+        Tests the delete_category API URL for properly deleting the
+        specified Category.
+        """
+        cat_name = 'NewCategory'
+        Category.objects.create(name=cat_name)
+        url = reverse('items:delete_category')
+        res = self.client.post(url, {'name': cat_name})
+        self.assertEqual(res.status_code, 200)
+
+        # make sure the Category we deleted is no longer present
+        cat = None
+        try:
+            cat = Category.objects.get(name=cat_name)
+        except Category.DoesNotExist:
+            pass
+        self.assertEqual(cat, None, 'Category was not deleted correctly.')
 
     def test_get_categories(self):
         """

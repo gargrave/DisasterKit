@@ -60,6 +60,13 @@
         }
       };
 
+      /**
+       * Sends the request to the server to delete the specified category.
+       */
+      vm.deleteCategory = function() {
+
+      };
+
       (function() {
         loadCategories(false);
       })();

@@ -99,7 +99,16 @@ def get_item_by_id(request, pk):
 
 @login_required
 def create_category(request):
-    Category.objects.create(name=request.POST.get('name'))
+    if request.POST:
+        Category.objects.create(name=request.POST.get('name'))
+    return HttpResponse(status=200)
+
+
+@login_required
+def delete_category(request):
+    if request.POST:
+        cat = get_object_or_404(Category, name=request.POST.get('name'))
+        cat.delete()
     return HttpResponse(status=200)
 
 

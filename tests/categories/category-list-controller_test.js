@@ -15,4 +15,13 @@ describe('Controller: CategoryListCtrl', function() {
     expect(ctrl.cats.length).toBe(0);
     expect(ctrl.subcats.length).toBe(0);
   });
+
+  // check resetting values
+  it('should reset the value of the new category name.', function() {
+    ctrl.errors.duplicate = true;
+    ctrl.newCategory = 'NewCategory';
+    ctrl.clearNewCategory();
+    expect(ctrl.errors.duplicate).toBeFalsy();
+    expect(ctrl.newCategory).toBe('');
+  });
 });
