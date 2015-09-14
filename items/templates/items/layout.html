@@ -59,6 +59,7 @@
 {# local import for local/dev builds #}
 {% if globalvars.build == 'dev' %}
   <script src="{% static 'libs/jquery.js' %}"></script>
+  <script src="{% static 'libs/underscore.js' %}"></script>
   <script src="{% static 'libs/bootstrap.js' %}"></script>
   <script src="{% static 'libs/angular.js' %}"></script>
   <script src="{% static 'libs/angular-messages.js' %}"></script>
@@ -79,6 +80,7 @@
 {# CDN imports for staging/prod builds #}
 {% else %}
   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-messages.min.js"></script>

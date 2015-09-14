@@ -31,6 +31,11 @@ urlpatterns = [
     url(r'^api/delete_item/(?P<pk>\d+)/?$',
         views.delete_item, name='delete_item'),
 
+    # URL to create a new category
+    # items/api/create_category
+    url(r'^api/create_category/?$',
+        views.create_category, name='create_category'),
+
     # URL to fetch a list of all categories (i.e. for populating <select>s
     # /items/api/get_categories/
     url(r'^api/get_categories/?$',

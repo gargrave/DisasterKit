@@ -98,6 +98,12 @@ def get_item_by_id(request, pk):
 
 
 @login_required
+def create_category(request):
+    Category.objects.create(name=request.POST.get('name'))
+    return HttpResponse(status=200)
+
+
+@login_required
 def get_categories(request):
     """
     Returns a JSON object containg two lists:

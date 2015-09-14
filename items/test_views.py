@@ -118,6 +118,21 @@ class ItemsViewsTests(TestCase):
         res = self.client.get(url)
         self.assertEqual(res.status_code, 404)
 
+    def test_create_category(self):
+        """
+        Tests the create_category for properly creating a new Category.
+        """
+        cat_name = 'NewCategory'
+        url = reverse('items:create_category')
+        res = self.client.post(url, {'name': cat_name})
+        self.assertEqual(res.status_code, 200)
+
+        # make sure the item we create is in the database
+        try:
+            self.assertTrue(Category.objects.get(name=cat_name))
+        except Category.DoesNotExist:
+            self.assertTrue(False, 'Expected Category instance not found.')
+
     def test_get_categories(self):
         """
         Tests the get_categories API URL for returning a list of all

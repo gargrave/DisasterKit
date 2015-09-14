@@ -10,10 +10,11 @@
       /**
        * Queries the API for a full list of categories and subcategories.
        */
-      vm.getCategoryList = function() {
+      vm.getCategoryList = function(forceUpdate) {
+        var force = forceUpdate || false;
         var deferred = $q.defer();
 
-        if (combined.cats && combined.subcats) {
+        if (combined.cats && combined.subcats && !force) {
           deferred.resolve(combined);
         } else {
           $http.get('items/api/get_categories')

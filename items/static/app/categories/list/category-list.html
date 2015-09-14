@@ -1,8 +1,7 @@
 <div class="row">
   <div class="col-xs-12 col-md-6 col-md-offset-3">
 
-    <h2>Categories</h2>
-    <br>
+    <h2>Categories</h2><br>
 
     <table class="table">
       <tr class="info">
@@ -14,15 +13,17 @@
       </tr>
     </table>
 
-    <form action="" ng-submit="catCtrl.addNewCategory()" class="form-inline">
+    <form action="" ng-submit="catCtrl.addNewCategory()">
       <div class="form-group">
-        <label for="input_name">Name: </label>
-        <input type="text" class="form-control" id="input_name">
+        <label for="input_name">New Category Name: </label>
+        <input type="text" class="form-control" id="input_name" required>
+        <!-- error message -->
+        <p class="error_text" ng-show="catCtrl.errors.duplicate">
+          This category already exists.
+        </p>
       </div>
       <button class="btn btn-primary">Save</button>
     </form>
-
-
 
   </div>
 </div>
