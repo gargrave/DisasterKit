@@ -99,6 +99,9 @@ def get_item_by_id(request, pk):
 
 @login_required
 def create_category(request):
+    """
+    Creates a new Category instance with the name specified in POST.
+    """
     if request.POST:
         Category.objects.create(name=request.POST.get('name'))
     return HttpResponse(status=200)
@@ -106,6 +109,9 @@ def create_category(request):
 
 @login_required
 def delete_category(request):
+    """
+    Delets the Category instance with the name specified in POST.
+    """
     if request.POST:
         cat = get_object_or_404(Category, name=request.POST.get('name'))
         cat.delete()

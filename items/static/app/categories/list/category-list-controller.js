@@ -40,7 +40,7 @@
        * Clears the current value of the new category model and
        * resets error messages.
        */
-      vm.clearNewCategory = function() {
+      vm.clearCategoryInput = function() {
         vm.newCategory = '';
         vm.errors.duplicate = false;
       };
@@ -54,6 +54,7 @@
           if (confirm('Create new category "' + vm.newCategory + '"?')) {
             $http.post('items/api/create_category', {name: vm.newCategory})
               .then(function(res) {
+                vm.clearCategoryInput();
                 loadCategories(true);
               });
           }
@@ -63,8 +64,13 @@
       /**
        * Sends the request to the server to delete the specified category.
        */
-      vm.deleteCategory = function() {
-
+      vm.deleteCategory = function(catName) {
+        if (confirm('Delete category "' + catName + '"?')) {
+          $http.post('items/api/delete_category', {name: catName})
+            .then(function(res) {
+              loadCategories(true);
+            });
+        }
       };
 
       (function() {

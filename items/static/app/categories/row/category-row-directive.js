@@ -6,7 +6,8 @@
       return {
         restrict: 'A',
         scope: {
-          cat: '='
+          cat: '=',
+          ctrl: '='
         },
         templateUrl: '/static/app/categories/row/category-row.html'
       };

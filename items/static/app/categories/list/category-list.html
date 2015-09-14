@@ -8,7 +8,7 @@
         <th>Name</th>
         <th>Controls</th>
       </tr>
-      <tr category-row cat="cat"
+      <tr category-row cat="cat" ctrl="catCtrl"
           ng-repeat="cat in catCtrl.cats">
       </tr>
     </table>
@@ -29,7 +29,7 @@
           </p>
           <button class="btn btn-primary">Save</button>
           <span class="btn btn-default pull-right"
-                ng-click="catCtrl.clearNewCategory()">Clear</span>
+                ng-click="catCtrl.clearCategoryInput()">Clear</span>
         </form>
       </div>
     </div>
