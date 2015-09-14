@@ -8,6 +8,8 @@
       vm.loading = true;
       vm.cats = [];
       vm.subcats = [];
+      // the model for the new category name
+      vm.newCategory = '';
       // collection of error objects
       vm.errors = {
         duplicate: false
@@ -27,19 +29,30 @@
       }
 
       /**
+       * Checks if the current value of the new category name
+       * is a duplicate of an existing one.
+       */
+      vm.newCatKeyUp = function() {
+        vm.errors.duplicate = _.contains(vm.cats, vm.newCategory);
+      };
+
+      /**
+       * Clears the current value of the new category model and
+       * resets error messages.
+       */
+      vm.clearNewCategory = function() {
+        vm.newCategory = '';
+        vm.errors.duplicate = false;
+      };
+
+      /**
        * Sends the specified new category to the server.
        */
       vm.addNewCategory = function() {
-        var value = $('#input_name').val();
-        vm.errors.duplicate = false;
-
-        // check if the submission is a duplicate of an existing one
-        if (_.contains(vm.cats, value)) {
-          vm.errors.duplicate = true;
-        } else {
+        if (!vm.errors.duplicate) {
           // TODO replace this with a modal
-          if (confirm('Create new category "' + value + '"?')) {
-            $http.post('items/api/create_category', {name: value})
+          if (confirm('Create new category "' + vm.newCategory + '"?')) {
+            $http.post('items/api/create_category', {name: vm.newCategory})
               .then(function(res) {
                 loadCategories(true);
               });

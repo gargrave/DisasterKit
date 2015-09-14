@@ -13,17 +13,26 @@
       </tr>
     </table>
 
-    <form action="" ng-submit="catCtrl.addNewCategory()">
-      <div class="form-group">
-        <label for="input_name">New Category Name: </label>
-        <input type="text" class="form-control" id="input_name" required>
-        <!-- error message -->
-        <p class="error_text" ng-show="catCtrl.errors.duplicate">
-          This category already exists.
-        </p>
+    <div class="panel panel-info">
+      <div class="panel-heading">Add a New Category</div>
+      <div class="panel-body">
+        <form action="" ng-submit="catCtrl.addNewCategory()">
+          <div class="form-group">
+            <input type="text" class="form-control" id="input_name"
+                   placeholder="New Category Name" ng-keyup="catCtrl.newCatKeyUp()"
+                   ng-model="catCtrl.newCategory"
+                   required>
+          </div>
+          <!-- error message -->
+          <p class="error_text" ng-show="catCtrl.errors.duplicate">
+            This category already exists.
+          </p>
+          <button class="btn btn-primary">Save</button>
+          <span class="btn btn-default pull-right"
+                ng-click="catCtrl.clearNewCategory()">Clear</span>
+        </form>
       </div>
-      <button class="btn btn-primary">Save</button>
-    </form>
+    </div>
 
   </div>
 </div>
