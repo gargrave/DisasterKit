@@ -36,7 +36,6 @@ def create_item(request):
     """
     Adds a new StockItem to the database based on a POST request.
     """
-    # TODO add form validation
     if request.POST:
         item = StockItem(
             name=request.POST.get('name'),
@@ -112,7 +111,7 @@ def delete_category(request):
     Delets the Category instance with the name specified in POST.
     """
     if request.POST:
-        cat = get_object_or_404(Category, name=request.POST.get('name'))
+        cat = get_object_or_404(Category, pk=request.POST.get('pk'))
         cat.delete()
     return HttpResponse(status=200)
 
@@ -125,8 +124,8 @@ def get_categories(request):
         2. a list of all sub-category names
     """
     return JsonResponse({
-        'cats': [cat.name for cat in Category.objects.all()],
-        'subcats': [cat.name for cat in SubCategory.objects.all()]
+        'cats': [{'id': cat.id, 'name': cat.name} for cat in Category.objects.all()],
+        'subcats': [{'id': cat.id, 'name': cat.name} for cat in SubCategory.objects.all()]
     })
 
 

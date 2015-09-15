@@ -23,6 +23,7 @@
         categoryListSvc.getCategoryList(force)
           .then(function(res) {
             vm.cats = res.cats;
+            console.log(vm.cats);
             vm.subcats = res.subcats;
             vm.loading = false;
           });
@@ -64,9 +65,9 @@
       /**
        * Sends the request to the server to delete the specified category.
        */
-      vm.deleteCategory = function(catName) {
-        if (confirm('Delete category "' + catName + '"?')) {
-          $http.post('items/api/delete_category', {name: catName})
+      vm.deleteCategory = function(cat) {
+        if (confirm('Delete category "' + cat.name + '"?')) {
+          $http.post('items/api/delete_category', {pk: cat.id})
             .then(function(res) {
               loadCategories(true);
             });

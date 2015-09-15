@@ -20,7 +20,7 @@ describe('Controller: CategoryListCtrl', function() {
   it('should reset the value of the new category name.', function() {
     ctrl.errors.duplicate = true;
     ctrl.newCategory = 'NewCategory';
-    ctrl.clearNewCategory();
+    ctrl.clearCategoryInput();
     expect(ctrl.errors.duplicate).toBeFalsy();
     expect(ctrl.newCategory).toBe('');
   });

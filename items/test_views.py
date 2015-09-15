@@ -165,10 +165,13 @@ class ItemsViewsTests(TestCase):
         # prase the response into cat/sub-cat lists and check expected values
         json_cats = json.loads(str(res.content, encoding='utf8'))['cats']
         json_subcats = json.loads(str(res.content, encoding='utf8'))['subcats']
-        self.assertIn('Food', json_cats)
-        self.assertNotIn('Sweet', json_cats)
-        self.assertIn('Sweet', json_subcats)
-        self.assertNotIn('Food', json_subcats)
+
+        food = {'id': self.temp_cat.id, 'name': self.temp_cat.name}
+        sweet = {'id': self.temp_subcat.id, 'name': self.temp_subcat.name}
+        self.assertIn(food, json_cats)
+        self.assertNotIn(sweet, json_cats)
+        self.assertIn(sweet, json_subcats)
+        self.assertNotIn(food, json_subcats)
 
     def test_update_item(self):
         """
