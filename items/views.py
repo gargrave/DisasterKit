@@ -106,6 +106,15 @@ def create_category(request):
 
 
 @login_required
+def update_category(request):
+    if request.POST:
+        cat = get_object_or_404(Category, pk=request.POST.get('pk'))
+        cat.name = request.POST.get('name')
+        cat.save()
+    return HttpResponse(status=200)
+
+
+@login_required
 def delete_category(request):
     """
     Delets the Category instance with the name specified in POST.

@@ -36,6 +36,11 @@ urlpatterns = [
     url(r'^api/create_category/?$',
         views.create_category, name='create_category'),
 
+    # URL to update a category
+    # items/api/update_category
+    url(r'^api/update_category/?$',
+        views.update_category, name='update_category'),
+
     # URL to delete a category via POST submission
     # items/api/delete_category
     url(r'^api/delete_category/?$',

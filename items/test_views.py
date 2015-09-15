@@ -69,10 +69,6 @@ class ItemsViewsTests(TestCase):
         res = self.client.get(url)
         self.assertRedirects(res, '/')
 
-    def test_create_item_with_bad_post(self):
-        # TODO implement this test after form validation is complete
-        pass
-
     def test_create_item(self):
         """
         Tests that create_item URL correctly creates an item
@@ -135,15 +131,30 @@ class ItemsViewsTests(TestCase):
             pass
         self.assertNotEqual(cat, None, 'Category was not created correctly.')
 
+    def test_update_category(self):
+        """
+        Tests that the update_category URL properly updates the specified category.
+        """
+        new_cat = Category.objects.create(name='UpdateCategory')
+        new_name = 'NewNameForUpdateCategory'
+        url = reverse('items:update_category')
+        res = self.client.post(url, {
+            'pk': new_cat.id,
+            'name': new_name
+        })
+        self.assertEqual(res.status_code, 200)
+        updated = Category.objects.get(pk=new_cat.id)
+        self.assertEqual(updated.name, new_name)
+
     def test_delete_category(self):
         """
         Tests the delete_category API URL for properly deleting the
         specified Category.
         """
         cat_name = 'NewCategory'
-        Category.objects.create(name=cat_name)
+        new_cat = Category.objects.create(name=cat_name)
         url = reverse('items:delete_category')
-        res = self.client.post(url, {'name': cat_name})
+        res = self.client.post(url, {'pk': new_cat.id})
         self.assertEqual(res.status_code, 200)
 
         # make sure the Category we deleted is no longer present
