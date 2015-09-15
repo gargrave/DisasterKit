@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   angular.module('dk').controller('ItemCreateCtrl', [
-    '$scope', '$http', '$state', 'categoryListSvc',
+    '$scope', '$http', '$state', 'categoryListSvc', 'itemCreateSvc',
 
-    function($scope, $http, $state, categoryListSvc) {
+    function($scope, $http, $state, categoryListSvc, itemCreateSvc) {
       var vm = this;
       vm.loading = true;
       // the items being created
@@ -33,22 +33,15 @@
        * Sends the to the server to be saved.
        */
       vm.saveNewItem = function() {
-        console.log('savenewItem()');
         $scope.submitted = false;
         // submit as normal if the form is validated
         if ($scope.createForm.$valid) {
           // make sure we do not pass a null 'notes' field
           vm.item.notes = vm.item.notes || '';
-          $http.post('items/api/create_item/', vm.item)
-            .then(function(res) {
-              $state.go('dk.item_list', {forceUpdate: true});
-              // in case of server error, display error and return to list state
-            }, function(res) {
-              alert('There was an error when attempting to ' +
-                'create this items.\nStatus code: ' + res.status);
-              $state.go('dk.item_list');
-            });
-          // otherwise, show form errors erorrs
+          itemCreateSvc.saveNewItem(vm.item, function() {
+            $state.go('dk.item_list', {forceUpdate: true});
+          });
+        // otherwise, show form errors erorrs
         } else {
           $scope.createForm.submitted = true;
         }

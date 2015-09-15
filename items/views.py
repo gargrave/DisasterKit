@@ -44,7 +44,6 @@ def create_item(request):
             date_of_expiration=request.POST.get('exp'),
             added_by=str(request.user),
             fk_category=Category.objects.get(name=request.POST.get('cat')),
-            # fk_subcategory=SubCategory.objects.get(name=request.POST.get('subcat')),
             notes=request.POST.get('notes'),
         )
         # check for optional subcategory
