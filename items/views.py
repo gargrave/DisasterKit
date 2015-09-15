@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db.utils import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
@@ -95,14 +96,21 @@ def get_item_by_id(request, pk):
     return JsonResponse(res_dict)
 
 
-@login_required
-def create_category(request):
-    """
-    Creates a new Category instance with the name specified in POST.
-    """
-    if request.POST:
-        Category.objects.create(name=request.POST.get('name'))
-    return HttpResponse(status=200)
+def category(request):
+    # for GET request, return a list of all categories/sub-categories
+    if request.method == 'GET':
+        return JsonResponse({
+            'cats': [{'id': cat.id, 'name': cat.name} for cat in Category.objects.all()],
+            'subcats': [{'id': cat.id, 'name': cat.name} for cat in SubCategory.objects.all()]
+        })
+    # for POST request, attempt to create a new category
+    if request.method == 'POST':
+        try:
+            Category.objects.create(name=request.POST.get('name'))
+            return HttpResponse(status=200)
+        except IntegrityError:
+            HttpResponse(status=400)
+    return HttpResponse(status=400)
 
 
 @login_required

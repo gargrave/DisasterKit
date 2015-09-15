@@ -114,15 +114,15 @@ class ItemsViewsTests(TestCase):
         res = self.client.get(url)
         self.assertEqual(res.status_code, 404)
 
-    def test_create_category(self):
+    def test_category(self):
         """
-        Tests the create_category for properly creating a new Category.
+        Tests the category URL for GET/POST requests.
         """
-        cat_name = 'NewCategory'
-        url = reverse('items:create_category')
+        # test POST request to create a new category
+        cat_name = 'New Category'
+        url = reverse('items:category')
         res = self.client.post(url, {'name': cat_name})
         self.assertEqual(res.status_code, 200)
-
         # make sure the item we create is in the database
         cat = None
         try:
@@ -130,6 +130,18 @@ class ItemsViewsTests(TestCase):
         except Category.DoesNotExist:
             pass
         self.assertNotEqual(cat, None, 'Category was not created correctly.')
+
+        # send a malformed POST request and make sure we get a 400
+        res = self.client.post(url, {'asdf': 'asdf'})
+        self.assertEqual(res.status_code, 400)
+
+        # attempt a GET request to make sure we get a list of categories
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, 200)
+        json_cats = json.loads(str(res.content, encoding='utf8'))
+        self.assertTrue(len(json_cats) > 0)
+        self.assertTrue(json_cats['cats'])
+        self.assertTrue(json_cats['subcats'])
 
     def test_update_category(self):
         """
