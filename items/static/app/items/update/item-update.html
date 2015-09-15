@@ -11,9 +11,7 @@
   <!-- update item form -->
   <form class="dk-form" name="updateForm"
         ng-submit="itemUpdateCtrl.saveEdits()">
-
     <div item-entry-form ctrl="itemUpdateCtrl" form="updateForm"></div>
-
     <!-- submit/cancel buttons -->
     <div>
       <input class="btn btn-primary" type="submit" value="Submit"
@@ -22,6 +20,5 @@
               ui-sref="dk.item_detail({'id': itemUpdateCtrl.item.id})">Cancel
       </button>
     </div>
-
   </form>
 </div>

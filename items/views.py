@@ -48,19 +48,6 @@ def get_item_by_id(request, pk):
     return JsonResponse(res_dict)
 
 
-@login_required
-def delete_item(request, pk):
-    """
-    Deactivates the items with the specified ID. Note that this
-    DOES NOT delete the items from the DB. It is simply a "soft
-    deactivation" to prevent the items from being listed.
-    """
-    item = get_object_or_404(StockItem, pk=pk)
-    item.active = False
-    item.save()
-    return HttpResponse(status=200)
-
-
 ################################################
 # Item URLs
 ################################################
@@ -112,19 +99,28 @@ def item_update(request):
     Updates the specified items with the set of values passed in through POST.
     """
     if request.method == 'POST':
-        test_item = get_object_or_404(StockItem, pk=request.POST['id'])
-        test_item.name = request.POST['name']
-        test_item.count = int(request.POST['count'])
-        test_item.date_of_expiration = request.POST['exp']
-        test_item.fk_category = Category.objects.get(name=request.POST['cat'])
-        test_item.fk_subcategory = SubCategory.objects.get(name=request.POST['subcat'])
-        test_item.notes = request.POST['notes']
-        test_item.save()
+        item_to_update = get_object_or_404(StockItem, pk=request.POST['id'])
+        item_to_update.name = request.POST['name']
+        item_to_update.count = int(request.POST['count'])
+        item_to_update.date_of_expiration = request.POST['exp']
+        item_to_update.fk_category = Category.objects.get(name=request.POST['cat'])
+        item_to_update.fk_subcategory = SubCategory.objects.get(name=request.POST['subcat'])
+        item_to_update.notes = request.POST['notes']
+        item_to_update.save()
     return HttpResponse(status=200)
 
 
 @login_required
 def item_delete(request):
+    """
+    Deactivates the items with the specified ID. Note that this
+    DOES NOT delete the items from the DB. It is simply a "soft
+    deactivation" to prevent the items from being listed.
+    """
+    if request.method == 'POST':
+        item_to_delete = get_object_or_404(StockItem, pk=request.POST['id'])
+        item_to_delete.active = False
+        item_to_delete.save()
     return HttpResponse(status=200)
 
 

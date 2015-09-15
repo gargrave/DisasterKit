@@ -79,18 +79,6 @@ class ItemsViewsTests(TestCase):
         res = self.client.get(url)
         self.assertEqual(res.status_code, 404)
 
-    def test_delete_item(self):
-        """
-        Tests that the delete_item view correctly deletes and item
-        from the database.
-        """
-        url = reverse('items:delete_item', kwargs={'pk': self.test_item.id})
-        res = self.client.get(url)
-        self.assertEqual(res.status_code, 200)
-        # check that the item has its 'active' flag set to false
-        updated_item = StockItem.objects.get(pk=self.test_item.id)
-        self.assertFalse(updated_item.active)
-
     #############################################
     # StockItem API Tests
     #############################################
@@ -132,6 +120,18 @@ class ItemsViewsTests(TestCase):
         updated_item = StockItem.objects.get(pk=self.test_item.id)
         self.assertEqual(update_data['name'], updated_item.name)
         self.assertNotEqual(original_name, updated_item.name)
+
+    def test_item_delete(self):
+        """
+        Tests that the delete_item view correctly deletes and item
+        from the database.
+        """
+        url = reverse('items:item_delete')
+        res = self.client.post(url, {'id': self.test_item.id})
+        self.assertEqual(res.status_code, 200)
+        # check that the item has its 'active' flag set to false
+        updated_item = StockItem.objects.get(pk=self.test_item.id)
+        self.assertFalse(updated_item.active)
 
     #############################################
     # Category API Tests

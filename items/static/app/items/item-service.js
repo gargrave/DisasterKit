@@ -6,6 +6,7 @@
       function($http, $q) {
         var API_URL_GETPOST = 'items/api/item/';
         var API_URL_UPDATE = 'items/api/item/update/';
+        var API_URL_DELETE = 'items/api/item/delete/';
         var vm = this;
         var items = [];
 
@@ -36,7 +37,6 @@
               }, function(res) {
                 alert('There was an error getting the items ' +
                   'list from the server.\nStatus code: ' + res.status);
-                $state.go('dk.home');
               });
           }
           return deferred.promise;
@@ -63,6 +63,15 @@
         vm.update = function(item) {
           return $http.post(API_URL_UPDATE, item);
         };
+
+        /**
+       * Sends the request to the server to delete the specified item.
+       *
+       * @param {Object} category - The Category to be deleted.
+       */
+      vm.delete = function(item) {
+        return $http.post(API_URL_DELETE, {id: item.id});
+      };
       }
     ]
   );

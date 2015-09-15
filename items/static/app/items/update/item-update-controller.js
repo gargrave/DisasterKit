@@ -1,10 +1,10 @@
 (function() {
   'use strict';
   angular.module('dk').controller('ItemUpdateCtrl', [
-    '$scope', '$http', '$state', '$stateParams',
+    '$scope', '$state', '$stateParams',
     'itemListSvc', 'categorySvc', 'itemSvc',
 
-    function($scope, $http, $state, $stateParams,
+    function($scope, $state, $stateParams,
              itemListSvc, categorySvc, itemSvc) {
       var vm = this;
       vm.loading = true;

@@ -9,13 +9,6 @@ urlpatterns = [
     url(r'^api/get_item_by_id/(?P<pk>\d+)/?$',
         views.get_item_by_id, name='get_item_by_id'),
 
-    # URL to delete a single items, as specified by ID
-    # NOTE: this does not actually delete the record from the database, but
-    #       rather just flags it as inactive, so it will be ignored when listing
-    # /items/api/delete_item/<pk>
-    url(r'^api/delete_item/(?P<pk>\d+)/?$',
-        views.delete_item, name='delete_item'),
-
     #############################################
     # Item URLs
     #############################################
@@ -34,7 +27,7 @@ urlpatterns = [
 
     # URL to delete a item via POST submission
     # items/api/item/delete/
-    url(r'^api/item/update/?$',
+    url(r'^api/item/delete/?$',
         views.item_delete, name='item_delete'),
 
     #############################################

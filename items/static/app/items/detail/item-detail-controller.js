@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   angular.module('dk').controller('ItemDetailCtrl', [
-    '$http', '$state', '$stateParams', 'itemListSvc',
+    '$http', '$state', '$stateParams', 'itemListSvc', 'itemSvc',
 
-    function($http, $state, $stateParams, itemListSvc) {
+    function($http, $state, $stateParams, itemListSvc, itemSvc) {
       var vm = this;
       vm.loading = true;
       // the item whose details we are viewing
@@ -24,13 +24,12 @@
        * Deletes the current items.
        */
       vm.deleteItem = function() {
-        if (confirm('Delete this items?')) {
-          $http.delete('items/api/delete_item/' + vm.item.id)
+        if (confirm('Delete this item?')) {
+          itemSvc.delete(vm.item)
             .then(function(res) {
               $state.go('dk.item_list', {forceUpdate: true});
-              // in case of error, display error and return to
-              // list state
             }, function(res) {
+              // in case of error, display error and return to list state
               alert('There was an error when attempting to ' +
                 'delete this items.\nStatus code: ' + res.status);
               $state.go('dk.item_list');
