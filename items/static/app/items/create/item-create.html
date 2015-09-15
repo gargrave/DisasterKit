@@ -4,23 +4,21 @@
 
   <div>
     <h2>Add an Item</h2>
-    <p>Fields marked with <span class="error_text">*</span> are required.</p>
+    <h5>Fields marked with <span class="error_text">*</span> are required.</h5>
   </div>
   <br>
 
   <!-- add new item form -->
   <form class="dk-form" name="createForm"
         ng-submit="itemCreateCtrl.saveNewItem()" required>
-
     <div item-entry-form ctrl="itemCreateCtrl" form="createForm"></div>
-
     <!-- submit/cancel buttons -->
     <div>
-      <input class="btn btn-primary" type="submit" value="Submit">
+      <input class="btn btn-primary" type="submit" value="Submit"
+             ng-disabled="!itemCreateCtrl.canSaveNewItem()">
       <button class="btn btn-default pull-right"
               ui-sref="dk.item_list">Cancel
       </button>
     </div>
-
   </form>
 </div>

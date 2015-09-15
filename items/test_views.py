@@ -114,6 +114,64 @@ class ItemsViewsTests(TestCase):
         res = self.client.get(url)
         self.assertEqual(res.status_code, 404)
 
+    def test_update_item(self):
+        """
+        Tests the update_item view for correctly updating an item.
+        """
+        url = reverse('items:update_item')
+        original_name = self.test_item.name
+        update_data = self.good_post_data
+        update_data['id'] = self.test_item.id
+        update_data['name'] = 'Updated Test Item #1 Name'
+        res = self.client.post(url, update_data)
+        self.assertEqual(res.status_code, 200)
+        self.assertIn(self.test_item, StockItem.objects.all())
+        # confirm that that name has been updated
+        updated_item = StockItem.objects.get(pk=self.test_item.id)
+        self.assertEqual(update_data['name'], updated_item.name)
+        self.assertNotEqual(original_name, updated_item.name)
+
+    def test_delete_item(self):
+        """
+        Tests that the delete_item view correctly deletes and item
+        from the database.
+        """
+        url = reverse('items:delete_item', kwargs={'pk': self.test_item.id})
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, 200)
+        # check that the item has its 'active' flag set to false
+        updated_item = StockItem.objects.get(pk=self.test_item.id)
+        self.assertFalse(updated_item.active)
+
+    #############################################
+    # StockItem API Tests
+    #############################################
+
+    def test_item(self):
+        """
+        Tests the Item URL for GET/POST requests.
+        """
+        url = reverse('items:item')
+        res = self.client.post(url, self.good_post_data)
+        self.assertEqual(res.status_code, 200)
+        # make sure the item we create is in the database
+        try:
+            name = self.good_post_data['name']
+            self.assertTrue(StockItem.objects.get(name=name))
+        except StockItem.DoesNotExist:
+            self.assertTrue(False, 'Expected item instance not found.')
+
+        # attempt a GET request to make sure we get a list of items
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, 200)
+        json_items = json.loads(str(res.content, encoding='utf8'))
+        self.assertTrue(len(json_items) > 0)
+        self.assertTrue(json_items['items'])
+
+    #############################################
+    # Category API Tests
+    #############################################
+
     def test_category(self):
         """
         Tests the category URL for GET/POST requests.
@@ -172,51 +230,3 @@ class ItemsViewsTests(TestCase):
         except Category.DoesNotExist:
             pass
         self.assertEqual(cat, None, 'Category was not deleted correctly.')
-
-    def test_get_categories(self):
-        """
-        Tests the get_categories API URL for returning a list of all
-        categories and sub-categories.
-        """
-        url = reverse('items:get_categories')
-        res = self.client.get(url)
-        self.assertEqual(res.status_code, 200)
-        # prase the response into cat/sub-cat lists and check expected values
-        json_cats = json.loads(str(res.content, encoding='utf8'))['cats']
-        json_subcats = json.loads(str(res.content, encoding='utf8'))['subcats']
-
-        food = {'id': self.temp_cat.id, 'name': self.temp_cat.name}
-        sweet = {'id': self.temp_subcat.id, 'name': self.temp_subcat.name}
-        self.assertIn(food, json_cats)
-        self.assertNotIn(sweet, json_cats)
-        self.assertIn(sweet, json_subcats)
-        self.assertNotIn(food, json_subcats)
-
-    def test_update_item(self):
-        """
-        Tests the update_item view for correctly updating an item.
-        """
-        url = reverse('items:update_item')
-        original_name = self.test_item.name
-        update_data = self.good_post_data
-        update_data['id'] = self.test_item.id
-        update_data['name'] = 'Updated Test Item #1 Name'
-        res = self.client.post(url, update_data)
-        self.assertEqual(res.status_code, 200)
-        self.assertIn(self.test_item, StockItem.objects.all())
-        # confirm that that name has been updated
-        updated_item = StockItem.objects.get(pk=self.test_item.id)
-        self.assertEqual(update_data['name'], updated_item.name)
-        self.assertNotEqual(original_name, updated_item.name)
-
-    def test_delete_item(self):
-        """
-        Tests that the delete_item view correctly deletes and item
-        from the database.
-        """
-        url = reverse('items:delete_item', kwargs={'pk': self.test_item.id})
-        res = self.client.get(url)
-        self.assertEqual(res.status_code, 200)
-        # check that the item has its 'active' flag set to false
-        updated_item = StockItem.objects.get(pk=self.test_item.id)
-        self.assertFalse(updated_item.active)

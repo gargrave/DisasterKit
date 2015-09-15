@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   angular.module('dk').controller('ItemCreateCtrl', [
-    '$scope', '$http', '$state', 'categorySvc', 'itemCreateSvc',
+    '$scope', '$state', 'categorySvc', 'itemSvc',
 
-    function($scope, $http, $state, categorySvc, itemCreateSvc) {
+    function($scope, $state, categorySvc, itemSvc) {
       var vm = this;
       vm.loading = true;
       // the items being created
@@ -30,21 +30,35 @@
       };
 
       /**
-       * Sends the to the server to be saved.
+       * Sends the new item data to the server to be saved.
        */
       vm.saveNewItem = function() {
         $scope.submitted = false;
         // submit as normal if the form is validated
-        if ($scope.createForm.$valid) {
+        if (vm.canSaveNewItem()) {
           // make sure we do not pass a null 'notes' field
           vm.item.notes = vm.item.notes || '';
-          itemCreateSvc.saveNewItem(vm.item, function() {
-            $state.go('dk.item_list', {forceUpdate: true});
-          });
+          itemSvc.create(vm.item)
+            .then(function(res) {
+              $state.go('dk.item_list', {forceUpdate: true});
+            }, function(res) {
+              alert('The new item could not be created.' +
+                '\nStatus code: ' + res.status);
+              $state.go('dk.item_list', {forceUpdate: true});
+            });
         // otherwise, show form errors erorrs
         } else {
           $scope.createForm.submitted = true;
         }
+      };
+
+      /**
+       * Returns whether the new Item is valid and can be saved.
+       *
+       * @returns {boolean} - Whether we can save the current Item info.
+       */
+      vm.canSaveNewItem = function() {
+        return $scope.createForm.$valid;
       };
 
       // init

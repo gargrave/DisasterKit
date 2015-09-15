@@ -32,6 +32,17 @@ urlpatterns = [
         views.delete_item, name='delete_item'),
 
     #############################################
+    # Item URLs
+    #############################################
+
+    # URL to GET or POST items
+    # /items/api/item/
+    # GET request returns a full list of StockItems
+    # POST request will attempt to create a new StockItem
+    url(r'^api/item/?$',
+        views.item, name='item'),
+
+    #############################################
     # Category URLs
     #############################################
 
