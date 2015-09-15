@@ -30,7 +30,7 @@ def index(request):
 
 
 ################################################
-# API Methods
+# Item URLs
 ################################################
 
 @login_required
@@ -98,6 +98,40 @@ def get_item_by_id(request, pk):
 
 
 @login_required
+def update_item(request):
+    """
+    Updates the specified items with the set of values passed in through POST.
+    """
+    if request.POST:
+        item = get_object_or_404(StockItem, pk=request.POST['id'])
+        item.name = request.POST['name']
+        item.count = int(request.POST['count'])
+        item.date_of_expiration = request.POST['exp']
+        item.fk_category = Category.objects.get(name=request.POST['cat'])
+        item.fk_subcategory = SubCategory.objects.get(name=request.POST['subcat'])
+        item.notes = request.POST['notes']
+        item.save()
+    return HttpResponse(status=200)
+
+
+@login_required
+def delete_item(request, pk):
+    """
+    Deactivates the items with the specified ID. Note that this
+    DOES NOT delete the items from the DB. It is simply a "soft
+    deactivation" to prevent the items from being listed.
+    """
+    item = get_object_or_404(StockItem, pk=pk)
+    item.active = False
+    item.save()
+    return HttpResponse(status=200)
+
+
+#############################################
+# Category URLs
+#############################################
+
+@login_required
 def category(request):
     # for GET request, return a list of all categories/sub-categories
     if request.method == 'GET':
@@ -133,34 +167,4 @@ def delete_category(request):
     if request.POST:
         cat = get_object_or_404(Category, pk=request.POST.get('id'))
         cat.delete()
-    return HttpResponse(status=200)
-
-
-@login_required
-def update_item(request):
-    """
-    Updates the specified items with the set of values passed in through POST.
-    """
-    if request.POST:
-        item = get_object_or_404(StockItem, pk=request.POST['id'])
-        item.name = request.POST['name']
-        item.count = int(request.POST['count'])
-        item.date_of_expiration = request.POST['exp']
-        item.fk_category = Category.objects.get(name=request.POST['cat'])
-        item.fk_subcategory = SubCategory.objects.get(name=request.POST['subcat'])
-        item.notes = request.POST['notes']
-        item.save()
-    return HttpResponse(status=200)
-
-
-@login_required
-def delete_item(request, pk):
-    """
-    Deactivates the items with the specified ID. Note that this
-    DOES NOT delete the items from the DB. It is simply a "soft
-    deactivation" to prevent the items from being listed.
-    """
-    item = get_object_or_404(StockItem, pk=pk)
-    item.active = False
-    item.save()
     return HttpResponse(status=200)

@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   angular.module('dk').controller('CategoryListCtrl', [
-    '$stateParams', 'categoryListSvc',
+    '$stateParams', 'categorySvc',
 
-    function($stateParams, categoryListSvc) {
+    function($stateParams, categorySvc) {
       var vm = this;
       vm.loading = true;
       // list of all categories
@@ -28,7 +28,7 @@
        */
       function loadCategories(force) {
         vm.loading = true;
-        categoryListSvc.query(force)
+        categorySvc.query(force)
           .then(function(res) {
             vm.cats = res.cats;
             vm.subcats = res.subcats;
@@ -67,7 +67,7 @@
        */
       vm.saveNewCategory = function() {
         if (vm.canSaveNewCategory()) {
-          categoryListSvc.create({name: vm.newCategory})
+          categorySvc.create({name: vm.newCategory})
             .then(function(res) {
               vm.clearCategoryInput();
               loadCategories(true);
@@ -112,7 +112,7 @@
        */
       vm.saveEdits = function() {
         if (vm.canSaveEdits()) {
-          categoryListSvc.update(vm.edit)
+          categorySvc.update(vm.edit)
             .then(function(res) {
               vm.cancelEditing();
               loadCategories(true);
@@ -157,7 +157,7 @@
        */
       vm.deleteCategory = function(category) {
         if (confirm('Delete category "' + category.name + '"?')) {
-          categoryListSvc.delete(category)
+          categorySvc.delete(category)
             .then(function(res) {
               loadCategories(true);
             }, function(res) {

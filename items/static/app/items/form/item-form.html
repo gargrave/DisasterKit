@@ -36,7 +36,7 @@
   <select name="cat" id="id_cat"
           class="form-control"
           ng-model="ctrl.item.cat">
-    <option ng-repeat="cat in ctrl.cats">{A cat A}</option>
+    <option ng-repeat="cat in ctrl.cats">{A cat.name A}</option>
   </select>
 </div>
 
@@ -46,7 +46,7 @@
   <select name="subcat" id="id_subcat"
           class="form-control u-pull-right"
           ng-model="ctrl.item.subcat">
-    <option ng-repeat="subcat in ctrl.subcats">{A subcat A}</option>
+    <option ng-repeat="subcat in ctrl.subcats">{A subcat.name A}</option>
   </select>
 </div>
 

@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   angular.module('dk').controller('ItemCreateCtrl', [
-    '$scope', '$http', '$state', 'categoryListSvc', 'itemCreateSvc',
+    '$scope', '$http', '$state', 'categorySvc', 'itemCreateSvc',
 
-    function($scope, $http, $state, categoryListSvc, itemCreateSvc) {
+    function($scope, $http, $state, categorySvc, itemCreateSvc) {
       var vm = this;
       vm.loading = true;
       // the items being created
@@ -18,13 +18,13 @@
        */
       vm.load = function() {
         // get the list of categories and sub-categories for the <select>s
-        categoryListSvc.query()
+        categorySvc.query()
           .then(function(res) {
             vm.cats = res.cats;
             vm.subcats = res.subcats;
             // set default selections
-            vm.item.cat = vm.cats[0];
-            vm.item.subcat = vm.subcats[0];
+            vm.item.cat = vm.cats[0].name;
+            vm.item.subcat = vm.subcats[0].name;
             vm.loading = false;
           });
       };

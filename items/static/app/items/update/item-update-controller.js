@@ -2,10 +2,10 @@
   'use strict';
   angular.module('dk').controller('ItemUpdateCtrl', [
     '$scope', '$http', '$state', '$stateParams',
-    'itemListSvc', 'categoryListSvc',
+    'itemListSvc', 'categorySvc',
 
     function($scope, $http, $state, $stateParams,
-             itemListSvc, categoryListSvc) {
+             itemListSvc, categorySvc) {
       var vm = this;
       vm.loading = true;
       // the items whose details we are viewing
@@ -39,7 +39,7 @@
           });
 
         // get the list of categories and sub-categories for the <select>s
-        categoryListSvc.query()
+        categorySvc.query()
           .then(function(res) {
             vm.cats = res.cats;
             vm.subcats = res.subcats;

@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('dk').service('categoryListSvc', [
+  angular.module('dk').service('categorySvc', [
     '$http', '$q', '$state',
 
     function($http, $q, $state) {

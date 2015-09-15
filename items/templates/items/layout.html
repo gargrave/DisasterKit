@@ -42,7 +42,7 @@
 <body ng-controller="MainCtrl as main">
 
 <div class="container">
-  {% include 'items/partials/pageheader.html' %}
+  {% include 'items/pageheader.html' %}
   <div id="main-content" class="row">
     {% block content %}
     {% endblock %}
@@ -68,7 +68,7 @@
   <script src="{% static 'app/app.js' %}"></script>
   <script src="{% static 'app/main-controller.js' %}"></script>
   <script src="{% static 'app/categories/list/category-list-controller.js' %}"></script>
-  <script src="{% static 'app/categories/list/category-list-service.js' %}"></script>
+  <script src="{% static 'app/categories/list/category-service.js' %}"></script>
   <script src="{% static 'app/categories/row/category-row-directive.js' %}"></script>
   <script src="{% static 'app/items/create/item-create-controller.js' %}"></script>
   <script src="{% static 'app/items/create/item-create-service.js' %}"></script>
