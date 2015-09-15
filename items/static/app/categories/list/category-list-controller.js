@@ -1,13 +1,16 @@
 (function() {
   'use strict';
   angular.module('dk').controller('CategoryListCtrl', [
-    '$http', '$stateParams', 'categoryListSvc', 'categoryUpdateSvc',
+    '$stateParams', 'categoryListSvc',
 
-    function($http, $stateParams, categoryListSvc, categoryUpdateSvc) {
+    function($stateParams, categoryListSvc) {
       var vm = this;
       vm.loading = true;
+      // list of all categories
       vm.cats = [];
+      // list of all sub-categories
       vm.subcats = [];
+      // the category object to use for tracking/submitting edits
       vm.edit = {
         id: -1,
         name: ''
@@ -25,7 +28,7 @@
        */
       function loadCategories(force) {
         vm.loading = true;
-        categoryListSvc.getCategoryList(force)
+        categoryListSvc.query(force)
           .then(function(res) {
             vm.cats = res.cats;
             vm.subcats = res.subcats;
@@ -46,6 +49,10 @@
         });
       };
 
+      /*========================================
+       * Category Creation Methods
+       *========================================*/
+
       /**
        * Clears the current value of the new category model and
        * resets error messages.
@@ -58,21 +65,39 @@
       /**
        * Sends the specified new category to the server.
        */
-      vm.addNewCategory = function() {
-        if (!vm.errors.duplicate) {
-          // TODO replace this with a modal
-          if (confirm('Create new category "' + vm.newCategory + '"?')) {
-            $http.post('items/api/create_category', {name: vm.newCategory})
-              .then(function(res) {
-                vm.clearCategoryInput();
-                loadCategories(true);
-              });
-          }
+      vm.saveNewCategory = function() {
+        if (vm.canSaveNewCategory()) {
+          categoryListSvc.create({name: vm.newCategory})
+            .then(function(res) {
+              vm.clearCategoryInput();
+              loadCategories(true);
+            });
         }
       };
 
+      /**
+       * Returns whether the new category can currently be saved as-is.
+       * Requires it to not be blank and not be a duplicate.
+       */
+      vm.canSaveNewCategory = function() {
+        return vm.newCategory !== '' && !vm.errors.duplicate;
+      };
+
+      /*========================================
+       * Category Editing Methods
+       *========================================*/
+
+      /**
+       * Enables the category with the specified ID to be editied.
+       *
+       * @param {Number} catID - The ID for category to begin editing.
+       */
       vm.enableEditing = function(catID) {
+        // set the default value to -1; if we receive an invalid ID,
+        // it will stay at -1, and no category will be enabled for editing
         vm.edit.id = -1;
+        // find the category with the specified ID and enabled it for editing
+        // save the original value so we can compare for changes before saving
         _.each(vm.cats, function(element) {
           if (element.id === catID) {
             vm.edit.name = element.name;
@@ -82,12 +107,16 @@
         });
       };
 
+      /**
+       * Saves the current edits on the active category.
+       */
       vm.saveEdits = function() {
         if (vm.canSaveEdits()) {
-          categoryUpdateSvc.saveEdits(vm.edit, function() {
-            vm.cancelEditing();
-            loadCategories(true);
-          });
+          categoryListSvc.update(vm.edit)
+            .then(function(res) {
+              vm.cancelEditing();
+              loadCategories(true);
+            });
         }
       };
 
@@ -119,18 +148,28 @@
           vm.edit.name !== vm.editOriginalName;
       };
 
+      /*========================================
+       * Category Deletion Methods
+       *========================================*/
+
       /**
        * Sends the request to the server to delete the specified category.
        */
-      vm.deleteCategory = function(cat) {
-        if (confirm('Delete category "' + cat.name + '"?')) {
-          $http.post('items/api/delete_category', {pk: cat.id})
+      vm.deleteCategory = function(category) {
+        if (confirm('Delete category "' + category.name + '"?')) {
+          categoryListSvc.delete(category)
             .then(function(res) {
               loadCategories(true);
+            }, function(res) {
+              alert('The category could not be deleted.' +
+                '\nStatus code: ' + res.status);
             });
         }
       };
 
+      /*========================================
+       * Initialization
+       *========================================*/
       (function() {
         loadCategories(false);
       })();

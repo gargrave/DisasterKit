@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db import transaction
 from django.db.utils import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
@@ -96,6 +97,7 @@ def get_item_by_id(request, pk):
     return JsonResponse(res_dict)
 
 
+@login_required
 def category(request):
     # for GET request, return a list of all categories/sub-categories
     if request.method == 'GET':
@@ -105,17 +107,18 @@ def category(request):
         })
     # for POST request, attempt to create a new category
     if request.method == 'POST':
-        try:
-            Category.objects.create(name=request.POST.get('name'))
-            return HttpResponse(status=200)
-        except IntegrityError:
-            HttpResponse(status=400)
+        with transaction.atomic():
+            try:
+                Category.objects.create(name=request.POST.get('name'))
+                return HttpResponse(status=200)
+            except IntegrityError:
+                return HttpResponse(status=400)
     return HttpResponse(status=400)
 
 
 @login_required
 def update_category(request):
-    if request.POST:
+    if request.method == 'POST':
         cat = get_object_or_404(Category, pk=request.POST.get('id'))
         cat.name = request.POST.get('name')
         cat.save()
@@ -128,22 +131,9 @@ def delete_category(request):
     Delets the Category instance with the name specified in POST.
     """
     if request.POST:
-        cat = get_object_or_404(Category, pk=request.POST.get('pk'))
+        cat = get_object_or_404(Category, pk=request.POST.get('id'))
         cat.delete()
     return HttpResponse(status=200)
-
-
-@login_required
-def get_categories(request):
-    """
-    Returns a JSON object containg two lists:
-        1. a list of all category names
-        2. a list of all sub-category names
-    """
-    return JsonResponse({
-        'cats': [{'id': cat.id, 'name': cat.name} for cat in Category.objects.all()],
-        'subcats': [{'id': cat.id, 'name': cat.name} for cat in SubCategory.objects.all()]
-    })
 
 
 @login_required

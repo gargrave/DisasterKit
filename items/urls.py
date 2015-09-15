@@ -31,21 +31,24 @@ urlpatterns = [
     url(r'^api/delete_item/(?P<pk>\d+)/?$',
         views.delete_item, name='delete_item'),
 
-    # URL to update a category
-    # items/api/update_category
-    url(r'^api/update_category/?$',
-        views.update_category, name='update_category'),
+    #############################################
+    # Category URLs
+    #############################################
+
+    # URL to GET or POST categories
+    # /items/api/category/
+    # GET request returns a full list of cats/sub-cats
+    # POST request will attempt to create a new category
+    url(r'^api/category/?$',
+        views.category, name='category'),
 
     # URL to delete a category via POST submission
-    # items/api/delete_category
-    url(r'^api/delete_category/?$',
+    # items/api/category/delete/
+    url(r'^api/category/delete/?$',
         views.delete_category, name='delete_category'),
 
-    # URL to fetch a list of all categories (i.e. for populating <select>s
-    # /items/api/get_categories/
-    url(r'^api/get_categories/?$',
-        views.get_categories, name='get_categories'),
-
-    url(r'^api/category/?$',
-        views.category, name='category')
+    # URL to update a category via POST submission
+    # items/api/category/update/
+    url(r'^api/category/update/?$',
+        views.update_category, name='update_category'),
 ]

@@ -16,7 +16,9 @@
     <div class="panel panel-info">
       <div class="panel-heading">Add a New Category</div>
       <div class="panel-body">
-        <form action="" ng-submit="catCtrl.addNewCategory()">
+
+        <!-- new category form -->
+        <form action="" name="catForm" ng-submit="catCtrl.saveNewCategory()">
           <div class="form-group">
             <input type="text" class="form-control" id="input_name"
                    placeholder="New Category Name" ng-keyup="catCtrl.newCatKeyUp()"
@@ -28,10 +30,11 @@
             This category already exists.
           </p>
           <button class="btn btn-primary"
-                  ng-disabled="catCtrl.errors.duplicate">Save</button>
+                  ng-disabled="!catCtrl.canSaveNewCategory()">Save</button>
           <span class="btn btn-default pull-right"
                 ng-click="catCtrl.clearCategoryInput()">Clear</span>
         </form>
+
       </div>
     </div>
 

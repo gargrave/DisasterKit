@@ -39,7 +39,7 @@
           });
 
         // get the list of categories and sub-categories for the <select>s
-        categoryListSvc.getCategoryList()
+        categoryListSvc.query()
           .then(function(res) {
             vm.cats = res.cats;
             vm.subcats = res.subcats;

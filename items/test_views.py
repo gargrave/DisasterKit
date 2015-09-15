@@ -131,10 +131,6 @@ class ItemsViewsTests(TestCase):
             pass
         self.assertNotEqual(cat, None, 'Category was not created correctly.')
 
-        # send a malformed POST request and make sure we get a 400
-        res = self.client.post(url, {'asdf': 'asdf'})
-        self.assertEqual(res.status_code, 400)
-
         # attempt a GET request to make sure we get a list of categories
         res = self.client.get(url)
         self.assertEqual(res.status_code, 200)
@@ -166,7 +162,7 @@ class ItemsViewsTests(TestCase):
         cat_name = 'NewCategory'
         new_cat = Category.objects.create(name=cat_name)
         url = reverse('items:delete_category')
-        res = self.client.post(url, {'pk': new_cat.id})
+        res = self.client.post(url, {'id': new_cat.id})
         self.assertEqual(res.status_code, 200)
 
         # make sure the Category we deleted is no longer present
