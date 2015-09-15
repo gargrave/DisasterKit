@@ -139,7 +139,7 @@ class ItemsViewsTests(TestCase):
         new_name = 'NewNameForUpdateCategory'
         url = reverse('items:update_category')
         res = self.client.post(url, {
-            'pk': new_cat.id,
+            'id': new_cat.id,
             'name': new_name
         })
         self.assertEqual(res.status_code, 200)

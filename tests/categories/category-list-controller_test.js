@@ -33,4 +33,31 @@ describe('Controller: CategoryListCtrl', function() {
     ctrl.newCatKeyUp();
     expect(ctrl.errors.duplicate).toBeTruthy();
   });
+
+  it('should enable editing for the specified ID.', function() {
+    ctrl.cats = [{id: 0, name: 'Food'}];
+    ctrl.enableEditing(0);
+    expect(ctrl.edit.id).toEqual(0);
+    expect(ctrl.edit.name).toEqual(ctrl.cats[0].name);
+  });
+
+  it('should reset to default value for invalid editing ID.', function() {
+    ctrl.cats = [{id: 0, name: 'Food'}];
+    ctrl.enableEditing(0);
+    ctrl.enableEditing(-100);
+    expect(ctrl.edit.id).toEqual(-1);
+  });
+
+  it('should indicate if the ID is enabled for editing.', function() {
+    ctrl.cats = [{id: 0, name: 'Food'}];
+    ctrl.enableEditing(0);
+    expect(ctrl.isEditing(0)).toBeTruthy();
+  });
+
+  it('should reset the value when editing is cancelled.', function() {
+    ctrl.cats = [{id: 0, name: 'Food'}];
+    ctrl.enableEditing(0);
+    ctrl.cancelEditing();
+    expect(ctrl.edit.id).toBe(-1);
+  });
 });

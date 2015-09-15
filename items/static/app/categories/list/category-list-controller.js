@@ -1,13 +1,18 @@
 (function() {
   'use strict';
   angular.module('dk').controller('CategoryListCtrl', [
-    '$http', '$stateParams', 'categoryListSvc',
+    '$http', '$stateParams', 'categoryListSvc', 'categoryUpdateSvc',
 
-    function($http, $stateParams, categoryListSvc) {
+    function($http, $stateParams, categoryListSvc, categoryUpdateSvc) {
       var vm = this;
       vm.loading = true;
       vm.cats = [];
       vm.subcats = [];
+      vm.edit = {
+        id: -1,
+        name: ''
+      };
+      vm.editOriginalName = '';
       // the model for the new category name
       vm.newCategory = '';
       // collection of error objects
@@ -66,8 +71,52 @@
         }
       };
 
-      vm.enabledEditing = function(cat) {
+      vm.enableEditing = function(catID) {
+        vm.edit.id = -1;
+        _.each(vm.cats, function(element) {
+          if (element.id === catID) {
+            vm.edit.name = element.name;
+            vm.editOriginalName = vm.edit.name;
+            return vm.edit.id = catID;
+          }
+        });
+      };
 
+      vm.saveEdits = function() {
+        if (vm.canSaveEdits()) {
+          categoryUpdateSvc.saveEdits(vm.edit, function() {
+            vm.cancelEditing();
+            loadCategories(true);
+          });
+        }
+      };
+
+      /**
+       * Cancels the category editing process and resets all necessary values
+       */
+      vm.cancelEditing = function() {
+        vm.edit.id = -1;
+      };
+
+      /**
+       * Returns whether the specified ID is the one currently set for editing.
+       *
+       * @param {Number} catID - The ID to check.
+       * @returns {Boolean} - Whether the specified ID is the one being edited.
+       */
+      vm.isEditing = function(catID) {
+        return vm.edit.id !== -1 && catID === vm.edit.id;
+      };
+
+      /**
+       * Returns whether the current state of edits meets the requirements
+       * to be saved.
+       *
+       * @returns {Boolean} - Whether we can save the current edits.
+       */
+      vm.canSaveEdits = function() {
+        return vm.edit.name !== '' &&
+          vm.edit.name !== vm.editOriginalName;
       };
 
       /**

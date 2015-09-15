@@ -1,14 +1,36 @@
 <td id="cat_{A cat.name A}">
-  <span ng-bind="cat.name"></span>
-  <!--<input id="asdf" type="text" value="{A cat A}">-->
+  <span ng-bind="cat.name" ng-hide="ctrl.isEditing(cat.id)"></span>
+
+  <!-- category editing form -->
+  <form ng-show="ctrl.isEditing(cat.id)"
+        ng-submit="ctrl.saveEdits()">
+    <input type="text" ng-model="ctrl.edit.name">
+    <!-- editing button row -->
+    <span class="btn-group btn-group-xs" role="group"
+          ng-show="ctrl.isEditing(cat.id)">
+      <!-- save edits button -->
+      <input class="btn btn-primary" type="submit" value="Save"
+              ng-disabled="!ctrl.canSaveEdits()">
+      <!-- cancel editing button -->
+      <span class="btn btn-default"
+            ng-click="ctrl.cancelEditing()">Cancel
+      </span>
+    </span>
+  </form>
+
 </td>
 <td>
+  <!-- standard button row -->
   <div class="btn-group btn-group-xs" role="group">
     <!-- enable editing button -->
-    <button class="btn btn-default btn-dk-control">
+    <button class="btn btn-default btn-dk-control"
+            ng-disabled="ctrl.isEditing(cat.id)"
+            ng-click="ctrl.enableEditing(cat.id)">
       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
     </button>
+    <!-- delete category button -->
     <button class="btn btn-default btn-dk-control"
+            ng-disabled="ctrl.isEditing(cat.id)"
             ng-click="ctrl.deleteCategory(cat)">
       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
     </button>
