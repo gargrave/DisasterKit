@@ -2,10 +2,10 @@
   'use strict';
   angular.module('dk').controller('ItemUpdateCtrl', [
     '$scope', '$http', '$state', '$stateParams',
-    'itemListSvc', 'categorySvc',
+    'itemListSvc', 'categorySvc', 'itemSvc',
 
     function($scope, $http, $state, $stateParams,
-             itemListSvc, categorySvc) {
+             itemListSvc, categorySvc, itemSvc) {
       var vm = this;
       vm.loading = true;
       // the items whose details we are viewing
@@ -50,26 +50,34 @@
       /**
        * Sends the current changes to the items back to the server.
        */
-      vm.commitUpdates = function() {
-        // TODO: check that any values have actually changed before submitting this
+      vm.saveEdits = function() {
         // if we are all valid, submit the request to the server
         $scope.submitted = false;
         // submit as normal if the form is validated
-        if ($scope.updateForm.$valid) {
-          // make sure we do not pass a null 'notes' field
-          $http.post('items/api/update_item/', vm.item)
+        if (vm.canSaveEdits()) {
+          itemSvc.update(vm.item)
             .then(function(res) {
               $state.go('dk.item_list', {forceUpdate: true});
-              // in case of server error, display error and return to list state
             }, function(res) {
               alert('There was an error when attempting to ' +
-                'update this items.\nStatus code: ' + res.status);
+                'update the item.\nStatus code: ' + res.status);
               $state.go('dk.item_list');
             });
-          // otherwise, show form errors erorrs
+        // otherwise, show form errors erorrs
         } else {
           $scope.updateForm.submitted = true;
         }
+      };
+
+      /**
+       * Returns whether the current state of edits meets the requirements
+       * to be saved.
+       *
+       * @returns {Boolean} - Whether we can save the current edits.
+       */
+      vm.canSaveEdits = function() {
+        // TODO: check that any values have actually changed before submitting this
+        return $scope.updateForm.$valid;
       };
 
       // init

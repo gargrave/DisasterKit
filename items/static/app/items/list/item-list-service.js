@@ -6,7 +6,7 @@
     function($http, $q, $state) {
       var vm = this;
       var items = [];
-      
+
       /**
        * Returns an invidual items instance matching the specified ID.
        *

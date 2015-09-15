@@ -60,41 +60,6 @@ class ItemsViewsTests(TestCase):
         self.assertTemplateUsed('items/index.html')
         self.assertTrue(res.context['globalvars'])
 
-    def test_create_item_with_no_post(self):
-        """
-        Tests that the create_item URL redirects home when
-        no POST data is received.
-        """
-        url = reverse('items:create_item')
-        res = self.client.get(url)
-        self.assertRedirects(res, '/')
-
-    def test_create_item(self):
-        """
-        Tests that create_item URL correctly creates an item
-        when good POST data is received.
-        """
-        url = reverse('items:create_item')
-        res = self.client.post(url, self.good_post_data)
-        self.assertEqual(res.status_code, 200)
-        # make sure the item we create is in the database
-        try:
-            name = self.good_post_data['name']
-            self.assertTrue(StockItem.objects.get(name=name))
-        except StockItem.DoesNotExist:
-            self.assertTrue(False, 'Expected item instance not found.')
-
-    def test_get_all_items(self):
-        """
-        Tests that the get_all_items URL returns a list of items.
-        """
-        url = reverse('items:get_all_items')
-        res = self.client.get(url)
-        self.assertEqual(res.status_code, 200)
-        # make sure our test item is in the list
-        json_items = json.loads(str(res.content, encoding='utf8'))['items']
-        self.assertTrue(len(json_items) > 1)
-
     def test_get_item_by_id(self):
         """
         Tests that the get_item_by_id returns the correct item.
@@ -113,23 +78,6 @@ class ItemsViewsTests(TestCase):
         url = reverse('items:get_item_by_id', kwargs={'pk': 8798798797})
         res = self.client.get(url)
         self.assertEqual(res.status_code, 404)
-
-    def test_update_item(self):
-        """
-        Tests the update_item view for correctly updating an item.
-        """
-        url = reverse('items:update_item')
-        original_name = self.test_item.name
-        update_data = self.good_post_data
-        update_data['id'] = self.test_item.id
-        update_data['name'] = 'Updated Test Item #1 Name'
-        res = self.client.post(url, update_data)
-        self.assertEqual(res.status_code, 200)
-        self.assertIn(self.test_item, StockItem.objects.all())
-        # confirm that that name has been updated
-        updated_item = StockItem.objects.get(pk=self.test_item.id)
-        self.assertEqual(update_data['name'], updated_item.name)
-        self.assertNotEqual(original_name, updated_item.name)
 
     def test_delete_item(self):
         """
@@ -168,6 +116,23 @@ class ItemsViewsTests(TestCase):
         self.assertTrue(len(json_items) > 0)
         self.assertTrue(json_items['items'])
 
+    def test_item_update(self):
+        """
+        Tests the item_update view for correctly updating an item.
+        """
+        url = reverse('items:item_update')
+        original_name = self.test_item.name
+        update_data = self.good_post_data
+        update_data['id'] = self.test_item.id
+        update_data['name'] = 'Updated Test Item #1 Name'
+        res = self.client.post(url, update_data)
+        self.assertEqual(res.status_code, 200)
+        self.assertIn(self.test_item, StockItem.objects.all())
+        # confirm that that name has been updated
+        updated_item = StockItem.objects.get(pk=self.test_item.id)
+        self.assertEqual(update_data['name'], updated_item.name)
+        self.assertNotEqual(original_name, updated_item.name)
+
     #############################################
     # Category API Tests
     #############################################
@@ -197,13 +162,13 @@ class ItemsViewsTests(TestCase):
         self.assertTrue(json_cats['cats'])
         self.assertTrue(json_cats['subcats'])
 
-    def test_update_category(self):
+    def test_category_update(self):
         """
         Tests that the update_category URL properly updates the specified category.
         """
-        new_cat = Category.objects.create(name='UpdateCategory')
+        new_cat = Category.objects.create(name='Update Category')
         new_name = 'NewNameForUpdateCategory'
-        url = reverse('items:update_category')
+        url = reverse('items:category_update')
         res = self.client.post(url, {
             'id': new_cat.id,
             'name': new_name
@@ -212,14 +177,14 @@ class ItemsViewsTests(TestCase):
         updated = Category.objects.get(pk=new_cat.id)
         self.assertEqual(updated.name, new_name)
 
-    def test_delete_category(self):
+    def test_category_delete(self):
         """
         Tests the delete_category API URL for properly deleting the
         specified Category.
         """
         cat_name = 'NewCategory'
         new_cat = Category.objects.create(name=cat_name)
-        url = reverse('items:delete_category')
+        url = reverse('items:category_delete')
         res = self.client.post(url, {'id': new_cat.id})
         self.assertEqual(res.status_code, 200)
 

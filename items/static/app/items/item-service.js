@@ -5,6 +5,7 @@
 
       function($http, $q) {
         var API_URL_GETPOST = 'items/api/item/';
+        var API_URL_UPDATE = 'items/api/item/update/';
         var vm = this;
         var items = [];
 
@@ -50,6 +51,17 @@
          */
         vm.create = function(item) {
           return $http.post(API_URL_GETPOST, item);
+        };
+
+        /**
+       * Sends a POST request with the specified item to the server
+       * to be updated. Returns the Promise object from the query.
+       *
+       * @param {Object} item - The item details to update.
+       * @returns {HttpPromise}
+       */
+        vm.update = function(item) {
+          return $http.post(API_URL_UPDATE, item);
         };
       }
     ]
