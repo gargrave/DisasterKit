@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   angular.module('dk').controller('ItemListCtrl', [
-    '$stateParams', 'itemListSvc',
+    '$stateParams', 'itemListSvc', 'itemSvc',
 
-    function($stateParams, itemListSvc) {
+    function($stateParams, itemListSvc, itemSvc) {
       // pre-calcuate the number of milliseconds in a dsy
       var MS_IN_DAY = 1000 * 60 * 60 * 24;
       // the possibilities for sorting the entry list
@@ -70,7 +70,7 @@
        */
       (function() {
         // load the list of current items
-        itemListSvc.getItemList(forceListUpdate).then(function(res) {
+        itemSvc.query(forceListUpdate).then(function(res) {
           vm.items = res;
 
           // update each of the items' info
