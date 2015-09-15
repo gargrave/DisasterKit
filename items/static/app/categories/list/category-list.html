@@ -27,7 +27,8 @@
           <p class="error_text" ng-show="catCtrl.errors.duplicate">
             This category already exists.
           </p>
-          <button class="btn btn-primary">Save</button>
+          <button class="btn btn-primary"
+                  ng-disabled="catCtrl.errors.duplicate">Save</button>
           <span class="btn btn-default pull-right"
                 ng-click="catCtrl.clearCategoryInput()">Clear</span>
         </form>

@@ -23,7 +23,6 @@
         categoryListSvc.getCategoryList(force)
           .then(function(res) {
             vm.cats = res.cats;
-            console.log(vm.cats);
             vm.subcats = res.subcats;
             vm.loading = false;
           });
@@ -34,7 +33,12 @@
        * is a duplicate of an existing one.
        */
       vm.newCatKeyUp = function() {
-        vm.errors.duplicate = _.contains(vm.cats, vm.newCategory);
+        vm.errors.duplicate = false;
+        _.each(vm.cats, function(element) {
+          if (element.name === vm.newCategory) {
+            return vm.errors.duplicate = true;
+          }
+        });
       };
 
       /**
@@ -60,6 +64,10 @@
               });
           }
         }
+      };
+
+      vm.enabledEditing = function(cat) {
+
       };
 
       /**

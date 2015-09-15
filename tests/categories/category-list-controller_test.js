@@ -24,4 +24,13 @@ describe('Controller: CategoryListCtrl', function() {
     expect(ctrl.errors.duplicate).toBeFalsy();
     expect(ctrl.newCategory).toBe('');
   });
+
+  // check that we are correctly detecting duplicates
+  it('should detect existing value from new category input.', function() {
+    ctrl.cats = [{id: 0, name: 'Food'}];
+    ctrl.errors.duplicate = false;
+    ctrl.newCategory = 'Food';
+    ctrl.newCatKeyUp();
+    expect(ctrl.errors.duplicate).toBeTruthy();
+  });
 });
