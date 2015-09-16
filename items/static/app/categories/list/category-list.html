@@ -1,42 +1,48 @@
-<div class="row">
-  <div class="col-xs-12 col-md-6 col-md-offset-3">
+<div class="dk-panel col-xs-12 col-md-6 col-md-offset-3 ng-cloak">
 
-    <h2>Categories</h2><br>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Categories</h3>
+    </div>
 
-    <table class="table">
-      <tr class="info">
-        <th>Name</th>
-        <th>Controls</th>
-      </tr>
-      <tr category-row cat="cat" ctrl="catCtrl"
-          ng-repeat="cat in catCtrl.cats">
-      </tr>
-    </table>
+    <div class="panel-buffer">
+      <table class="table panel-table">
+        <tr category-row cat="cat" ctrl="catCtrl"
+            ng-repeat="cat in catCtrl.cats">
+        </tr>
+      </table>
+    </div>
 
-    <div class="panel panel-info">
-      <div class="panel-heading">Add a New Category</div>
-      <div class="panel-body">
+  </div>
 
-        <!-- new category form -->
-        <form action="" name="catForm" ng-submit="catCtrl.saveNewCategory()">
-          <div class="form-group">
-            <input type="text" class="form-control" id="input_name"
-                   placeholder="New Category Name" ng-keyup="catCtrl.newCatKeyUp()"
-                   ng-model="catCtrl.newCategory"
-                   required>
-          </div>
-          <!-- error message -->
-          <p class="error_text" ng-show="catCtrl.errors.duplicate">
-            This category already exists.
-          </p>
-          <button class="btn btn-primary"
-                  ng-disabled="!catCtrl.canSaveNewCategory()">Save</button>
+  <div class="panel panel-primary">
+
+    <div class="panel-heading">
+      <h3 class="panel-title">Add a Category</h3>
+    </div>
+
+    <div class="panel-body">
+      <!-- new category form -->
+      <form action="" name="catForm" ng-submit="catCtrl.saveNewCategory()">
+        <div class="form-group">
+          <input type="text" class="form-control" id="input_name"
+                 placeholder="New Category Name" maxlength="64"
+                 ng-keyup="catCtrl.newCatKeyUp()" ng-model="catCtrl.newCategory"
+                 required>
+        </div>
+        <!-- error message -->
+        <p class="error_text" ng-show="catCtrl.errors.duplicate">
+          This category already exists.
+        </p>
+        <button class="btn btn-primary"
+                ng-disabled="!catCtrl.canSaveNewCategory()">Save
+        </button>
           <span class="btn btn-default pull-right"
-                ng-click="catCtrl.clearCategoryInput()">Clear</span>
-        </form>
-
-      </div>
+                ng-click="catCtrl.clearCategoryInput()">Clear
+          </span>
+      </form>
     </div>
 
   </div>
 </div>
+

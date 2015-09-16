@@ -1,57 +1,61 @@
 <div id="item-detail-container"
-     class="col-md-8 col-md-offset-2"
+     class="dk-panel col-md-8 col-md-offset-2"
      ng-hide="itemDetailCtrl.loading">
 
-  <h2>Details for:
-    <em><span ng-bind="itemDetailCtrl.item.name"></span></em>
-  </h2>
-  <br>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Details for:
+        <em><span ng-bind="itemDetailCtrl.item.name"></span></em>
+      </h3>
+    </div>
 
-  <!-- item details table -->
-  <table class="table" id="item_details_table">
-    <tr>
-      <td><strong>Name:</strong></td>
-      <td ng-bind="itemDetailCtrl.item.name"></td>
-    </tr>
-    <tr>
-      <td><strong>Category:</strong></td>
-      <td ng-bind="itemDetailCtrl.item.cat"></td>
-    </tr>
-    <tr>
-      <td><strong>Sub-category:</strong></td>
-      <td ng-bind="itemDetailCtrl.item.subcat"></td>
-    </tr>
-    <tr>
-      <td><strong>Count:</strong></td>
-      <td ng-bind="itemDetailCtrl.item.count"></td>
-    </tr>
-    <tr>
-      <td><strong>Expiration:</strong></td>
-      <td ng-bind="itemDetailCtrl.item.exp"></td>
-    </tr>
-    <tr>
-      <td><strong>Added on:</strong></td>
-      <td>
-        <span ng-bind="itemDetailCtrl.item.date_added"></span> by
-        <span ng-bind="itemDetailCtrl.item.added_by"></span>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Notes:</strong></td>
-      <td ng-bind="itemDetailCtrl.item.notes"></td>
-    </tr>
-  </table>
+    <!-- item details table -->
+    <table class="table panel-table" id="item_details_table">
+      <tr>
+        <td><strong>Name:</strong></td>
+        <td ng-bind="itemDetailCtrl.item.name"></td>
+      </tr>
+      <tr>
+        <td><strong>Category:</strong></td>
+        <td ng-bind="itemDetailCtrl.item.cat"></td>
+      </tr>
+      <tr>
+        <td><strong>Sub-category:</strong></td>
+        <td ng-bind="itemDetailCtrl.item.subcat"></td>
+      </tr>
+      <tr>
+        <td><strong>Count:</strong></td>
+        <td ng-bind="itemDetailCtrl.item.count"></td>
+      </tr>
+      <tr>
+        <td><strong>Expiration:</strong></td>
+        <td ng-bind="itemDetailCtrl.item.exp"></td>
+      </tr>
+      <tr>
+        <td><strong>Added on:</strong></td>
+        <td>
+          <span ng-bind="itemDetailCtrl.item.date_added"></span> by
+          <span ng-bind="itemDetailCtrl.item.added_by"></span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Notes:</strong></td>
+        <td ng-bind="itemDetailCtrl.item.notes"></td>
+      </tr>
+    </table>
 
-  <!-- edit/back/submit buttons -->
-  <div>
-    <button class="btn btn-primary"
-            ui-sref="dk.item_update({'id': itemDetailCtrl.item.id})">Edit
-    </button>
-    <button class="btn btn-default" ui-sref="dk.item_list">Back</button>
 
-    <button class="btn btn-danger pull-right"
-            ng-click="itemDetailCtrl.deleteItem()">Delete
-    </button>
+    <!-- edit/back/submit buttons -->
+    <div class="panel-footer">
+      <button class="btn btn-primary"
+              ui-sref="dk.item_update({'id': itemDetailCtrl.item.id})">Edit
+      </button>
+      <button class="btn btn-default" ui-sref="dk.item_list">Back</button>
+
+      <button class="btn btn-danger pull-right"
+              ng-click="itemDetailCtrl.deleteItem()">Delete
+      </button>
+    </div>
   </div>
 
 </div>

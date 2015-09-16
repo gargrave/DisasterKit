@@ -1,33 +1,31 @@
-<div id="item-detail-container" ng-hide="itemListCtrl.loading">
-  <div id="items-display">
+<div class="dk-panel col-md-12 ng-cloak">
 
-    <div class="row">
-      <div class="col-md-12">
-
-        <button class="btn btn-primary" ui-sref="dk.item_create">Add</button>
-
-      </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title" style="margin-bottom: 3px;">Current Stock
+        <button class="btn btn-xs btn-default pull-right"
+                ui-sref="dk.item_create">Add
+        </button>
+      </h3>
     </div>
-    <br>
 
-    <div class="row">
-      <div class="col-md-12">
-
-        <table class="table">
-          <tr class="info">
-            <th><a href ng-click="itemListCtrl.setOrderBy('name')">Name</a></th>
-            <th><a href ng-click="itemListCtrl.setOrderBy('cat')">Category</a></th>
-            <th><a href ng-click="itemListCtrl.setOrderBy('subcat')">Sub-Category</a></th>
-            <th><a href ng-click="itemListCtrl.setOrderBy('count')">Count</a></th>
-            <th><a href ng-click="itemListCtrl.setOrderBy('date_added')">Date Added</a></th>
-            <th><a href ng-click="itemListCtrl.setOrderBy('exp')">Expiration</a></th>
-          </tr>
-          <tr item-widget item-data="item" class="{A item.trClass A}"
-              ng-repeat="item in itemListCtrl.items | orderBy:itemListCtrl.ordering track by item.id">
-          </tr>
-        </table>
-
-      </div>
+    <div id="item-list-container panel-body" ng-hide="itemListCtrl.loading">
+      <table class="table table-condensed table-bordered panel-table">
+        <tr class="info">
+          <th><a href ng-click="itemListCtrl.setOrderBy('name')">Name</a></th>
+          <th><a href ng-click="itemListCtrl.setOrderBy('cat')">Category</a></th>
+          <th><a href ng-click="itemListCtrl.setOrderBy('subcat')">Sub-Category</a></th>
+          <th><a href ng-click="itemListCtrl.setOrderBy('count')">Count</a></th>
+          <th><a href ng-click="itemListCtrl.setOrderBy('date_added')">Date Added</a></th>
+          <th><a href ng-click="itemListCtrl.setOrderBy('exp')">Expiration</a></th>
+        </tr>
+        <tr item-widget item-data="item" class="{A item.trClass A}"
+            ng-repeat="item in itemListCtrl.items | orderBy:itemListCtrl.ordering track by item.id">
+        </tr>
+      </table>
     </div>
+
   </div>
 </div>
+
+

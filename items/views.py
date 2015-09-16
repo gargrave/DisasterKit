@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.db import transaction
 from django.db.utils import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
@@ -58,38 +57,37 @@ def item(request):
     if request.method == 'GET':
         items = StockItem.objects.filter(active=True)
         res_dict = {'items': []}
-        for item in items:
+        for new_item in items:
             res_dict['items'].append({
-                'id': item.id,
-                'name': item.name,
-                'count': item.count,
-                'date_added': item.date_added,
-                'exp': item.date_of_expiration,
-                'added_by': item.added_by,
-                'cat': str(item.fk_category),
-                'subcat': str(item.fk_subcategory),
-                'notes': item.notes
+                'id': new_item.id,
+                'name': new_item.name,
+                'count': new_item.count,
+                'date_added': new_item.date_added,
+                'exp': new_item.date_of_expiration,
+                'added_by': new_item.added_by,
+                'cat': str(new_item.fk_category),
+                'subcat': str(new_item.fk_subcategory),
+                'notes': new_item.notes
             })
         return JsonResponse(res_dict)
     # for POST request, attempt to create a new StockItem
     if request.method == 'POST':
-        with transaction.atomic():
-            try:
-                item = StockItem(
-                    name=request.POST.get('name'),
-                    count=int(request.POST.get('count')),
-                    date_of_expiration=request.POST.get('exp'),
-                    added_by=str(request.user),
-                    fk_category=Category.objects.get(name=request.POST.get('cat')),
-                    notes=request.POST.get('notes'),
-                )
-                # check for optional subcategory
-                if request.POST.get('subcat'):
-                    item.fk_subcategory = SubCategory.objects.get(name=request.POST.get('subcat'))
-                item.save()
-                return HttpResponse(status=200)
-            except IntegrityError:
-                return HttpResponse(status=400)
+        try:
+            new_item = StockItem(
+                name=request.POST.get('name'),
+                count=int(request.POST.get('count')),
+                date_of_expiration=request.POST.get('exp'),
+                added_by=str(request.user),
+                fk_category=Category.objects.get(name=request.POST.get('cat')),
+                notes=request.POST.get('notes'),
+            )
+            # check for optional subcategory
+            if request.POST.get('subcat'):
+                new_item.fk_subcategory = SubCategory.objects.get(name=request.POST.get('subcat'))
+            new_item.save()
+            return HttpResponse(status=200)
+        except IntegrityError:
+            return HttpResponse(status=400)
     return HttpResponse(status=400)
 
 
@@ -138,12 +136,11 @@ def category(request):
         })
     # for POST request, attempt to create a new category
     if request.method == 'POST':
-        with transaction.atomic():
-            try:
-                Category.objects.create(name=request.POST.get('name'))
-                return HttpResponse(status=200)
-            except IntegrityError:
-                return HttpResponse(status=400)
+        try:
+            Category.objects.create(name=request.POST.get('name'))
+            return HttpResponse(status=200)
+        except IntegrityError:
+            return HttpResponse(status=400)
     return HttpResponse(status=400)
 
 

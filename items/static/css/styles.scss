@@ -1,11 +1,26 @@
 body {
   padding: 10px;
-  background: white;
+  background: #E7EDF5;
 }
 
 .container {
   max-width: 1000px;
 }
+
+.panel {
+  .panel-buffer {
+    //margin: 15px;
+  }
+
+  .panel-table {
+    //border: 1px solid #ddd;
+    margin-bottom: 0;
+    th, td {
+      padding-left: 16px;
+    }
+  }
+}
+
 
 /**********************************
  * text styles
@@ -33,6 +48,10 @@ body {
  **********************************/
 
 .dk-form {
+}
+
+.dk-panel {
+  margin-top: 35px;
 }
 
 .form-header {

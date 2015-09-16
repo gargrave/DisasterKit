@@ -10,7 +10,7 @@
           ng-show="ctrl.isEditing(cat.id)">
       <!-- save edits button -->
       <input class="btn btn-primary" type="submit" value="Save"
-              ng-disabled="!ctrl.canSaveEdits()">
+             ng-disabled="!ctrl.canSaveEdits()">
       <!-- cancel editing button -->
       <span class="btn btn-default"
             ng-click="ctrl.cancelEditing()">Cancel
@@ -21,7 +21,7 @@
 </td>
 <td>
   <!-- standard button row -->
-  <div class="btn-group btn-group-xs" role="group">
+  <div class="btn-group btn-group-xs pull-right" role="group">
     <!-- enable editing button -->
     <button class="btn btn-default btn-dk-control"
             ng-disabled="ctrl.isEditing(cat.id)"

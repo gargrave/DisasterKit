@@ -1,24 +1,30 @@
-<div id="item-create-container"
-     class="col-xs-12 col-md-6 col-md-offset-3"
-     ng-hide="itemCreateCtrl.loading">
+<div class="dk-panel col-xs-12 col-md-8 col-md-offset-2 ng-cloak">
+  <div class="panel panel-primary">
 
-  <div>
-    <h2>Add an Item</h2>
-    <h5>Fields marked with <span class="error_text">*</span> are required.</h5>
-  </div>
-  <br>
-
-  <!-- add new item form -->
-  <form class="dk-form" name="createForm"
-        ng-submit="itemCreateCtrl.saveNewItem()" required>
-    <div item-entry-form ctrl="itemCreateCtrl" form="createForm"></div>
-    <!-- submit/cancel buttons -->
-    <div>
-      <input class="btn btn-primary" type="submit" value="Submit"
-             ng-disabled="!itemCreateCtrl.canSaveNewItem()">
-      <button class="btn btn-default pull-right"
-              ui-sref="dk.item_list">Cancel
-      </button>
+    <div class="panel-heading">
+      <h3 class="panel-title">Add an Item</h3>
     </div>
-  </form>
+
+    <div class="panel-body">
+      <div id="item-create-container"
+           ng-hide="itemCreateCtrl.loading">
+        <p>Fields marked with <span class="error_text">*</span> are required.</p>
+
+        <!-- add new item form -->
+        <form class="dk-form" name="createForm"
+              ng-submit="itemCreateCtrl.saveNewItem()" required>
+          <div item-entry-form ctrl="itemCreateCtrl" form="createForm"></div>
+          <!-- submit/cancel buttons -->
+          <div>
+            <input class="btn btn-primary" type="submit" value="Submit"
+                   ng-disabled="!itemCreateCtrl.canSaveNewItem()">
+            <button class="btn btn-default pull-right"
+                    ui-sref="dk.item_list">Cancel
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
 </div>

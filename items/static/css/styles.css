@@ -1,9 +1,14 @@
 body {
   padding: 10px;
-  background: white; }
+  background: #E7EDF5; }
 
 .container {
   max-width: 1000px; }
+
+.panel .panel-table {
+  margin-bottom: 0; }
+  .panel .panel-table th, .panel .panel-table td {
+    padding-left: 16px; }
 
 /**********************************
  * text styles
@@ -24,6 +29,9 @@ body {
 /**********************************
  * form styles
  **********************************/
+.dk-panel {
+  margin-top: 35px; }
+
 .form-header {
   color: white;
   background-color: #999;

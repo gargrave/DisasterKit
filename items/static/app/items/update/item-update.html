@@ -1,24 +1,27 @@
 <div id="item-update-container"
-     class="col-xs-12 col-md-6 col-md-offset-3"
+     class="dk-panel col-xs-12 col-md-8 col-md-offset-2 ng-cloak"
      ng-hide="itemUpdateCtrl.loading">
+  <div class="panel panel-primary">
 
-  <div>
-    <h2>Update an Item</h2>
-    <p>Fields marked with <span class="error_text">*</span> are required.</p>
-  </div>
-  <br>
-
-  <!-- update item form -->
-  <form class="dk-form" name="updateForm"
-        ng-submit="itemUpdateCtrl.saveEdits()">
-    <div item-entry-form ctrl="itemUpdateCtrl" form="updateForm"></div>
-    <!-- submit/cancel buttons -->
-    <div>
-      <input class="btn btn-primary" type="submit" value="Submit"
-             ng-disabled="!itemUpdateCtrl.canSaveEdits()">
-      <button class="btn btn-default pull-right"
-              ui-sref="dk.item_detail({'id': itemUpdateCtrl.item.id})">Cancel
-      </button>
+    <div class="panel-heading">
+      <h3 class="panel-title">Update an Item</h3>
     </div>
-  </form>
+
+    <div class="panel-body">
+      <p>Fields marked with <span class="error_text">*</span> are required.</p>
+      <!-- update item form -->
+      <form class="dk-form" name="updateForm"
+            ng-submit="itemUpdateCtrl.saveEdits()">
+        <div item-entry-form ctrl="itemUpdateCtrl" form="updateForm"></div>
+        <!-- submit/cancel buttons -->
+        <div>
+          <input class="btn btn-primary" type="submit" value="Submit"
+                 ng-disabled="!itemUpdateCtrl.canSaveEdits()">
+          <button class="btn btn-default pull-right"
+                  ui-sref="dk.item_detail({'id': itemUpdateCtrl.item.id})">Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
