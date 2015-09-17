@@ -13,8 +13,10 @@ class ItemsViewsTests(TestCase):
 
     def setUp(self):
         # create and login as a temp/test user
-        self.temp_user = User.objects.create_user(username='temp', password='temp')
-        login_successful = self.client.login(username='temp', password='temp')
+        self.temp_user = User.objects.create_user(
+            username='temp', password='temp')
+        login_successful = self.client.login(
+            username='temp', password='temp')
         self.assertTrue(login_successful, 'User is not logged in.')
 
         # create temp categories/sub-categories
@@ -164,7 +166,8 @@ class ItemsViewsTests(TestCase):
 
     def test_category_update(self):
         """
-        Tests that the update_category URL properly updates the specified category.
+        Tests that the update_category URL properly updates
+        the specified category.
         """
         new_cat = Category.objects.create(name='Update Category')
         new_name = 'NewNameForUpdateCategory'

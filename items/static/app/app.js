@@ -1,14 +1,15 @@
 (function() {
   'use strict';
   angular.module('dk', [
-    'ngMessages',
-    'ui.router'])
+      'ngMessages',
+      'ui.router'
+    ])
     .config([
       '$interpolateProvider', '$httpProvider',
       '$stateProvider', '$urlRouterProvider',
 
       function($interpolateProvider, $httpProvider,
-               $stateProvider, $urlRouterProvider) {
+        $stateProvider, $urlRouterProvider) {
 
         /* set up custom interpolation handlebars,
          * so that NG can work together with Django templates */
@@ -73,8 +74,7 @@
                 templateUrl: '/static/app/categories/list/category-list.html'
               }
             }
-          }
-        );
+          });
         $urlRouterProvider.otherwise('/items/');
 
         /*
@@ -140,4 +140,3 @@
       }
     ]);
 })();
-

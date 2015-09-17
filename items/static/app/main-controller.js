@@ -4,9 +4,6 @@
 
     function() {
       var vm = this;
-
-      vm.class = {
-        SIXCOLS: 'six columns offset-by-three'
-      };
-    }]);
+    }
+  ]);
 })();
