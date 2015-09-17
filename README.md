@@ -20,3 +20,11 @@ export run="python manage.py runserver --settings=disasterkit.settings.dev"
 ```
 export test="python manage.py test items --settings=disasterkit.settings.dev"
 ```
+
+#### All in one!
+```
+cd Dev/Python/DisasterKit-Project/DisasterKit/
+$venvw && workon dkenv
+export run="python manage.py runserver --settings=disasterkit.settings.dev"
+export test="python manage.py test items --settings=disasterkit.settings.dev"
+```

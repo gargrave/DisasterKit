@@ -55,7 +55,7 @@
       /**
        * Returns whether the new Item is valid and can be saved.
        *
-       * @returns {boolean} - Whether we can save the current Item info.
+       * @returns {Boolean} - Whether we can save the current Item info.
        */
       vm.canSaveNewItem = function() {
         return $scope.createForm.$valid;
