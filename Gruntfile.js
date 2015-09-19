@@ -9,6 +9,14 @@ module.exports = function(grunt) {
       }
     },
 
+    sass: {
+      dist: {
+        files: {
+          'items/static/css/styles.css': 'items/static/css/styles.scss'
+        }
+      }
+    },
+
     /* uglify
      ********************************************/
     uglify: {
@@ -28,6 +36,8 @@ module.exports = function(grunt) {
       }
     }
   });
+
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask('build', ['uglify']);
+  grunt.registerTask('build', ['sass', 'uglify']);
 };
