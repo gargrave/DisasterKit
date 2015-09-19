@@ -39,10 +39,10 @@
 ************************************************************
 {% endcomment %}
 
+{% include 'items/navbar.html' %}
 <body ng-controller="MainCtrl as main">
 
 <div class="container">
-  {% include 'items/pageheader.html' %}
   <div id="main-content" class="row">
     {% block content %}
     {% endblock %}

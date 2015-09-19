@@ -67,7 +67,9 @@
        */
       vm.saveNewCategory = function() {
         if (vm.canSaveNewCategory()) {
-          categorySvc.create({name: vm.newCategory})
+          categorySvc.create({
+              name: vm.newCategory
+            })
             .then(function(res) {
               vm.clearCategoryInput();
               loadCategories(true);
@@ -173,6 +175,6 @@
       (function() {
         loadCategories(false);
       })();
-    }]);
+    }
+  ]);
 })();
-
