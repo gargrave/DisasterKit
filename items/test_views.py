@@ -198,3 +198,11 @@ class ItemsViewsTests(TestCase):
         except Category.DoesNotExist:
             pass
         self.assertEqual(cat, None, 'Category was not deleted correctly.')
+
+    def test_send_report(self):
+        """
+        Tests the URL for generating a report of the status of current items.
+        """
+        url = reverse('items:send_report')
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, 200)

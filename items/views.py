@@ -1,3 +1,5 @@
+import requests
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -162,3 +164,28 @@ def category_delete(request):
         cat = get_object_or_404(Category, pk=request.POST.get('id'))
         cat.delete()
     return HttpResponse(status=200)
+
+
+def send_report(request):
+    """
+    Sends a POST request to the server to have it generate and
+    send a report to the registered email addresses.
+    """
+    api_key = 'key-1b2dc11519760a21c8a3d0585a4e1cab'
+    url = 'https://api.mailgun.net/v3/mg.gargrave.me/messages'
+
+    mock = True
+    if not mock:
+        response = requests.post(url, auth=('api', api_key), data={
+            'from': 'disaster_kit Updates <mailgun@mg.gargrave.me>',
+            'to': 'rinkrinkerfink@gmail.com',
+            'subject': 'Weekly Update for disaster_kit',
+            'text': 'This is your weekly update from disaster_kit.'
+        })
+        return HttpResponse(response.content)
+    else:
+        # TODO Implement time-checking here
+        # - check the last time a message was sent
+        # - if we have reached the interval, send a message
+        # - save this message's timestamp as the last one sent
+        return HttpResponse("Email sending has been disabled.")

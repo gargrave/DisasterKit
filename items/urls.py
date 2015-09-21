@@ -50,4 +50,13 @@ urlpatterns = [
     # items/api/category/delete/
     url(r'^api/category/delete/?$',
         views.category_delete, name='category_delete'),
+
+    #############################################
+    # Various API URLs
+    #############################################
+
+    # URL to send a report via email
+    # items/api/report/send
+    url(r'^api/report/send/?$',
+        views.send_report, name='send_report')
 ]
