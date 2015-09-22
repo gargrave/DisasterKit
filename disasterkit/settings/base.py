@@ -77,6 +77,5 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 LOGIN_REDIRECT_URL = '/'
 
-# TODO move this to an env. var and then get a new key
-MAILGUN_API_KEY = 'key-1b2dc11519760a21c8a3d0585a4e1cab'
-MAILGUN_API_URL = 'https://api.mailgun.net/v3/mg.gargrave.me/messages'
+MAILGUN_API_KEY = ''
+MAILGUN_API_URL = ''
