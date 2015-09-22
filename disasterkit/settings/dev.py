@@ -1,4 +1,6 @@
+import datetime
 import os
+
 import dj_database_url
 
 from .base import *
@@ -11,6 +13,7 @@ with open('etc/secret_key.txt') as f:
 DEBUG = True
 TEMPLATE_DEBUG = True
 BUILD = 'dev'
+EMAIL_INTERVAL = datetime.timedelta(seconds=5)
 
 DATABASES = {
     'default': {
