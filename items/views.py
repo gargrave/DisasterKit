@@ -1,3 +1,5 @@
+import datetime
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -10,6 +12,8 @@ from .email_master import send_weekly_report
 from .forms import ItemForm
 from .models import StockItem, Category, SubCategory
 from .utils.timecheck import TimeCheck
+
+dt = datetime.datetime
 
 globalvars = {
     'is_debug': settings.DEBUG,
@@ -172,7 +176,15 @@ def weekly_report(request):
     send a report to the registered email addresses.
     """
     if TimeCheck().is_ready():
-        response = send_weekly_report()
+        # get the list of items for the email
+        # this will include all active items with an expiration date
+        # that occurs within the next 31 days
+        exclude_date = dt.now() + datetime.timedelta(days=31)
+        items = StockItem.objects\
+            .filter(active=True)\
+            .exclude(date_of_expiration__gt=exclude_date)\
+            .order_by('date_of_expiration')
+        response = send_weekly_report(items)
         return HttpResponse(response.content)
     else:
         return HttpResponse('It is too soon to send another email.')
