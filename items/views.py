@@ -8,9 +8,10 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
 
+from .emails import weekly_update
 from .forms import ItemForm
 from .models import StockItem, Category, SubCategory
-from.utils.timecheck import TimeCheck
+from .utils.timecheck import TimeCheck
 
 globalvars = {
     'is_debug': settings.DEBUG,
@@ -178,10 +179,10 @@ def send_report(request):
     if TimeCheck().is_ready():
         # TODO move this info to environment vars
         response = requests.post(url, auth=('api', api_key), data={
-            'from': 'disaster_kit Updates <mailgun@mg.gargrave.me>',
-            'to': 'rinkrinkerfink@gmail.com',
-            'subject': 'Weekly Update for disaster_kit',
-            'text': 'This is your weekly update from disaster_kit.'
+            'from': weekly_update.from_field,
+            'to': weekly_update.to_field,
+            'subject': weekly_update.subject,
+            'html': weekly_update.content
         })
         return HttpResponse(response.content)
     else:
