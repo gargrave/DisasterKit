@@ -1,5 +1,3 @@
-import requests
-
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -8,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
 
-from .emails import weekly_update
+from .email_master import send_weekly_report
 from .forms import ItemForm
 from .models import StockItem, Category, SubCategory
 from .utils.timecheck import TimeCheck
@@ -168,22 +166,13 @@ def category_delete(request):
     return HttpResponse(status=200)
 
 
-def send_report(request):
+def weekly_report(request):
     """
     Sends a POST request to the server to have it generate and
     send a report to the registered email addresses.
     """
-    api_key = 'key-1b2dc11519760a21c8a3d0585a4e1cab'
-    url = 'https://api.mailgun.net/v3/mg.gargrave.me/messages'
-
     if TimeCheck().is_ready():
-        # TODO move this info to environment vars
-        response = requests.post(url, auth=('api', api_key), data={
-            'from': weekly_update.from_field,
-            'to': weekly_update.to_field,
-            'subject': weekly_update.subject,
-            'html': weekly_update.content
-        })
+        response = send_weekly_report()
         return HttpResponse(response.content)
     else:
         return HttpResponse('It is too soon to send another email.')

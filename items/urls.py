@@ -56,7 +56,7 @@ urlpatterns = [
     #############################################
 
     # URL to send a report via email
-    # items/api/report/send
-    url(r'^api/report/send/?$',
-        views.send_report, name='send_report')
+    # items/api/email/weekly_report
+    url(r'^api/email/weekly_report/?$',
+        views.weekly_report, name='weekly_report')
 ]
