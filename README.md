@@ -6,4 +6,4 @@ I built this app to help my wife and me keep track of all of our supplies and se
 
 The was the first Django app that I actually pushed into production, and it worked well, but I have certainly come a long way since this time and at this point, it is mostly just here for archiving purposes.
 
-Built with Django 1.8 and AngularJS 1.4. The biggest issue was that I built the entire stack as a single project, so even minor changes to the front end code required a full redeployment, which became a bit of a pain to manage. The project structure is also a little awkward to navigate, since all of the front end Angular code is nested within the Django app. Lesson learned: multi-tier deployment FTW.
+Built with Django 1.8 and AngularJS 1.4, and deployed to Heroku. The biggest issue was that I built the entire stack as a single project, so even minor changes to the front end code required a full redeployment, which became a bit of a pain to manage. The project structure is also a little awkward to navigate, since all of the front end Angular code is nested within the Django app. Lesson learned: multi-tier deployment FTW.
