@@ -2,10 +2,10 @@
   "name": "DisasterKit",
   "version": "0.1.2",
   "authors": [
-    "Gabe Hargrave <rinkrinkerfink@gmail.com>"
+    "Gabe Hargrave <gkhargrave@gmail.com>"
   ],
   "description": "A simple app to help us manage our emergency supplies.",
-  "homepage": "http://disasterkit.gargrave.me",
+  "homepage": "https://disasterkit-prod.herokuapp.com",
   "ignore": [
     "**/.*",
     "node_modules",
